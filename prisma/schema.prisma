@@ -1,0 +1,379 @@
+// This is your Prisma schema file
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// NextAuth Required Models
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+
+  // Custom relations
+  role             Role              @default(APPLICANT)
+  applicantProfile ApplicantProfile?
+  adminProfile     AdminUser?
+  auditLogs        AuditLog[]        @relation("UserAudit")
+  notifications    Notification[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// Enums
+enum Role {
+  APPLICANT
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum DepartmentType {
+  TECHNICAL
+  WEB_DEVELOPMENT
+  DESIGN
+  SOCIAL_MEDIA
+  EVENT_MANAGEMENT
+}
+
+enum RecruitmentStatus {
+  PENDING
+  SHORTLISTED
+  HOLD
+  SECOND_REVIEW
+  REJECTED
+}
+
+enum PipelineStageName {
+  APPLIED
+  ASSESSMENT_COMPLETED
+  UNDER_REVIEW
+  SHORTLISTED
+  INTERVIEW_SCHEDULED
+  INTERVIEW_COMPLETED
+  SELECTED
+  REJECTED
+}
+
+enum InterviewStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+// Custom Application Models
+model AdminUser {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  designation String? // e.g. "Technical Lead", "Chairperson"
+
+  stageChanges  StageHistory[]
+  interviews    Interview[]    @relation("Interviewer")
+  reviewerNotes ReviewerNote[]
+}
+
+model ApplicantProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  registrationNumber    String  @unique
+  phoneNumber           String
+  branch                String
+  year                  String
+  section               String
+  githubUrl             String?
+  linkedinUrl           String?
+  portfolioUrl          String?
+  previousExperience    String?
+  programmingExperience String?
+
+  overallStatus PipelineStageName @default(APPLIED)
+
+  departments       DepartmentSelection[]
+  assessmentSession AssessmentSession?
+  stageHistory      StageHistory[]
+  interviews        Interview[]
+  reviewerNotes     ReviewerNote[]
+  integrityScore    IntegrityScore?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model DepartmentSelection {
+  id          String           @id @default(cuid())
+  applicantId String
+  applicant   ApplicantProfile @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+
+  department DepartmentType
+  status     RecruitmentStatus @default(PENDING)
+
+  assessments Assessment[]
+  scores      Score?
+
+  @@unique([applicantId, department])
+}
+
+model QuestionBank {
+  id          String         @id @default(cuid())
+  department  DepartmentType
+  title       String
+  description String?
+  type        String // e.g., "MCQ", "LONG_ANSWER", "CODING", "CTF"
+  difficulty  Int            @default(1)
+  points      Int            @default(10)
+
+  content Json
+  hints   String[]
+  flag    String?
+
+  questions Question[]
+}
+
+model Assessment {
+  id                    String              @id @default(cuid())
+  departmentSelectionId String
+  departmentSelection   DepartmentSelection @relation(fields: [departmentSelectionId], references: [id], onDelete: Cascade)
+
+  status        String // "PENDING", "IN_PROGRESS", "COMPLETED"
+  startedAt     DateTime?
+  completedAt   DateTime?
+  timeRemaining Int? // in seconds
+
+  questions Question[]
+}
+
+model Question {
+  id           String     @id @default(cuid())
+  assessmentId String
+  assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+
+  questionBankId String
+  questionBank   QuestionBank @relation(fields: [questionBankId], references: [id])
+
+  answer           Answer?
+  mcqAnswer        MCQAnswer?
+  codingSubmission CodingSubmission?
+  ctfSubmission    CTFSubmission?
+}
+
+model Answer {
+  id         String   @id @default(cuid())
+  questionId String   @unique
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  content     String
+  aiScore     Int?
+  manualScore Int?
+}
+
+model MCQAnswer {
+  id         String   @id @default(cuid())
+  questionId String   @unique
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  selectedOption String
+  isCorrect      Boolean
+}
+
+model CodingSubmission {
+  id         String   @id @default(cuid())
+  questionId String   @unique
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  code            String
+  language        String
+  testCasesPassed Int
+  totalTestCases  Int
+}
+
+model CTFSubmission {
+  id         String   @id @default(cuid())
+  questionId String   @unique
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  submittedFlag String
+  isCorrect     Boolean
+  hintsUsed     Int     @default(0)
+}
+
+model AssessmentSession {
+  id          String           @id @default(cuid())
+  applicantId String           @unique
+  applicant   ApplicantProfile @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+
+  ipAddress String?
+  userAgent String?
+
+  events IntegrityEvent[]
+}
+
+model IntegrityEvent {
+  id        String            @id @default(cuid())
+  sessionId String
+  session   AssessmentSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  eventType String // "TAB_SWITCH", "COPY", "PASTE", "FULLSCREEN_EXIT"
+  timestamp DateTime @default(now())
+  details   String?
+}
+
+model IntegrityScore {
+  id          String           @id @default(cuid())
+  applicantId String           @unique
+  applicant   ApplicantProfile @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+
+  score     Int
+  breakdown Json
+}
+
+model RecruitmentStage {
+  id    String            @id @default(cuid())
+  name  PipelineStageName @unique
+  order Int
+}
+
+model StageHistory {
+  id          String           @id @default(cuid())
+  applicantId String
+  applicant   ApplicantProfile @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+
+  previousStage PipelineStageName
+  newStage      PipelineStageName
+  adminId       String
+  admin         AdminUser         @relation(fields: [adminId], references: [id])
+  notes         String?
+  timestamp     DateTime          @default(now())
+}
+
+model Interview {
+  id          String           @id @default(cuid())
+  applicantId String
+  applicant   ApplicantProfile @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+
+  interviewerId String?
+  interviewer   AdminUser? @relation("Interviewer", fields: [interviewerId], references: [id])
+
+  scheduledAt DateTime
+  duration    Int // minutes
+  type        String // "ONLINE", "OFFLINE"
+  location    String
+  status      InterviewStatus @default(SCHEDULED)
+  notes       String?
+
+  feedback InterviewFeedback?
+}
+
+model InterviewFeedback {
+  id          String    @id @default(cuid())
+  interviewId String    @unique
+  interview   Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+
+  rating   Int
+  comments String
+}
+
+model ReviewerNote {
+  id          String           @id @default(cuid())
+  applicantId String
+  applicant   ApplicantProfile @relation(fields: [applicantId], references: [id], onDelete: Cascade)
+
+  adminId String
+  admin   AdminUser @relation(fields: [adminId], references: [id])
+
+  note      String
+  createdAt DateTime @default(now())
+}
+
+model Score {
+  id                    String              @id @default(cuid())
+  departmentSelectionId String              @unique
+  departmentSelection   DepartmentSelection @relation(fields: [departmentSelectionId], references: [id], onDelete: Cascade)
+
+  autoScore        Float
+  aiSuggestedScore Float?
+  manualScore      Float?
+  finalScore       Float?
+}
+
+model Notification {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type      String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id      String @id @default(cuid())
+  adminId String
+  admin   User   @relation("UserAudit", fields: [adminId], references: [id])
+
+  action       String
+  resourceType String
+  resourceId   String?
+  details      Json?
+  timestamp    DateTime @default(now())
+}
+
+model WhatsAppSettings {
+  id         String   @id @default(cuid())
+  inviteLink String
+  updatedAt  DateTime @updatedAt
+}

@@ -1,0 +1,145 @@
+"use client";
+
+import { PipelineStageName } from "@prisma/client";
+import { updateApplicantStage } from "../actions/admin";
+import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { User as UserIcon, AlertCircle, MessageCircle, Eye, Clock } from "lucide-react";
+import { QuickReviewModal } from "./QuickReviewModal";
+import { formatDistanceToNow } from "date-fns";
+
+const STAGES = [
+  PipelineStageName.APPLIED,
+  PipelineStageName.ASSESSMENT_COMPLETED,
+  PipelineStageName.UNDER_REVIEW,
+  PipelineStageName.SHORTLISTED,
+  PipelineStageName.INTERVIEW_SCHEDULED,
+  PipelineStageName.INTERVIEW_COMPLETED,
+  PipelineStageName.SELECTED,
+  PipelineStageName.REJECTED
+];
+
+export function KanbanBoard({ applicants }: { applicants: any[] }) {
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [quickViewId, setQuickViewId] = useState<string | null>(null);
+
+  const handleStageChange = async (applicantId: string, newStage: PipelineStageName) => {
+    setLoadingId(applicantId);
+    try {
+      await updateApplicantStage(applicantId, newStage);
+    } catch (e) {
+      alert("Failed to update stage");
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  return (
+    <div className="flex gap-6 overflow-x-auto pb-8 h-full">
+      {STAGES.map(stage => {
+        const stageApplicants = applicants.filter(a => a.overallStatus === stage);
+        
+        return (
+          <div key={stage} className="min-w-[320px] max-w-[320px] bg-black/60 border border-cyan-500/20 rounded-lg flex flex-col h-full">
+            <div className="p-4 border-b border-cyan-500/20 bg-cyan-950/40 rounded-t-lg">
+              <h3 className="font-mono font-bold text-cyan-300 text-sm tracking-widest">{stage.replace(/_/g, " ")}</h3>
+              <p className="text-xs text-cyan-100/50 mt-1">{stageApplicants.length} Applicants</p>
+            </div>
+            
+            <div className="p-4 flex-1 overflow-y-auto space-y-4">
+              {stageApplicants.map(applicant => (
+                <div key={applicant.id} className="bg-cyan-950/20 border border-cyan-500/30 rounded p-4 shadow-[0_0_15px_rgba(0,255,255,0.02)]">
+                  
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-cyan-900/50 flex items-center justify-center border border-cyan-500/50">
+                        <UserIcon className="w-4 h-4 text-cyan-400" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-cyan-100">{applicant.user.name}</p>
+                        <p className="text-xs font-mono text-cyan-500">{applicant.registrationNumber}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-xs font-mono text-cyan-100/60 mb-4 space-y-1">
+                    <p>Branch: {applicant.branch}</p>
+                    <div className="flex gap-2">
+                      {applicant.departments.map((d: any) => (
+                        <span key={d.id} className="px-2 py-0.5 bg-black/50 border border-cyan-500/30 rounded text-[10px]">
+                          {d.department.slice(0, 4)}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {applicant.stageHistory && applicant.stageHistory.length > 0 && (
+                      <div className="flex items-center gap-1 mt-2 text-[9px] text-cyan-500/80">
+                        <Clock className="w-3 h-3" />
+                        <span>
+                          by {applicant.stageHistory[0].admin.user.name?.split(' ')[0]} • {formatDistanceToNow(new Date(applicant.stageHistory[0].timestamp), { addSuffix: true })}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <Select 
+                      disabled={loadingId === applicant.id}
+                      value={applicant.overallStatus} 
+                      onValueChange={(val) => handleStageChange(applicant.id, val as PipelineStageName)}
+                    >
+                      <SelectTrigger className="h-8 text-xs bg-black/50 border-cyan-500/30 focus:border-cyan-400 font-mono">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {STAGES.map(s => (
+                          <SelectItem key={s} value={s} className="text-xs font-mono">{s.replace(/_/g, " ")}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    
+                    <div className="flex items-center gap-2 mt-2">
+                      <a 
+                        href={`/admin/review/${applicant.id}`} 
+                        className="flex-1 flex items-center justify-center gap-2 h-8 text-[10px] bg-cyan-600/20 border border-cyan-500/50 rounded hover:bg-cyan-500/30 text-cyan-200 transition-colors font-mono"
+                      >
+                        Review Assessment
+                      </a>
+                      
+                      <button 
+                        onClick={() => setQuickViewId(applicant.id)}
+                        title="Quick View Answers"
+                        className="flex items-center justify-center h-8 w-8 bg-blue-900/40 border border-blue-500/50 rounded hover:bg-blue-800/60 text-blue-400 transition-colors"
+                      >
+                        <Eye className="w-4 h-4" />
+                      </button>
+
+                      {applicant.phoneNumber && (
+                        <a 
+                          href={`https://wa.me/${applicant.phoneNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${applicant.user.name.split(' ')[0]}, this is an update regarding your CYSCOM recruitment process.`)}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          title="Message on WhatsApp"
+                          className="flex items-center justify-center h-8 w-8 bg-green-900/40 border border-green-500/50 rounded hover:bg-green-800/60 text-green-400 transition-colors"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+      
+      <QuickReviewModal 
+        applicantId={quickViewId || ""} 
+        isOpen={!!quickViewId} 
+        onClose={() => setQuickViewId(null)} 
+      />
+    </div>
+  );
+}
