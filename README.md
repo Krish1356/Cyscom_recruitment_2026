@@ -23,21 +23,7 @@ Ensure you have Node.js (v18+) and npm installed on your machine.
 You will also need a PostgreSQL database.
 
 ### 2. Environment Variables
-Create a `.env` file in the root directory and add the following keys:
-
-```env
-# Database Connection String
-DATABASE_URL="postgresql://user:password@host:port/database"
-
-# NextAuth Configuration
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="generate-a-random-secret-key-here"
-
-# Google OAuth Credentials (for Login)
-AUTH_GOOGLE_ID="your-google-client-id"
-AUTH_GOOGLE_SECRET="your-google-client-secret"
-```
-*(Contact the technical lead for the specific development keys if you don't have them).*
+You will need a `.env` file with the required database and authentication keys. Contact the technical lead for the specific development keys before proceeding.
 
 ### 3. Installation
 Install the dependencies:
