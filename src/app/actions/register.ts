@@ -14,6 +14,15 @@ export async function submitRegistration(data: RegistrationFormValues) {
     throw new Error("Unauthorized");
   }
 
+  if (
+    !session.user.email?.endsWith("@vitstudent.ac.in") && 
+    session.user.email !== "krishpatel1352006@gmail.com" &&
+    session.user.email !== "krishmpatel18@gmail.com" &&
+    session.user.email !== "krishmittalpatel034@gmail.com"
+  ) {
+    throw new Error("Only @vitstudent.ac.in emails are allowed to register for recruitment.");
+  }
+
   // Validate data on the server
   const parsedData = registrationSchema.parse(data);
 
@@ -31,17 +40,17 @@ export async function submitRegistration(data: RegistrationFormValues) {
     // 1. Create Profile
     const profile = await tx.applicantProfile.create({
       data: {
-        userId: session.user.id,
+        user: { connect: { id: session.user.id } },
         registrationNumber: parsedData.registrationNumber.toUpperCase(),
         phoneNumber: parsedData.phoneNumber,
         branch: parsedData.branch,
         year: parsedData.year,
-        section: parsedData.section,
-        githubUrl: parsedData.githubUrl || null,
-        linkedinUrl: parsedData.linkedinUrl || null,
-        portfolioUrl: parsedData.portfolioUrl || null,
-        previousExperience: parsedData.previousExperience || null,
-        programmingExperience: parsedData.programmingExperience || null,
+        section: "",
+        githubUrl: "",
+        linkedinUrl: "",
+        portfolioUrl: "",
+        previousExperience: "",
+        programmingExperience: "",
         overallStatus: "APPLIED",
       }
     });
@@ -67,8 +76,8 @@ export async function submitRegistration(data: RegistrationFormValues) {
   });
 
   // Revalidate layout/dashboard data
-  revalidatePath("/dashboard");
-  
-  // Redirect to assessment dashboard
-  redirect("/dashboard");
+  revalidatePath("/");
+
+  // Redirect to home page
+  redirect("/");
 }

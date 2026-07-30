@@ -1,282 +1,281 @@
 "use client";
 
-import { CyberMatrixBackground } from "@/components/CyberMatrixBackground";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { HUDLayout } from "@/components/HUDLayout";
 import { 
-  ChevronRight, 
-  ShieldAlert, 
-  Code2, 
-  Palette, 
-  Megaphone, 
-  PenTool, 
-  CalendarDays,
-  Target,
-  Trophy,
-  Users,
-  Briefcase,
-  Zap,
-  Globe
+  Terminal, ShieldAlert, Code2, Globe, Cpu, Palette, Users, Hexagon,
+  ChevronRight, Play, CheckSquare, ShieldCheck, Target, Network, FileText, ArrowDown, Share2, Mail
 } from "lucide-react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Orbitron } from "next/font/google";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { RecruitmentAction } from "@/components/RecruitmentAction";
 
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700", "900"] });
-
-export default function LandingPage() {
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
+export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#0D1117] text-white selection:bg-cyan-500/30 overflow-x-hidden">
-      {/* Background layer */}
-      <div className="fixed inset-0 z-0">
-        <CyberMatrixBackground />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0D1117]/80 to-[#0D1117]" />
-      </div>
-
-      <div className="relative z-10 flex flex-col">
-        {/* Navigation */}
-        <nav className="flex items-center justify-between p-6 max-w-7xl w-full mx-auto backdrop-blur-sm border-b border-white/5 sticky top-0 z-50">
-          <div className={`text-2xl font-black tracking-wider text-cyan-400 ${orbitron.className}`}>
-            CYSCOM
+    <HUDLayout>
+      
+      {/* 01: HERO SECTION */}
+      <section id="home" className="min-h-[85vh] flex flex-col justify-center relative">
+        <div className="absolute inset-0 pointer-events-none hidden md:flex items-center justify-center overflow-hidden z-0">
+          <img 
+            src="/logo.png" 
+            alt="" 
+            className="absolute opacity-10 w-full h-full object-cover object-center drop-shadow-[0_0_30px_rgba(0,255,255,0.2)]" 
+          />
+        </div>
+        
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <div className="text-[10px] text-cyan-600 mb-6 flex items-center justify-center gap-2">
+            <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
+            INITIALIZING SECURE CONNECTION...
           </div>
-          <div className="flex gap-4">
-            <Link href="/login" className="px-6 py-2 rounded-full text-sm font-medium text-cyan-300 hover:text-cyan-100 transition-colors">
-              Login
-            </Link>
-            <Link href="/dashboard" className="px-6 py-2 rounded-full bg-cyan-600/20 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-white transition-all shadow-[0_0_15px_rgba(0,255,255,0.2)]">
-              Dashboard
-            </Link>
-          </div>
-        </nav>
-
-        {/* Hero Section */}
-        <section className="min-h-[85vh] flex flex-col items-center justify-center text-center px-4 pt-20 pb-32">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-center gap-8 max-w-5xl"
-          >
-            <div className="inline-block px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-sm font-medium mb-4 backdrop-blur-md">
-              <span className="animate-pulse mr-2">●</span> Build. Secure. Innovate.
-            </div>
-
-            <h1 className={`text-6xl md:text-8xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-cyan-100 to-cyan-800 drop-shadow-2xl leading-tight ${orbitron.className}`}>
-              CYSCOM<br />Recruitment 2026
-            </h1>
-
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
-              Join the elite cybersecurity and technology community at VIT Chennai. We are looking for passionate builders, hackers, and creators to shape the future of tech.
-            </p>
-
-            <CountdownTimer />
-
-            <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <Link href="/register">
-                <button className="group relative px-8 py-4 bg-cyan-500 text-[#0D1117] font-bold rounded-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(0,255,255,0.4)]">
-                  <span className="relative z-10 flex items-center gap-2">
-                    Apply Now <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </button>
-              </Link>
-              <a href="#departments">
-                <button className="px-8 py-4 bg-[#161B22] border border-gray-700 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors">
-                  Explore Departments
-                </button>
-              </a>
-            </div>
-          </motion.div>
-        </section>
-
-        {/* Statistics Section */}
-        <section className="py-20 border-y border-white/5 bg-[#0D1117]/50 backdrop-blur-lg">
-          <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <StatCard icon={Users} value="500+" label="Active Members" />
-            <StatCard icon={CalendarDays} value="50+" label="Events Conducted" />
-            <StatCard icon={Target} value="20+" label="CTF Competitions" />
-            <StatCard icon={Briefcase} value="10+" label="Industry Partners" />
-          </div>
-        </section>
-
-        {/* Departments Section */}
-        <section id="departments" className="py-32 px-4 max-w-7xl mx-auto w-full">
-          <div className="text-center mb-20">
-            <h2 className={`text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 ${orbitron.className}`}>Our Departments</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Choose your domain of expertise and grow with like-minded peers.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <DeptCard 
-              icon={ShieldAlert} title="Technical" 
-              desc="Master ethical hacking, penetration testing, cryptography, and secure architecture."
-              color="from-red-500/20 to-orange-500/20" border="border-red-500/30" iconColor="text-red-400"
-            />
-            <DeptCard 
-              icon={Code2} title="Development" 
-              desc="Build scalable platforms, web applications, and robust internal tools for the community."
-              color="from-blue-500/20 to-cyan-500/20" border="border-blue-500/30" iconColor="text-blue-400"
-            />
-            <DeptCard 
-              icon={Palette} title="Design" 
-              desc="Craft stunning UI/UX, immersive graphics, and striking visual identities."
-              color="from-purple-500/20 to-pink-500/20" border="border-purple-500/30" iconColor="text-purple-400"
-            />
-            <DeptCard 
-              icon={Megaphone} title="Social Media" 
-              desc="Strategize campaigns, grow our digital footprint, and engage with the global community."
-              color="from-green-500/20 to-emerald-500/20" border="border-green-500/30" iconColor="text-green-400"
-            />
-            <DeptCard 
-              icon={PenTool} title="Content" 
-              desc="Write compelling narratives, deep-dive technical blogs, and engaging newsletters."
-              color="from-yellow-500/20 to-amber-500/20" border="border-yellow-500/30" iconColor="text-yellow-400"
-            />
-            <DeptCard 
-              icon={Users} title="Event Management" 
-              desc="Orchestrate mega-hackathons, workshops, and manage logistics flawlessly."
-              color="from-indigo-500/20 to-blue-500/20" border="border-indigo-500/30" iconColor="text-indigo-400"
-            />
-          </div>
-        </section>
-
-        {/* Why Join Section */}
-        <section className="py-32 px-4 bg-[#161B22]/50 border-t border-white/5 relative overflow-hidden">
-          {/* Subtle glowing orb in background */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
           
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="text-center mb-20">
-              <h2 className={`text-4xl md:text-5xl font-bold mb-4 text-white ${orbitron.className}`}>Why Join CYSCOM?</h2>
-            </div>
+          <h1 className="text-6xl md:text-8xl font-black text-white tracking-[0.2em] mb-4 drop-shadow-[0_0_20px_rgba(0,255,255,0.4)]">
+            CYSCOM
+          </h1>
+          <h2 className="text-2xl md:text-4xl text-cyan-400 tracking-[0.4em] mb-8 font-light">RECRUITMENTS 2026</h2>
+          
+          <div className="text-[11px] text-cyan-600 mb-2">&gt; BUILDING THE FUTURE OF CYBERSECURITY</div>
+          <p className="text-sm text-cyan-100/70 max-w-md mb-8 leading-relaxed">
+            We don't just learn cybersecurity.<br/>
+            We Exploit, We Understand, We Protect.
+          </p>
+
+          {/* Countdown Timer */}
+          <div className="mb-12">
+            <div className="text-[9px] text-cyan-700 uppercase tracking-widest mb-3">T-MINUS UNTIL PORTAL CLOSES</div>
+            <CountdownTimer />
+          </div>
+
+          <RecruitmentAction />
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-cyan-500/20 text-center bg-[#030710]/80 backdrop-blur-sm">
+          <div className="text-center">
+            <div className="text-[9px] text-cyan-700 uppercase tracking-widest mb-1">RECRUITMENT STATUS</div>
+            <div className="text-sm text-green-400 font-bold tracking-wider">ACTIVE</div>
+          </div>
+          <div className="text-center">
+            <div className="text-[9px] text-cyan-700 uppercase tracking-widest mb-1">OPEN DIVISIONS</div>
+            <div className="text-sm text-cyan-200 font-bold tracking-wider">05</div>
+          </div>
+        </div>
+      </section>
+
+      {/* 02: MISSION BRIEFING */}
+      <section id="mission" className="pt-24 pb-12">
+        <Panel title="02 MISSION BRIEFING">
+          <div className="flex flex-col md:flex-row gap-12 p-4 md:p-8">
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <FeatureCard icon={Trophy} title="Hackathons & CTFs" />
-              <FeatureCard icon={Zap} title="Hands-on Projects" />
-              <FeatureCard icon={Globe} title="Industry Exposure" />
-              <FeatureCard icon={Users} title="Networking" />
+            <div className="flex-1">
+              <h3 className="text-2xl text-green-400 mb-6 tracking-widest">DECRYPTING TRANSMISSION...</h3>
+              <div className="space-y-6 text-sm text-cyan-100/70 leading-relaxed font-mono">
+                <p>Welcome, Candidate.</p>
+                <p>You are attempting to join the Cyber Security Community.</p>
+                <p>We do not recruit based on CGPA.<br/>We recruit curiosity.</p>
+                <p>If you are ready to learn, build, break and secure systems - you are in the right place.</p>
+                <p>Mission begins below.</p>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div className="mt-8 mx-4 md:mx-8 pt-8 border-t border-cyan-500/20">
+            <div className="text-xs text-cyan-600 mb-8 tracking-widest">RECRUITMENT PROTOCOL</div>
+            <div className="grid grid-cols-2 md:flex justify-between items-center gap-8">
+              <ProcessStep icon={Globe} label="1. RECON" desc="Discover CYSCOM" active />
+              <ProcessStep icon={FileText} label="2. APPLICATION" desc="Submit Dossier" />
+              <ProcessStep icon={Terminal} label="3. TECHNICAL" desc="Skill Assessment" />
+              <ProcessStep icon={Users} label="4. INTERVIEW" desc="Personal Evaluation" />
+              <ProcessStep icon={CheckSquare} label="5. CLEARANCE" desc="Final Selection" />
             </div>
           </div>
-        </section>
+        </Panel>
+      </section>
 
-        {/* Timeline Section */}
-        <section className="py-32 px-4 max-w-4xl mx-auto w-full">
-          <div className="text-center mb-20">
-            <h2 className={`text-4xl md:text-5xl font-bold mb-4 text-white ${orbitron.className}`}>Recruitment Timeline</h2>
+      {/* 03: DIVISIONS OVERVIEW */}
+      <section id="divisions" className="py-12">
+        <Panel title="03 DIVISIONS OVERVIEW">
+          <div className="p-4 md:p-8">
+            <h3 className="text-2xl text-green-400 mb-2 tracking-widest">OUR DIVISIONS</h3>
+            <p className="text-sm text-cyan-100/50 mb-12">Choose your battlefield. Make an impact.</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <DivisionCard title="TECHNICAL" icon={ShieldAlert} desc="Offensive & Defensive Security. Break systems, find vulnerabilities, secure networks." />
+              <DivisionCard title="WEB DEV" icon={Code2} desc="Build scalable platforms. Secure web applications and architect digital infrastructure." />
+              <DivisionCard title="DESIGN" icon={Palette} desc="Craft stunning, creative posters for events and bring the hacker aesthetic to life." />
+              <DivisionCard title="EVENT MANAGEMENT" icon={Users} desc="Orchestrate mega hackathons and CTF (Capture The Flag) competitions. Logistics, sponsorships, and execution." />
+              <DivisionCard title="SOCIAL MEDIA" icon={Share2} desc="Manage digital presence, craft campaigns, and engage with the global cyber community." />
+            </div>
           </div>
+        </Panel>
+      </section>
 
-          <div className="relative border-l-2 border-cyan-500/30 ml-4 md:ml-10 space-y-12">
-            <TimelineItem title="Applications Open" date="Now" active />
-            <TimelineItem title="Applications Close" date="TBD" />
-            <TimelineItem title="Shortlisting & Online Assessment" date="TBD" />
-            <TimelineItem title="Personal Interviews" date="TBD" />
-            <TimelineItem title="Final Results" date="TBD" />
+      {/* 04: CONTACT */}
+      <section id="contact" className="py-12">
+        <Panel title="04 SECURE COMM LINK (CONTACT)">
+          <div className="p-4 md:p-8">
+            <h3 className="text-2xl text-green-400 mb-2 tracking-widest">TRANSMISSION CHANNEL</h3>
+            <p className="text-sm text-cyan-100/50 mb-12">Establish a secure connection with CYSCOM command.</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+              {/* Box 1: Email */}
+              <a href="mailto:cyscom@vit.ac.in" className="flex flex-col items-center justify-center p-8 border border-cyan-500/20 hover:bg-cyan-900/20 hover:border-cyan-500/50 transition-all cyber-bracket text-center group h-full">
+                <Mail className="w-8 h-8 text-cyan-500 group-hover:scale-110 transition-transform mb-4" />
+                <div>
+                  <div className="text-[10px] text-cyan-600 tracking-widest uppercase mb-2">Email</div>
+                  <div className="text-sm text-white font-mono tracking-wider">cyscom@vit.ac.in</div>
+                </div>
+              </a>
+
+              {/* Box 2: Social Networks */}
+              <div className="flex flex-col items-center justify-center border border-cyan-500/10 bg-[#030710]/40 p-8 text-center cyber-bracket h-full">
+                 <h4 className="text-cyan-400 font-bold tracking-widest mb-6">SOCIAL NETWORKS</h4>
+                 <div className="flex flex-wrap justify-center gap-6">
+                   <a href="https://www.instagram.com/cyscomvit?igsh=MWRiazFuZ3RxMG84dQ==" target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-300 tracking-widest uppercase border-b border-transparent hover:border-cyan-300 transition-colors">Instagram</a>
+                   <a href="https://www.linkedin.com/company/cyscomvit/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-300 tracking-widest uppercase border-b border-transparent hover:border-cyan-300 transition-colors">LinkedIn</a>
+                 </div>
+              </div>
+            </div>
           </div>
-        </section>
+        </Panel>
+      </section>
 
-        {/* Footer */}
-        <footer className="py-8 text-center text-gray-500 border-t border-white/5 text-sm">
-          <p>© 2026 CYSCOM VIT Chennai. All rights reserved.</p>
-        </footer>
+      {/* CALL TO ACTION */}
+      <section id="apply" className="py-24 text-center">
+        <h2 className="text-3xl font-bold text-white mb-6">READY TO INITIATE?</h2>
+        <p className="text-cyan-400/70 mb-8 max-w-lg mx-auto">
+          The recruitment portal is currently open. Submit your dossier and begin the selection protocol.
+        </p>
+        <Link href="/register" className="inline-block border-2 border-cyan-500 bg-cyan-950/40 text-cyan-400 px-12 py-5 text-sm font-bold uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-all cyber-bracket shadow-[0_0_20px_rgba(0,255,255,0.2)]">
+          &gt; ACCESS APPLICATION TERMINAL
+        </Link>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-cyan-500/20 py-8 text-center text-[10px] text-cyan-600/60 tracking-widest uppercase">
+        &copy; 2026 CYSCOM VIT Chennai. All rights reserved.
+      </footer>
+
+    </HUDLayout>
+  );
+}
+
+// Helper Components
+function Panel({ title, children, className = "" }: { title: string, children: React.ReactNode, className?: string }) {
+  return (
+    <div className={`border border-cyan-500/30 bg-[#060A13]/80 backdrop-blur-md relative overflow-hidden group ${className}`}>
+      <div className="absolute top-0 left-0 px-4 py-1 bg-cyan-500/10 border-b border-r border-cyan-500/30 text-[10px] text-cyan-400 font-bold tracking-widest">
+        {title}
       </div>
-    </main>
+      <div className="mt-6 h-full">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ProcessStep({ icon: Icon, label, desc, active }: { icon: any, label: string, desc: string, active?: boolean }) {
+  return (
+    <div className="flex flex-col items-center gap-3 text-center">
+      <div className={`w-12 h-12 rounded flex items-center justify-center border transition-all duration-500 ${active ? 'border-green-400 bg-green-400/10 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.3)] scale-110' : 'border-cyan-700 bg-cyan-900/10 text-cyan-700 opacity-70'}`}>
+        <Icon className="w-6 h-6" />
+      </div>
+      <div>
+        <div className={`text-xs uppercase tracking-widest font-bold mb-1 ${active ? 'text-green-400' : 'text-cyan-600'}`}>{label}</div>
+        <div className="text-[9px] text-cyan-800 uppercase tracking-widest">{desc}</div>
+      </div>
+    </div>
+  );
+}
+
+function DivisionCard({ title, icon: Icon, desc }: { title: string, icon: any, desc: string }) {
+  return (
+    <div className="group relative border border-cyan-500/20 p-8 bg-[#030710]/40 backdrop-blur-sm flex flex-col justify-between hover:bg-cyan-950/20 transition-all duration-300 overflow-hidden">
+      {/* Subtle hover gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative z-10 flex items-center justify-between mb-8">
+        <div className="w-12 h-12 rounded bg-cyan-950/40 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(0,255,255,0.2)] transition-all duration-300">
+          <Icon className="w-5 h-5" />
+        </div>
+        <div className="text-[9px] text-cyan-600 uppercase tracking-widest border border-cyan-800/50 px-2 py-1 bg-cyan-950/20">Active</div>
+      </div>
+      
+      <div className="relative z-10">
+        <h4 className="text-lg font-bold text-white tracking-wider mb-2 group-hover:text-cyan-300 transition-colors">{title}</h4>
+        <p className="text-xs text-cyan-100/60 leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function EventCard({ status, title, desc, date, link, color, active }: { status: string, title: string, desc: string, date: string, link: string, color: string, active?: boolean }) {
+  return (
+    <div className={`border p-6 flex flex-col bg-black/40 ${color} ${active ? 'shadow-[0_0_20px_rgba(59,130,246,0.15)] border-opacity-100 bg-blue-900/10 cyber-bracket' : 'border-opacity-30'}`}>
+      <div className="text-[10px] uppercase tracking-widest mb-6 opacity-80">{status}</div>
+      <h4 className="text-lg font-bold tracking-widest mb-3">{title}</h4>
+      <p className="text-xs opacity-70 mb-8 leading-relaxed">{desc}</p>
+      
+      <div className="mt-auto pt-4 border-t border-current border-opacity-20 flex justify-between items-center">
+        <span className="text-[10px] opacity-60 tracking-widest">{date}</span>
+        <a href="#" className="text-xs hover:underline font-bold uppercase tracking-widest">{link}</a>
+      </div>
+    </div>
   );
 }
 
 function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, mins: 0, secs: 0 });
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Mock countdown to 7 days from now for visual purposes
-    const target = new Date().getTime() + 7 * 24 * 60 * 60 * 1000;
-    
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = target - now;
-      
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        mins: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        secs: Math.floor((distance % (1000 * 60)) / 1000),
-      });
-    }, 1000);
+    setMounted(true);
+    const targetDate = new Date("August 17, 2026 23:59:00").getTime();
 
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000),
+        });
+      }
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="flex gap-4 sm:gap-8 mt-6">
-      <TimeUnit value={timeLeft.days} label="DAYS" />
-      <TimeUnit value={timeLeft.hours} label="HOURS" />
-      <TimeUnit value={timeLeft.mins} label="MINS" />
-      <TimeUnit value={timeLeft.secs} label="SECS" />
-    </div>
-  );
-}
+  if (!mounted) return <div className="h-24"></div>; // Placeholder to avoid hydration mismatch
 
-function TimeUnit({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center">
-      <div className="text-3xl md:text-5xl font-bold font-mono text-cyan-400 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">
-        {value.toString().padStart(2, '0')}
+    <div className="flex gap-4 md:gap-8 justify-center text-cyan-400 font-mono">
+      <div className="flex flex-col items-center">
+        <span className="text-4xl md:text-5xl font-bold drop-shadow-[0_0_10px_rgba(0,255,255,0.4)]">{timeLeft.days.toString().padStart(2, '0')}</span>
+        <span className="text-[10px] tracking-widest uppercase opacity-70 mt-1">Days</span>
       </div>
-      <div className="text-xs md:text-sm text-gray-500 font-semibold tracking-widest mt-2">{label}</div>
+      <span className="text-3xl md:text-5xl font-bold opacity-30 mt-1">:</span>
+      <div className="flex flex-col items-center">
+        <span className="text-4xl md:text-5xl font-bold drop-shadow-[0_0_10px_rgba(0,255,255,0.4)]">{timeLeft.hours.toString().padStart(2, '0')}</span>
+        <span className="text-[10px] tracking-widest uppercase opacity-70 mt-1">Hours</span>
+      </div>
+      <span className="text-3xl md:text-5xl font-bold opacity-30 mt-1">:</span>
+      <div className="flex flex-col items-center">
+        <span className="text-4xl md:text-5xl font-bold drop-shadow-[0_0_10px_rgba(0,255,255,0.4)]">{timeLeft.minutes.toString().padStart(2, '0')}</span>
+        <span className="text-[10px] tracking-widest uppercase opacity-70 mt-1">Mins</span>
+      </div>
+      <span className="text-3xl md:text-5xl font-bold opacity-30 mt-1">:</span>
+      <div className="flex flex-col items-center">
+        <span className="text-4xl md:text-5xl font-bold drop-shadow-[0_0_10px_rgba(0,255,255,0.4)]">{timeLeft.seconds.toString().padStart(2, '0')}</span>
+        <span className="text-[10px] tracking-widest uppercase opacity-70 mt-1">Secs</span>
+      </div>
     </div>
-  );
-}
-
-function StatCard({ icon: Icon, value, label }: { icon: any; value: string; label: string }) {
-  return (
-    <motion.div 
-      whileHover={{ y: -5 }}
-      className="flex flex-col items-center text-center p-6 rounded-2xl bg-white/5 border border-white/10"
-    >
-      <Icon className="w-8 h-8 text-cyan-400 mb-4" />
-      <div className="text-4xl font-bold text-white mb-2">{value}</div>
-      <div className="text-sm text-gray-400 font-medium">{label}</div>
-    </motion.div>
-  );
-}
-
-function DeptCard({ icon: Icon, title, desc, color, border, iconColor }: { icon: any; title: string; desc: string; color: string; border: string; iconColor: string }) {
-  return (
-    <motion.div 
-      whileHover={{ y: -10, scale: 1.02 }}
-      className={`relative overflow-hidden p-8 rounded-2xl bg-[#161B22] border ${border} group`}
-    >
-      <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-      <Icon className={`w-12 h-12 ${iconColor} mb-6 drop-shadow-[0_0_15px_currentColor]`} />
-      <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
-      <p className="text-gray-400 leading-relaxed">{desc}</p>
-    </motion.div>
-  );
-}
-
-function FeatureCard({ icon: Icon, title }: { icon: any; title: string }) {
-  return (
-    <div className="flex flex-col items-center p-6 bg-[#0D1117] border border-white/5 rounded-xl hover:border-cyan-500/30 hover:bg-cyan-500/5 transition-colors cursor-default">
-      <Icon className="w-8 h-8 text-cyan-500 mb-4" />
-      <h4 className="font-semibold text-gray-200 text-center">{title}</h4>
-    </div>
-  );
-}
-
-function TimelineItem({ title, date, active = false }: { title: string; date: string; active?: boolean }) {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      className="relative pl-8 md:pl-12"
-    >
-      {/* Node */}
-      <div className={`absolute left-0 top-1.5 w-4 h-4 -translate-x-[9px] rounded-full border-2 ${active ? 'bg-cyan-400 border-cyan-400 shadow-[0_0_15px_rgba(0,255,255,0.6)]' : 'bg-[#0D1117] border-gray-600'}`} />
-      
-      <h3 className={`text-xl font-bold ${active ? 'text-cyan-400' : 'text-gray-300'}`}>{title}</h3>
-      <p className="text-gray-500 mt-2 font-mono text-sm">{date}</p>
-    </motion.div>
   );
 }

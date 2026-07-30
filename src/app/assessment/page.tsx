@@ -36,7 +36,7 @@ export default async function AssessmentPage() {
 
   if (assessments.length === 0) {
     // Assessment hasn't been started, go back to dashboard
-    redirect("/dashboard");
+    redirect("/");
   }
 
   return <AssessmentClient assessments={assessments} />;

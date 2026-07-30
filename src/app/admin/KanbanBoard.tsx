@@ -40,33 +40,33 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
         const stageApplicants = applicants.filter(a => a.overallStatus === stage);
         
         return (
-          <div key={stage} className="min-w-[320px] max-w-[320px] bg-black/60 border border-cyan-500/20 rounded-lg flex flex-col h-full">
-            <div className="p-4 border-b border-cyan-500/20 bg-cyan-950/40 rounded-t-lg">
-              <h3 className="font-mono font-bold text-cyan-300 text-sm tracking-widest">{stage.replace(/_/g, " ")}</h3>
-              <p className="text-xs text-cyan-100/50 mt-1">{stageApplicants.length} Applicants</p>
+          <div key={stage} className="min-w-[320px] max-w-[320px] bg-[#060A13]/90 border border-cyan-500/30 rounded-none flex flex-col h-full cyber-bracket shadow-[0_0_10px_rgba(0,255,255,0.02)]">
+            <div className="p-4 border-b border-cyan-500/30 bg-cyan-950/20">
+              <h3 className="font-mono font-bold text-cyan-400 text-[10px] tracking-widest uppercase">{stage.replace(/_/g, " ")}</h3>
+              <p className="text-[10px] tracking-widest uppercase text-cyan-600 mt-1">SYS.COUNT: {stageApplicants.length}</p>
             </div>
             
             <div className="p-4 flex-1 overflow-y-auto space-y-4">
               {stageApplicants.map(applicant => (
-                <div key={applicant.id} className="bg-cyan-950/20 border border-cyan-500/30 rounded p-4 shadow-[0_0_15px_rgba(0,255,255,0.02)]">
+                <div key={applicant.id} className="bg-[#030710]/80 border border-cyan-500/30 rounded-none p-4 shadow-[0_0_15px_rgba(0,255,255,0.02)] hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)] transition-all group">
                   
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-cyan-900/50 flex items-center justify-center border border-cyan-500/50">
+                      <div className="w-8 h-8 rounded-none bg-cyan-950/50 flex items-center justify-center border border-cyan-500/50 group-hover:border-cyan-400 transition-colors">
                         <UserIcon className="w-4 h-4 text-cyan-400" />
                       </div>
                       <div>
-                        <p className="text-sm font-bold text-cyan-100">{applicant.user.name}</p>
-                        <p className="text-xs font-mono text-cyan-500">{applicant.registrationNumber}</p>
+                        <p className="text-xs font-bold text-cyan-100 tracking-widest uppercase">{applicant.user.name}</p>
+                        <p className="text-[10px] font-mono text-cyan-600 tracking-widest uppercase">{applicant.registrationNumber}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="text-xs font-mono text-cyan-100/60 mb-4 space-y-1">
-                    <p>Branch: {applicant.branch}</p>
+                  <div className="text-[10px] tracking-widest font-mono text-cyan-600 uppercase mb-4 space-y-2">
+                    <p>BRANCH: <span className="text-cyan-400">{applicant.branch}</span></p>
                     <div className="flex gap-2">
                       {applicant.departments.map((d: any) => (
-                        <span key={d.id} className="px-2 py-0.5 bg-black/50 border border-cyan-500/30 rounded text-[10px]">
+                        <span key={d.id} className="px-2 py-0.5 bg-cyan-950/30 border border-cyan-500/30 rounded-none text-[9px] text-cyan-400">
                           {d.department.slice(0, 4)}
                         </span>
                       ))}
@@ -88,12 +88,12 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
                       value={applicant.overallStatus} 
                       onValueChange={(val) => handleStageChange(applicant.id, val as PipelineStageName)}
                     >
-                      <SelectTrigger className="h-8 text-xs bg-black/50 border-cyan-500/30 focus:border-cyan-400 font-mono">
+                      <SelectTrigger className="h-8 text-[10px] tracking-widest uppercase bg-[#030710] border-cyan-500/30 rounded-none focus:border-cyan-400 font-mono text-cyan-400">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-[#060A13] border border-cyan-500/50 rounded-none">
                         {STAGES.map(s => (
-                          <SelectItem key={s} value={s} className="text-xs font-mono">{s.replace(/_/g, " ")}</SelectItem>
+                          <SelectItem key={s} value={s} className="text-[10px] tracking-widest uppercase font-mono text-cyan-400 focus:bg-cyan-950/50 focus:text-cyan-300">{s.replace(/_/g, " ")}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>

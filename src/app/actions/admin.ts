@@ -75,7 +75,7 @@ export async function getApplicantQuickReview(applicantId: string) {
           assessments: {
             include: {
               questions: {
-                include: { answer: true, questionBank: true }
+                include: { answer: true, mcqAnswer: true, questionBank: true }
               }
             }
           }

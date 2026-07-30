@@ -6,7 +6,7 @@ export default auth((req) => {
   
   if (isAuthPage) {
     if (isLoggedIn) {
-      return Response.redirect(new URL('/dashboard', req.nextUrl));
+      return Response.redirect(new URL('/', req.nextUrl));
     }
     return null;
   }
@@ -23,5 +23,5 @@ export default auth((req) => {
 })
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.(?:png|jpg|jpeg|svg|webp|ico)).*)'],
 }

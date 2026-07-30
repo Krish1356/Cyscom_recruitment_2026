@@ -9,10 +9,10 @@ export function DashboardStats({ total, pending, shortlisted, rejected }: { tota
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat) => (
-        <div key={stat.name} className={`relative overflow-hidden bg-[#161B22]/60 backdrop-blur-md rounded-xl border border-gray-800 hover:${stat.border} p-6 group transition-all duration-300`}>
+        <div key={stat.name} className={`relative overflow-hidden bg-[#060A13]/80 backdrop-blur-md rounded-none border border-cyan-900/30 hover:${stat.border} p-6 group transition-all duration-300 cyber-bracket`}>
           <div className="relative z-10">
-            <p className="text-gray-400 text-sm font-medium mb-3">{stat.name}</p>
-            <h4 className={`text-4xl font-bold tracking-tight text-gray-100 group-hover:${stat.color} transition-colors`}>{stat.value}</h4>
+            <p className="text-cyan-600 text-[10px] uppercase tracking-widest font-bold mb-3">{stat.name}</p>
+            <h4 className={`text-4xl font-bold tracking-tight text-cyan-500 group-hover:${stat.color} transition-colors`}>{stat.value}</h4>
           </div>
         </div>
       ))}

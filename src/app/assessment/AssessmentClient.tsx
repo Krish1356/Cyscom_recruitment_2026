@@ -4,23 +4,34 @@ import { useState, useEffect } from "react";
 import { CyberMatrixBackground } from "@/components/CyberMatrixBackground";
 import { ShieldAlert, Clock, Terminal, Send } from "lucide-react";
 import { logIntegrityEvent } from "../actions/integrity";
-import { submitAssessment } from "../actions/assessment";
+import { startTimedAssessments, submitAssessment } from "../actions/assessment";
 import { useRouter } from "next/navigation";
 
 export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const router = useRouter();
+  
+  const [localAssessments, setLocalAssessments] = useState(assessments);
+  const inProgressAssessments = localAssessments.filter(a => a.status === "IN_PROGRESS");
+  const pendingAssessments = localAssessments.filter(a => a.status === "PENDING");
+  
+  const isTimedPhaseLocked = inProgressAssessments.length === 0 && pendingAssessments.length > 0;
+  const currentAssessments = isTimedPhaseLocked ? pendingAssessments : inProgressAssessments;
+
   const [activeTab, setActiveTab] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(300); // 5 mins
+  const initialTimeLeft = inProgressAssessments.reduce((total, a) => total + (a.timeRemaining || 0), 0);
+  const [timeLeft, setTimeLeft] = useState<number | null>(initialTimeLeft > 0 ? initialTimeLeft : null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    if (timeLeft === null) return;
     if (timeLeft <= 0 && !isSubmitting) {
       handleSubmit();
       return;
     }
 
     const timer = setInterval(() => {
-      setTimeLeft(prev => Math.max(0, prev - 1));
+      setTimeLeft(prev => prev !== null ? Math.max(0, prev - 1) : null);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -29,11 +40,35 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      await submitAssessment();
-      router.push("/dashboard");
+      await submitAssessment(answers);
+      
+      if (pendingAssessments.length > 0) {
+        setLocalAssessments(prev => prev.map(a => a.status === "IN_PROGRESS" ? { ...a, status: "COMPLETED" } : a));
+        setActiveTab(0);
+        setIsSubmitting(false);
+      } else {
+        router.push("/");
+      }
     } catch (e) {
       console.error(e);
       alert("Failed to submit assessment. Please try again.");
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleStartTimed = async () => {
+    setIsSubmitting(true);
+    try {
+      await startTimedAssessments();
+      setLocalAssessments(prev => prev.map(a => a.status === "PENDING" ? { ...a, status: "IN_PROGRESS" } : a));
+      setActiveTab(0);
+      
+      const newTime = pendingAssessments.reduce((acc, a) => acc + (a.timeRemaining || 0), 0);
+      setTimeLeft(newTime > 0 ? newTime : null);
+      setIsSubmitting(false);
+    } catch(e) {
+      console.error(e);
+      alert("Failed to start timed assessment.");
       setIsSubmitting(false);
     }
   };
@@ -57,21 +92,14 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
       logIntegrityEvent("PASTE", "User attempted to paste text");
     };
 
-    const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-      logIntegrityEvent("RIGHT_CLICK", "User attempted to open context menu");
-    };
-
     document.addEventListener("visibilitychange", handleVisibilityChange);
     document.addEventListener("copy", handleCopy);
     document.addEventListener("paste", handlePaste);
-    document.addEventListener("contextmenu", handleContextMenu);
 
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       document.removeEventListener("copy", handleCopy);
       document.removeEventListener("paste", handlePaste);
-      document.removeEventListener("contextmenu", handleContextMenu);
     };
   }, []);
 
@@ -81,7 +109,30 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const currentAssessment = assessments[activeTab];
+  const currentAssessment = currentAssessments[activeTab];
+
+  if (isTimedPhaseLocked) {
+    return (
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-black/90">
+        <CyberMatrixBackground />
+        <div className="z-10 bg-black/60 p-10 border border-cyan-500/50 rounded max-w-lg text-center backdrop-blur-sm shadow-[0_0_30px_rgba(0,255,255,0.1)] cyber-bracket">
+          <Terminal className="w-12 h-12 text-cyan-400 mx-auto mb-6" />
+          <h2 className="text-2xl font-mono text-cyan-300 mb-4 font-bold tracking-widest uppercase">General Phase Complete</h2>
+          <p className="text-cyan-100/70 mb-8 font-mono">
+            You have successfully submitted the general questions. You now have a timed technical assessment for your remaining departments.
+            The timer will begin as soon as you proceed.
+          </p>
+          <button 
+            onClick={handleStartTimed}
+            disabled={isSubmitting}
+            className="inline-flex items-center justify-center border border-yellow-500 bg-yellow-950/20 text-yellow-400 px-8 py-4 text-xs uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition-colors disabled:opacity-50"
+          >
+            {isSubmitting ? "INITIALIZING..." : "BEGIN TIMED ASSESSMENT"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen flex flex-col text-white overflow-hidden bg-black/90">
@@ -94,10 +145,12 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
           <h1 className="font-mono text-xl font-bold tracking-widest text-cyan-400">CYSCOM // TERMINAL</h1>
         </div>
         
-        <div className="flex items-center gap-4 bg-cyan-950/50 px-4 py-2 rounded border border-cyan-500/50">
-          <Clock className="w-5 h-5 text-cyan-300" />
-          <span className="font-mono text-xl font-bold text-cyan-100">{formatTime(timeLeft)}</span>
-        </div>
+        {timeLeft !== null && (
+          <div className="flex items-center gap-4 bg-cyan-950/50 px-4 py-2 rounded border border-cyan-500/50">
+            <Clock className="w-5 h-5 text-cyan-300" />
+            <span className="font-mono text-xl font-bold text-cyan-100">{formatTime(timeLeft)}</span>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
@@ -106,7 +159,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
         {/* Sidebar */}
         <aside className="w-64 border-r border-cyan-500/30 bg-black/60 backdrop-blur-md p-4 flex flex-col gap-4">
           <div className="text-xs font-mono text-cyan-500 mb-2 uppercase tracking-widest">Departments</div>
-          {assessments.map((assessment, idx) => (
+          {currentAssessments.map((assessment, idx) => (
             <button
               key={assessment.id}
               onClick={() => setActiveTab(idx)}
@@ -116,7 +169,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
                   : "bg-black/40 border-cyan-900/50 text-cyan-100/60 hover:border-cyan-500/50 hover:text-cyan-300"
               }`}
             >
-              {assessment.departmentSelection.department}
+              {assessment.departmentSelection.department} {assessment.timeRemaining ? "(Timed)" : "(General)"}
             </button>
           ))}
 
@@ -147,11 +200,34 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
                 {currentAssessment?.questions.map((q: any, i: number) => (
                   <div key={q.id} className="p-6 border border-cyan-500/30 bg-black/60 rounded">
                     <h3 className="font-mono text-cyan-400 font-bold mb-4">Question {i + 1}</h3>
-                    <p className="text-cyan-50 mb-6">{q.questionBank.title}</p>
-                    <textarea 
-                      className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[150px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
-                      placeholder="Enter your response here..."
-                    />
+                    <p className="text-cyan-50 mb-6 whitespace-pre-wrap">{q.questionBank.description || q.questionBank.content}</p>
+                    {q.questionBank.content?.options ? (
+                      <div className="space-y-3">
+                        {q.questionBank.content.options.map((opt: string, optIdx: number) => (
+                          <label key={optIdx} className={`flex items-center gap-3 p-3 border rounded cursor-pointer transition-colors ${answers[q.id] === opt ? 'border-cyan-400 bg-cyan-900/30' : 'border-cyan-900/50 bg-black/40 hover:border-cyan-700'}`}>
+                            <input 
+                              type="radio" 
+                              name={`q-${q.id}`} 
+                              value={opt}
+                              checked={answers[q.id] === opt}
+                              onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt }))}
+                              className="hidden"
+                            />
+                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${answers[q.id] === opt ? 'border-cyan-400' : 'border-cyan-700'}`}>
+                              {answers[q.id] === opt && <div className="w-2 h-2 rounded-full bg-cyan-400" />}
+                            </div>
+                            <span className="font-mono text-sm text-cyan-100">{opt}</span>
+                          </label>
+                        ))}
+                      </div>
+                    ) : (
+                      <textarea 
+                        value={answers[q.id] || ""}
+                        onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
+                        className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[150px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                        placeholder="Enter your response here..."
+                      />
+                    )}
                   </div>
                 ))}
               </div>

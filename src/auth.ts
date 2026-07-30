@@ -17,8 +17,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const email = user.email
         if (!email) return false
 
-        // 1. Allow all VIT students
-        if (email.endsWith("@vitstudent.ac.in")) {
+        // 1. Allow all VIT students and the test account
+        if (email.endsWith("@vitstudent.ac.in") || email === "krishpatel1352006@gmail.com" || email === "krishmpatel18@gmail.com" || email === "krishmittalpatel034@gmail.com") {
           return true
         }
 

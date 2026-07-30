@@ -132,7 +132,7 @@ model ApplicantProfile {
   phoneNumber           String
   branch                String
   year                  String
-  section               String
+  section               String?
   githubUrl             String?
   linkedinUrl           String?
   portfolioUrl          String?

@@ -88,32 +88,51 @@ export async function startAssessment() {
   // Create Assessments for each department
   await prisma.$transaction(async (tx) => {
     for (const dept of profile.departments) {
-      // Create Assessment record
-      const assessment = await tx.assessment.create({
-        data: {
-          departmentSelectionId: dept.id,
-          status: "IN_PROGRESS",
-          startedAt: new Date(),
-          timeRemaining: 300, // 5 minutes per department
-        }
-      });
-
-      // Find all questions in the question bank for this department
-      // To prevent loading thousands of questions, in a real app, you'd pick random N questions.
-      // For this implementation, we will just fetch all questions associated with this department.
+      // Fetch all questions for this department
       const bankQuestions = await tx.questionBank.findMany({
         where: { department: dept.department }
       });
 
-      // Map them to Assessment Questions
-      const questionsData = bankQuestions.map(bq => ({
-        assessmentId: assessment.id,
-        questionBankId: bq.id,
-      }));
+      const untimedQuestions = bankQuestions.filter(q => q.difficulty === 1);
+      const timedQuestions = bankQuestions.filter(q => q.difficulty === 2);
 
-      if (questionsData.length > 0) {
+      // Create UNTIMED Assessment if there are general questions
+      if (untimedQuestions.length > 0) {
+        const untimedAssessment = await tx.assessment.create({
+          data: {
+            departmentSelectionId: dept.id,
+            status: "IN_PROGRESS",
+            startedAt: new Date(),
+            timeRemaining: null,
+          }
+        });
         await tx.question.createMany({
-          data: questionsData
+          data: untimedQuestions.map(bq => ({
+            assessmentId: untimedAssessment.id,
+            questionBankId: bq.id,
+          }))
+        });
+      }
+
+      // Create TIMED Assessment if there are technical questions
+      if (timedQuestions.length > 0) {
+        let timeRemaining: number | null = null;
+        if (dept.department === "WEB_DEVELOPMENT") timeRemaining = 30;
+        else if (dept.department === "TECHNICAL") timeRemaining = 90;
+
+        const timedAssessment = await tx.assessment.create({
+          data: {
+            departmentSelectionId: dept.id,
+            status: "PENDING", // PENDING so timer hasn't started yet!
+            startedAt: null,
+            timeRemaining: timeRemaining,
+          }
+        });
+        await tx.question.createMany({
+          data: timedQuestions.map(bq => ({
+            assessmentId: timedAssessment.id,
+            questionBankId: bq.id,
+          }))
         });
       }
     }

@@ -6,12 +6,6 @@ export const registrationSchema = z.object({
   phoneNumber: z.string().regex(/^[0-9]{10}$/, "Phone number must be exactly 10 digits"),
   branch: z.string().min(2, "Branch is required"),
   year: z.string().min(1, "Year is required"),
-  section: z.string().min(1, "Section is required"),
-  githubUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-  linkedinUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-  portfolioUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-  previousExperience: z.string().optional(),
-  programmingExperience: z.string().optional(),
   
   // Department Selections
   department1: z.string().min(1, "First department is required"),
