@@ -7,9 +7,9 @@ import { Shield } from "lucide-react";
 export default async function SettingsPage() {
   const session = await auth();
   
-  // Guard the page - only SUPER_ADMIN can access
+  // Guard the page - only ADMIN or SUPER_ADMIN can access
   // @ts-ignore
-  if (!session?.user || session.user.role !== "SUPER_ADMIN") {
+  if (!session?.user || (session.user.role !== "SUPER_ADMIN" && session.user.role !== "ADMIN")) {
     redirect("/admin");
   }
 
@@ -28,7 +28,8 @@ export default async function SettingsPage() {
       </div>
       
       <div className="flex-1 overflow-auto">
-        <AdminManagementTable initialAdmins={admins} />
+        {/* @ts-ignore */}
+        <AdminManagementTable initialAdmins={admins} currentUserRole={session.user.role} />
       </div>
     </div>
   );

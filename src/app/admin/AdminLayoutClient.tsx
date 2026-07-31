@@ -9,7 +9,6 @@ import {
   Building2, 
   BarChart, 
   CalendarDays, 
-  Bell, 
   Settings,
   Search,
   ChevronLeft,
@@ -29,7 +28,7 @@ const ALL_NAV_ITEMS = [
   { name: "Pipeline Kanban", href: "/admin/kanban", icon: Kanban },
   { name: "Interview Slots", href: "/admin/interviews", icon: Calendar, superAdminOnly: true },
   { name: "Shortlisted", href: "/admin/shortlisted", icon: CheckCircle },
-  { name: "Settings", href: "/admin/settings", icon: Settings, superAdminOnly: true },
+  { name: "Settings", href: "/admin/settings", icon: Settings },
 ];
 
 export default function AdminLayoutClient({
@@ -154,10 +153,6 @@ export default function AdminLayoutClient({
 
             {/* Right side icons */}
             <div className="flex items-center gap-6 ml-auto">
-              <button className="relative text-cyan-600 hover:text-cyan-400 transition-colors">
-                <Bell className="w-5 h-5" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-none shadow-[0_0_5px_rgba(239,68,68,0.8)]" />
-              </button>
               
               <div className="flex items-center gap-3 border-l border-cyan-500/30 pl-6">
                 <div className="text-right hidden sm:block">

@@ -17,29 +17,115 @@ import { format, formatDistanceToNow } from "date-fns";
 
 export function ApplicantTable({ applicants }: { applicants: any[] }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [pref1Filter, setPref1Filter] = useState("ALL");
+  const [pref2Filter, setPref2Filter] = useState("ALL");
   const [quickViewId, setQuickViewId] = useState<string | null>(null);
 
   const filtered = applicants.filter(app => {
     const searchStr = `${app.user.name} ${app.user.email} ${app.regNo || ""}`.toLowerCase();
-    return searchStr.includes(searchTerm.toLowerCase());
+    const matchesSearch = searchStr.includes(searchTerm.toLowerCase());
+    
+    const pref1 = app.departments[0]?.department || "NONE";
+    const pref2 = app.departments[1]?.department || "NONE";
+
+    const matchesPref1 = pref1Filter === "ALL" || pref1 === pref1Filter;
+    const matchesPref2 = pref2Filter === "ALL" || pref2 === pref2Filter;
+
+    return matchesSearch && matchesPref1 && matchesPref2;
   });
+
+  const handleExportCSV = () => {
+    if (filtered.length === 0) {
+      alert("No data to export.");
+      return;
+    }
+
+    const headers = [
+      "Name",
+      "Email",
+      "Registration Number",
+      "Phone",
+      "Branch",
+      "Year",
+      "Pref 1",
+      "Pref 2",
+      "Status",
+      "Applied On"
+    ];
+
+    const rows = filtered.map(app => {
+      const escape = (str: string) => `"${String(str || "").replace(/"/g, '""')}"`;
+      
+      return [
+        escape(app.user.name),
+        escape(app.user.email),
+        escape(app.regNo),
+        escape(app.phoneNumber),
+        escape(app.branch),
+        escape(app.year),
+        escape(app.departments[0]?.department || "NONE"),
+        escape(app.departments[1]?.department || "NONE"),
+        escape(app.overallStatus),
+        escape(new Date(app.createdAt).toLocaleString())
+      ].join(",");
+    });
+
+    const csvContent = [headers.join(","), ...rows].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `CYSCOM_Recruitment_Data_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="bg-[#060A13]/80 backdrop-blur-xl border border-cyan-500/30 rounded-none overflow-hidden flex flex-col h-full shadow-[0_0_15px_rgba(0,255,255,0.05)] cyber-bracket font-mono">
       
       {/* Toolbar */}
       <div className="p-4 border-b border-cyan-500/30 flex flex-wrap gap-4 items-center justify-between bg-[#030710]/50">
-        <div className="relative w-full max-w-sm">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="w-4 h-4 text-cyan-500/50" />
+        <div className="flex flex-1 gap-4 items-center flex-wrap">
+          <div className="relative w-full max-w-sm">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <Search className="w-4 h-4 text-cyan-500/50" />
+            </div>
+            <input 
+              type="text" 
+              placeholder="QUERY APPLICANTS..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-[#030710] border border-cyan-500/50 rounded-none py-2 pl-10 pr-4 text-[10px] uppercase tracking-widest text-cyan-400 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(0,255,255,0.2)] transition-all placeholder:text-cyan-800"
+            />
           </div>
-          <input 
-            type="text" 
-            placeholder="QUERY APPLICANTS..." 
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-[#030710] border border-cyan-500/50 rounded-none py-2 pl-10 pr-4 text-[10px] uppercase tracking-widest text-cyan-400 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(0,255,255,0.2)] transition-all placeholder:text-cyan-800"
-          />
+          
+          <select
+            value={pref1Filter}
+            onChange={(e) => setPref1Filter(e.target.value)}
+            className="bg-[#030710] border border-cyan-500/50 text-[10px] uppercase tracking-widest text-cyan-400 py-2 px-3 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(0,255,255,0.2)]"
+          >
+            <option value="ALL">PREF 1: ALL</option>
+            <option value="WEB_DEVELOPMENT">WEB DEV</option>
+            <option value="TECHNICAL">TECHNICAL</option>
+            <option value="SOCIAL_MEDIA">SOCIAL MEDIA</option>
+            <option value="EVENT_MANAGEMENT">EVENT MGMT</option>
+            <option value="DESIGN">DESIGN</option>
+          </select>
+
+          <select
+            value={pref2Filter}
+            onChange={(e) => setPref2Filter(e.target.value)}
+            className="bg-[#030710] border border-cyan-500/50 text-[10px] uppercase tracking-widest text-cyan-400 py-2 px-3 focus:outline-none focus:border-cyan-400 focus:shadow-[0_0_10px_rgba(0,255,255,0.2)]"
+          >
+            <option value="ALL">PREF 2: ALL</option>
+            <option value="NONE">PREF 2: NONE</option>
+            <option value="WEB_DEVELOPMENT">WEB DEV</option>
+            <option value="TECHNICAL">TECHNICAL</option>
+            <option value="SOCIAL_MEDIA">SOCIAL MEDIA</option>
+            <option value="EVENT_MANAGEMENT">EVENT MGMT</option>
+            <option value="DESIGN">DESIGN</option>
+          </select>
         </div>
         
         <div className="flex items-center gap-3">
@@ -47,7 +133,10 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
             <Filter className="w-4 h-4" />
             FILTERS
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-[#030710] border border-cyan-500/50 rounded-none text-[10px] uppercase tracking-widest text-cyan-500 hover:text-cyan-300 hover:border-cyan-400 hover:shadow-[0_0_10px_rgba(0,255,255,0.2)] transition-all">
+          <button 
+            onClick={handleExportCSV}
+            className="flex items-center gap-2 px-4 py-2 bg-[#030710] border border-cyan-500/50 rounded-none text-[10px] uppercase tracking-widest text-cyan-500 hover:text-cyan-300 hover:border-cyan-400 hover:shadow-[0_0_10px_rgba(0,255,255,0.2)] transition-all"
+          >
             <Download className="w-4 h-4" />
             EXPORT CSV
           </button>

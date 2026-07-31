@@ -6,9 +6,11 @@ import { Role } from "@prisma/client";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 
-export function AdminManagementTable({ initialAdmins }: { initialAdmins: any[] }) {
+export function AdminManagementTable({ initialAdmins, currentUserRole }: { initialAdmins: any[], currentUserRole: string }) {
   const [admins, setAdmins] = useState(initialAdmins);
   const [loading, setLoading] = useState<string | null>(null);
+  
+  const isSuperAdmin = currentUserRole === "SUPER_ADMIN";
 
   const handleUpdate = async (userId: string, role: Role, designation: string | null) => {
     setLoading(userId);
@@ -49,7 +51,7 @@ export function AdminManagementTable({ initialAdmins }: { initialAdmins: any[] }
               </td>
               <td className="p-4">
                 <Select 
-                  disabled={loading === admin.id}
+                  disabled={!isSuperAdmin || loading === admin.id}
                   value={admin.role}
                   onValueChange={(val) => handleUpdate(admin.id, val as Role, admin.adminProfile?.designation || "")}
                 >
@@ -65,12 +67,17 @@ export function AdminManagementTable({ initialAdmins }: { initialAdmins: any[] }
               </td>
               <td className="p-4">
                 <Input 
-                  disabled={loading === admin.id}
-                  defaultValue={admin.adminProfile?.designation || ""}
+                  disabled={!isSuperAdmin || loading === admin.id}
+                  value={admin.adminProfile?.designation || ""}
+                  onChange={(e) => {
+                    const newVal = e.target.value;
+                    setAdmins(prev => prev.map(a => a.id === admin.id ? { ...a, adminProfile: { ...a.adminProfile, designation: newVal } } : a));
+                  }}
                   placeholder="e.g. Technical Lead"
                   className="bg-[#161B22] border-gray-700 h-9 text-sm"
                   onBlur={(e) => {
-                    if (e.target.value !== (admin.adminProfile?.designation || "")) {
+                    const initial = initialAdmins.find(a => a.id === admin.id)?.adminProfile?.designation || "";
+                    if (e.target.value !== initial) {
                       handleUpdate(admin.id, admin.role, e.target.value);
                     }
                   }}

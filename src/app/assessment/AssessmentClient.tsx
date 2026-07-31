@@ -221,12 +221,17 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
                         ))}
                       </div>
                     ) : (
-                      <textarea 
-                        value={answers[q.id] || ""}
-                        onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
-                        className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[150px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
-                        placeholder="Enter your response here..."
-                      />
+                      <div className="space-y-2">
+                        <textarea 
+                          value={answers[q.id] || ""}
+                          onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
+                          className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[150px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                          placeholder="Enter your response here..."
+                        />
+                        <p className="text-xs text-cyan-500/60 font-mono italic">
+                          * If this question asks for an upload or file, please paste your public Google Drive (or similar) link in the box above. Ensure access is set to "Anyone with the link".
+                        </p>
+                      </div>
                     )}
                   </div>
                 ))}

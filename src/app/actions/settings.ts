@@ -13,8 +13,8 @@ export async function getAdmins() {
     where: { id: session.user.id }
   });
 
-  if (user?.role !== "SUPER_ADMIN") {
-    throw new Error("Unauthorized: Super Admins only");
+  if (user?.role !== "SUPER_ADMIN" && user?.role !== "ADMIN") {
+    throw new Error("Unauthorized: Admins only");
   }
 
   // Fetch all admins and super admins
