@@ -11,7 +11,7 @@ export async function submitRegistration(data: RegistrationFormValues) {
   const session = await auth();
   
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { error: "Unauthorized" };
   }
 
   if (
@@ -24,7 +24,7 @@ export async function submitRegistration(data: RegistrationFormValues) {
     session.user.email !== "niharamariam2005@gmail.com" &&
     session.user.email !== "krish2256patel@gmail.com"
   ) {
-    throw new Error("Only @vitstudent.ac.in emails are allowed to register for recruitment.");
+    return { error: "Only @vitstudent.ac.in emails are allowed to register for recruitment." };
   }
 
   // Validate data on the server
@@ -36,7 +36,7 @@ export async function submitRegistration(data: RegistrationFormValues) {
   });
 
   if (existingProfile) {
-    throw new Error("You have already registered.");
+    return { error: "You have already registered." };
   }
 
   const existingReg = await prisma.applicantProfile.findUnique({
@@ -44,7 +44,7 @@ export async function submitRegistration(data: RegistrationFormValues) {
   });
 
   if (existingReg) {
-    throw new Error(`Registration number ${parsedData.registrationNumber.toUpperCase()} is already in use by another account.`);
+    return { error: `Registration number ${parsedData.registrationNumber.toUpperCase()} is already in use by another account.` };
   }
 
   // Create Profile and everything in a transaction
@@ -92,4 +92,6 @@ export async function submitRegistration(data: RegistrationFormValues) {
 
   // Redirect to home page
   redirect("/");
+  // Note: redirect() throws an internal error that Next.js catches to handle the redirect,
+  // so we don't return anything here.
 }

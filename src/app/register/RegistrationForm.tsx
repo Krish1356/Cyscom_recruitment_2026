@@ -45,7 +45,12 @@ export function RegistrationForm() {
   const onSubmit = async (data: RegistrationFormValues) => {
     setIsSubmitting(true); setError(null);
     try {
-      await submitRegistration(data);
+      const result = await submitRegistration(data);
+      if (result && result.error) {
+        setError(result.error);
+        setIsSubmitting(false);
+        return;
+      }
       // Handle success redirect or state here
     } catch (err: any) {
       setError(err.message || "Protocol Failure.");
