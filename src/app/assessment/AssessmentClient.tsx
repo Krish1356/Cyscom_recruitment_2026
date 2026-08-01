@@ -83,13 +83,11 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     };
 
     const handleCopy = (e: ClipboardEvent) => {
-      e.preventDefault();
-      logIntegrityEvent("COPY", "User attempted to copy text");
+      logIntegrityEvent("COPY", "User copied text");
     };
 
     const handlePaste = (e: ClipboardEvent) => {
-      e.preventDefault();
-      logIntegrityEvent("PASTE", "User attempted to paste text");
+      logIntegrityEvent("PASTE", "User pasted text");
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -225,7 +223,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
                         <textarea 
                           value={answers[q.id] || ""}
                           onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
-                          className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[150px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                          className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[250px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
                           placeholder="Enter your response here..."
                         />
                         <p className="text-xs text-cyan-500/60 font-mono italic">
