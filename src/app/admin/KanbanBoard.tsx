@@ -1,6 +1,5 @@
 "use client";
 
-import { PipelineStageName } from "@prisma/client";
 import { updateApplicantStage } from "../actions/admin";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,21 +8,21 @@ import { QuickReviewModal } from "./QuickReviewModal";
 import { formatDistanceToNow } from "date-fns";
 
 const STAGES = [
-  PipelineStageName.APPLIED,
-  PipelineStageName.ASSESSMENT_COMPLETED,
-  PipelineStageName.UNDER_REVIEW,
-  PipelineStageName.SHORTLISTED,
-  PipelineStageName.INTERVIEW_SCHEDULED,
-  PipelineStageName.INTERVIEW_COMPLETED,
-  PipelineStageName.SELECTED,
-  PipelineStageName.REJECTED
+  "APPLIED",
+  "ASSESSMENT_COMPLETED",
+  "UNDER_REVIEW",
+  "SHORTLISTED",
+  "INTERVIEW_SCHEDULED",
+  "INTERVIEW_COMPLETED",
+  "SELECTED",
+  "REJECTED"
 ];
 
 export function KanbanBoard({ applicants }: { applicants: any[] }) {
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [quickViewId, setQuickViewId] = useState<string | null>(null);
 
-  const handleStageChange = async (applicantId: string, newStage: PipelineStageName) => {
+  const handleStageChange = async (applicantId: string, newStage: string) => {
     setLoadingId(applicantId);
     try {
       await updateApplicantStage(applicantId, newStage);
