@@ -25,7 +25,7 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
   const handleStageChange = async (applicantId: string, newStage: string) => {
     setLoadingId(applicantId);
     try {
-      await updateApplicantStage(applicantId, newStage);
+      await updateApplicantStage(applicantId, newStage as any);
     } catch (e) {
       alert("Failed to update stage");
     } finally {
@@ -85,7 +85,7 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
                     <Select 
                       disabled={loadingId === applicant.id}
                       value={applicant.overallStatus} 
-                      onValueChange={(val) => handleStageChange(applicant.id, val as PipelineStageName)}
+                      onValueChange={(val) => handleStageChange(applicant.id, val)}
                     >
                       <SelectTrigger className="h-8 text-[10px] tracking-widest uppercase bg-[#030710] border-cyan-500/30 rounded-none focus:border-cyan-400 font-mono text-cyan-400">
                         <SelectValue />
