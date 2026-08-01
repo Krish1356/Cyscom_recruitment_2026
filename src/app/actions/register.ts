@@ -20,7 +20,8 @@ export async function submitRegistration(data: RegistrationFormValues) {
     session.user.email !== "krishmpatel18@gmail.com" &&
     session.user.email !== "krishmittalpatel034@gmail.com" &&
     session.user.email !== "chitwansbagga@gmail.com" &&
-    session.user.email !== "education.anayy@gmail.com"
+    session.user.email !== "education.anayy@gmail.com" &&
+    session.user.email !== "niharamariam2005@gmail.com"
   ) {
     throw new Error("Only @vitstudent.ac.in emails are allowed to register for recruitment.");
   }
