@@ -20,7 +20,7 @@ const NAV_ITEMS = [
   { name: "HOME", icon: Home, href: "#home" },
   { name: "MISSION", icon: Target, href: "#mission" },
   { name: "DIVISIONS", icon: LayoutGrid, href: "#divisions" },
-  { name: "APPLY", icon: FileText, href: "#apply" },
+  { name: "WHY JOIN", icon: Users, href: "#why-join" },
   { name: "CONTACT", icon: Mail, href: "#contact" },
 ];
 

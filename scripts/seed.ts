@@ -36,12 +36,13 @@ async function main() {
   // EVENT MANAGEMENT (GENERAL)
   // ==========================================
   const emQuestions = [
-    { title: "Past Experience", content: "Describe situation where u organized or coordinated an event in school" },
-    { title: "Qualities", content: "What qualities do u think are most imp for someone in em? Which of those do u possess" },
-    { title: "Volunteer Crisis", content: "30mins before an event starts only two of the 10 volunteers show up what do u do" },
-    { title: "Chief Guest Delay", content: "10 mins before an event chief guest stuck in traffic" },
-    { title: "Stage vs Behind-scenes", content: "Would you rather be the person on stage or the one making everything run behind the scenes? Why" },
-    { title: "Best Advertisement", content: "What's the best advertisement you've seen recently, and why did it work?" }
+    { title: "Past Experience", content: "1. Describe a situation where you organized or coordinated an event at your school." },
+    { title: "Qualities", content: "2. What qualities do you think are most important for someone in Event Management (EM)? Which of those qualities do you possess?" },
+    { title: "Volunteer Crisis", content: "3. Thirty minutes before an event starts, only two of the ten volunteers show up. What would you do?" },
+    { title: "Chief Guest Delay", content: "4. Ten minutes before the event begins, you learn that the chief guest is stuck in traffic. How would you handle the situation?" },
+    { title: "Stage vs Behind-scenes", content: "5. Would you rather be the person on stage or the one working behind the scenes to make everything run smoothly? Why?" },
+    { title: "Best Advertisement", content: "6. What's the best advertisement you've seen recently, and why do you think it was effective?" },
+    { title: "Mascot Design", content: "7. \"If CYSCOM had a mascot, what would it be and why?\"" }
   ];
   for (const q of emQuestions) {
     await prisma.questionBank.create({

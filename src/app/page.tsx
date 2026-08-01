@@ -112,9 +112,39 @@ export default function Home() {
         </Panel>
       </section>
 
-      {/* 04: CONTACT */}
+      {/* 04: WHY JOIN CYSCOM */}
+      <section id="why-join" className="py-12">
+        <Panel title="04 WHY JOIN US">
+          <div className="p-4 md:p-8">
+            <h3 className="text-2xl text-green-400 mb-2 tracking-widest font-[family-name:var(--font-black-ops)]">WHY JOIN US ?</h3>
+            <p className="text-sm text-cyan-100/50 mb-12">We organize mind blowing events and we try to do the unthinkable. See it for yourself.</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Box 1 */}
+              <div className="border border-cyan-500/20 bg-[#030710]/40 p-6 cyber-bracket group">
+                <h4 className="text-xl font-bold text-white tracking-wider mb-2 font-[family-name:var(--font-black-ops)] group-hover:text-cyan-300 transition-colors">Biggest cybersecurity community in VIT</h4>
+                <p className="text-xs text-cyan-100/60 leading-relaxed mb-6">We have the biggest cybersecurity community in VIT and we are proud of it.</p>
+                <div className="aspect-video w-full bg-cyan-950/20 border border-cyan-900/50 flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[url('/community.JPG')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500"></div>
+                </div>
+              </div>
+
+              {/* Box 2 */}
+              <div className="border border-cyan-500/20 bg-[#030710]/40 p-6 cyber-bracket group">
+                <h4 className="text-xl font-bold text-white tracking-wider mb-2 font-[family-name:var(--font-black-ops)] group-hover:text-cyan-300 transition-colors">We conduct some of the biggest events in VIT Chennai</h4>
+                <p className="text-xs text-cyan-100/60 leading-relaxed mb-6">And we have received a lot of love from the community and participants.</p>
+                <div className="aspect-video w-full bg-cyan-950/20 border border-cyan-900/50 flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[url('/events.JPG')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Panel>
+      </section>
+
+      {/* 05: CONTACT */}
       <section id="contact" className="py-12">
-        <Panel title="04 SECURE COMM LINK (CONTACT)">
+        <Panel title="05 SECURE COMM LINK (CONTACT)">
           <div className="p-4 md:p-8">
             <h3 className="text-2xl text-green-400 mb-2 tracking-widest font-[family-name:var(--font-black-ops)]">TRANSMISSION CHANNEL</h3>
             <p className="text-sm text-cyan-100/50 mb-12">Establish a secure connection with CYSCOM command.</p>
@@ -137,36 +167,6 @@ export default function Home() {
                    <a href="https://www.linkedin.com/company/cyscomvit/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-300 tracking-widest uppercase border-b border-transparent hover:border-cyan-300 transition-colors">LinkedIn</a>
                    <a href="https://github.com/cyscomvit" target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-300 tracking-widest uppercase border-b border-transparent hover:border-cyan-300 transition-colors">GitHub</a>
                  </div>
-              </div>
-            </div>
-          </div>
-        </Panel>
-      </section>
-
-      {/* 05: WHY JOIN CYSCOM */}
-      <section id="why-join" className="py-12">
-        <Panel title="05 WHY JOIN US">
-          <div className="p-4 md:p-8">
-            <h3 className="text-2xl text-green-400 mb-2 tracking-widest font-[family-name:var(--font-black-ops)]">WHY JOIN US ?</h3>
-            <p className="text-sm text-cyan-100/50 mb-12">We organize mind blowing events and we try to do the unthinkable. See it for yourself.</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Box 1 */}
-              <div className="border border-cyan-500/20 bg-[#030710]/40 p-6 cyber-bracket group">
-                <h4 className="text-xl font-bold text-white tracking-wider mb-2 font-[family-name:var(--font-black-ops)] group-hover:text-cyan-300 transition-colors">Biggest cybersecurity community in VIT</h4>
-                <p className="text-xs text-cyan-100/60 leading-relaxed mb-6">We have the biggest cybersecurity community in VIT and we are proud of it.</p>
-                <div className="aspect-video w-full bg-cyan-950/20 border border-cyan-900/50 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[url('/community.JPG')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500"></div>
-                </div>
-              </div>
-
-              {/* Box 2 */}
-              <div className="border border-cyan-500/20 bg-[#030710]/40 p-6 cyber-bracket group">
-                <h4 className="text-xl font-bold text-white tracking-wider mb-2 font-[family-name:var(--font-black-ops)] group-hover:text-cyan-300 transition-colors">We conduct some of the biggest events in VIT Chennai</h4>
-                <p className="text-xs text-cyan-100/60 leading-relaxed mb-6">And we have received a lot of love from the community and participants.</p>
-                <div className="aspect-video w-full bg-cyan-950/20 border border-cyan-900/50 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[url('/events.JPG')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500"></div>
-                </div>
               </div>
             </div>
           </div>
