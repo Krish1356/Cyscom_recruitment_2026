@@ -25,9 +25,9 @@ export async function getUserStatus() {
   });
 
   if (anyAssessment) {
-    if (!incompleteAssessment) return { status: "completed" };
-    return { status: "in_progress" };
+    if (!incompleteAssessment) return { status: "completed", overallStatus: profile.overallStatus };
+    return { status: "in_progress", overallStatus: profile.overallStatus };
   }
 
-  return { status: "ready" };
+  return { status: "ready", overallStatus: profile.overallStatus };
 }

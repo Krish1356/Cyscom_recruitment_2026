@@ -9,10 +9,14 @@ import { signOut } from "next-auth/react";
 
 export function RecruitmentAction() {
   const [status, setStatus] = useState<string | null>(null);
+  const [overallStatus, setOverallStatus] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getUserStatus().then(res => setStatus(res.status));
+    getUserStatus().then(res => {
+      setStatus(res.status);
+      if (res.overallStatus) setOverallStatus(res.overallStatus);
+    });
   }, []);
 
   const handleStart = async () => {
@@ -58,9 +62,36 @@ export function RecruitmentAction() {
 
   if (status === "no_assessment" || status === "completed") {
     return (
-      <div className="flex flex-col items-center gap-4">
-        <div className="inline-flex items-center justify-center border border-green-500/50 bg-green-950/20 text-green-400 px-8 py-4 text-xs uppercase tracking-widest cyber-bracket">
-          &gt; DOSSIER SUBMITTED. AWAITING CLEARANCE.
+      <div className="flex flex-col items-center gap-6 w-full max-w-sm mx-auto mt-4">
+        <div className="w-full bg-[#0a151c]/80 border border-cyan-900/40 rounded p-6 shadow-md text-left">
+          <h3 className="text-cyan-500 font-bold mb-4 uppercase tracking-widest text-xs border-b border-cyan-900/30 pb-2">Application Status</h3>
+          <div className="space-y-4">
+            <div>
+              <div className="text-[10px] text-cyan-600 uppercase tracking-widest mb-1">Current Phase</div>
+              <div className="text-white font-mono text-base">{overallStatus ? overallStatus.replace(/_/g, ' ') : "AWAITING CLEARANCE"}</div>
+            </div>
+            
+            {overallStatus === 'REJECTED' && (
+              <div className="text-red-400/80 text-sm mt-2">
+                We appreciate your interest, but we are not moving forward with your application at this time. Keep learning and hacking!
+              </div>
+            )}
+            {(overallStatus === 'SHORTLISTED' || overallStatus === 'INTERVIEW_SCHEDULED') && (
+              <div className="text-green-400/90 text-sm mt-2">
+                You have cleared the assessment phase! Please check your email for the next steps and interview details.
+              </div>
+            )}
+            {overallStatus === 'SELECTED' && (
+              <div className="text-green-400 text-sm mt-2 font-bold">
+                Congratulations! You have been selected to join CYSCOM. Welcome to the community!
+              </div>
+            )}
+            {overallStatus === 'ASSESSMENT_COMPLETED' && (
+              <div className="text-cyan-200/60 text-sm mt-2">
+                Your assessment has been submitted successfully and is currently under review by our team.
+              </div>
+            )}
+          </div>
         </div>
         <LogoutButton />
       </div>

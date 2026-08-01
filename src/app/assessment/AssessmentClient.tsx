@@ -239,18 +239,27 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
             )}
             
             <div className="pt-8 border-t border-cyan-500/30 flex justify-end">
-              <button 
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isSubmitting ? "SUBMITTING..." : (
-                  <>
-                    <Send className="w-5 h-5 mr-2" />
-                    SUBMIT ASSESSMENT
-                  </>
-                )}
-              </button>
+              {activeTab < currentAssessments.length - 1 ? (
+                <button 
+                  onClick={() => setActiveTab(prev => prev + 1)}
+                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center"
+                >
+                  NEXT SECTION <Send className="w-5 h-5 ml-2" />
+                </button>
+              ) : (
+                <button 
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "SUBMITTING..." : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      SUBMIT ALL ASSESSMENTS
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </main>

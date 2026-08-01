@@ -87,21 +87,19 @@ export function ReviewClient({ applicant }: { applicant: any }) {
               ) : (
                 <div className="space-y-8">
                   {assessment.questions.map((q: any, idx: number) => (
-                    <div key={q.id} className="space-y-4">
-                      <div className="flex items-start gap-4">
-                        <div className="w-8 h-8 shrink-0 bg-cyan-950 flex items-center justify-center font-bold text-cyan-400 rounded">
-                          {idx + 1}
+                    <div key={q.id} className="space-y-4 pb-6 border-b border-cyan-900/50 last:border-0 last:pb-0">
+                      <div className="flex flex-col font-mono">
+                        <div className="text-cyan-400 font-bold mb-4 leading-relaxed">
+                          SYS.Q: {q.questionBank.title} - <span className="text-cyan-300 font-medium">{q.questionBank.description || q.questionBank.content?.text || "No description provided."}</span>
                         </div>
-                        <div className="flex-1">
-                          <p className="text-cyan-50 font-medium mb-2">{q.questionBank.title}</p>
-                          <div className="p-4 bg-cyan-950/20 border border-cyan-500/20 rounded text-cyan-100/80 font-mono whitespace-pre-wrap min-h-[100px]">
-                            {q.answer?.content || <span className="text-cyan-100/40 italic">No answer provided</span>}
-                          </div>
+                        
+                        <div className="pl-4 border-l-2 border-cyan-500 bg-[#0a151c] p-4 text-cyan-100/80 whitespace-pre-wrap min-h-[50px] flex items-center">
+                          {q.answer?.content || <span className="text-cyan-100/40 italic">No answer provided</span>}
                         </div>
                       </div>
 
                       {q.answer && (
-                        <div className="ml-12 flex items-center gap-4 bg-cyan-950/40 p-3 rounded border border-cyan-500/20">
+                        <div className="flex items-center gap-4 bg-cyan-950/40 p-3 rounded border border-cyan-500/20 mt-2 w-fit">
                           <div className="flex items-center gap-2">
                             <span className="text-xs font-mono text-cyan-400">AI Score:</span>
                             <span className="font-bold text-cyan-100">{q.answer.aiScore ?? "N/A"}</span>

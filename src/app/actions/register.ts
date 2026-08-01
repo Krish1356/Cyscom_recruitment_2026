@@ -21,7 +21,8 @@ export async function submitRegistration(data: RegistrationFormValues) {
     session.user.email !== "krishmittalpatel034@gmail.com" &&
     session.user.email !== "chitwansbagga@gmail.com" &&
     session.user.email !== "education.anayy@gmail.com" &&
-    session.user.email !== "niharamariam2005@gmail.com"
+    session.user.email !== "niharamariam2005@gmail.com" &&
+    session.user.email !== "krish2256patel@gmail.com"
   ) {
     throw new Error("Only @vitstudent.ac.in emails are allowed to register for recruitment.");
   }
@@ -36,6 +37,14 @@ export async function submitRegistration(data: RegistrationFormValues) {
 
   if (existingProfile) {
     throw new Error("You have already registered.");
+  }
+
+  const existingReg = await prisma.applicantProfile.findUnique({
+    where: { registrationNumber: parsedData.registrationNumber.toUpperCase() }
+  });
+
+  if (existingReg) {
+    throw new Error(`Registration number ${parsedData.registrationNumber.toUpperCase()} is already in use by another account.`);
   }
 
   // Create Profile and everything in a transaction

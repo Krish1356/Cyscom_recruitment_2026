@@ -9,6 +9,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID!,
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   callbacks: {
@@ -18,7 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!email) return false
 
         // 1. Allow all VIT students and the test account
-        if (email.endsWith("@vitstudent.ac.in") || email === "krishpatel1352006@gmail.com" || email === "krishmpatel18@gmail.com" || email === "krishmittalpatel034@gmail.com" || email === "education.anayy@gmail.com" || email === "niharamariam2005@gmail.com") {
+        if (email.endsWith("@vitstudent.ac.in") || email === "krishpatel1352006@gmail.com" || email === "krishmpatel18@gmail.com" || email === "krishmittalpatel034@gmail.com" || email === "education.anayy@gmail.com" || email === "niharamariam2005@gmail.com" || email === "krish2256patel@gmail.com") {
           return true
         }
 
