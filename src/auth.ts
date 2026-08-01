@@ -19,7 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!email) return false
 
         // 1. Allow all VIT students and the test account
-        if (email.endsWith("@vitstudent.ac.in") || email === "krishpatel1352006@gmail.com" || email === "krishmpatel18@gmail.com" || email === "krishmittalpatel034@gmail.com" || email === "education.anayy@gmail.com" || email === "niharamariam2005@gmail.com" || email === "krish2256patel@gmail.com") {
+        if (email.endsWith("@vitstudent.ac.in") || email === "krishpatel1352006@gmail.com" || email === "krishmpatel18@gmail.com" || email === "krishmittalpatel034@gmail.com" || email === "education.anayy@gmail.com" || email === "niharamariam2005@gmail.com" || email === "krish2256patel@gmail.com" || email === "chitwansingh06@gmail.com") {
           return true
         }
 
@@ -46,7 +46,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           "krishpatel1352006@gmail.com",
           "krishmpatel18@gmail.com",
           "education.anayy@gmail.com",
-          "krish2256patel@gmail.com"
+          "krish2256patel@gmail.com",
+          "chitwansingh06@gmail.com"
         ];
         const allAdmins = [...adminEmails, ...hardcodedAdmins];
 
