@@ -97,6 +97,9 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
               <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_#22c55e] animate-pulse" />
               <span className="text-xs text-green-400 tracking-widest uppercase">ONLINE</span>
             </div>
+            <Link href="/admin">
+              <div className="w-6 h-6 opacity-0" />
+            </Link>
           </div>
           <div className="flex justify-between items-center text-[10px] text-cyan-700">
             <span>RECRUITMENT 2026</span>
