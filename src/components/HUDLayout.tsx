@@ -115,10 +115,27 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
       {/* Main Content Viewport */}
       <main className="flex-1 relative flex flex-col min-h-screen">
         <div className="fixed inset-0 terminal-scanline opacity-10 pointer-events-none z-50" />
-        <div className="flex-1 w-full max-w-[1600px] mx-auto p-4 md:p-8 space-y-12 pb-24">
+        <div className="flex-1 w-full max-w-[1600px] mx-auto p-4 md:p-8 space-y-12 pb-32">
           {children}
         </div>
       </main>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-[#02050A]/95 backdrop-blur-md border-t border-cyan-500/30 flex items-center justify-around z-50">
+        {NAV_ITEMS.map((item) => (
+          <Link 
+            key={item.name} 
+            href={item.href}
+            onClick={() => setActiveHash(item.href)}
+            className={`p-2 flex flex-col items-center justify-center gap-1 transition-colors ${
+              activeHash === item.href ? "text-cyan-400" : "text-cyan-700 hover:text-cyan-500"
+            }`}
+          >
+            <item.icon className="w-5 h-5" />
+            <span className="text-[8px] tracking-widest">{item.name}</span>
+          </Link>
+        ))}
+      </nav>
       
     </div>
   );

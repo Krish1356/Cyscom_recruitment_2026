@@ -50,7 +50,7 @@ export default function Home() {
           <RecruitmentAction />
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-cyan-500/20 text-center bg-[#030710]/80 backdrop-blur-sm">
+        <div className="w-full mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-cyan-500/20 text-center bg-[#030710]/80 backdrop-blur-sm pb-8">
           <div className="text-center">
             <div className="text-[9px] text-cyan-700 uppercase tracking-widest mb-1">RECRUITMENT STATUS</div>
             <div className="text-sm text-green-400 font-bold tracking-wider">ACTIVE</div>
@@ -297,22 +297,22 @@ function CountdownTimer() {
   return (
     <div className="flex justify-center items-start gap-4 md:gap-8 text-center font-[family-name:var(--font-black-ops)]">
         <div className="flex flex-col items-center">
-          <div className="text-6xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.days.toString().padStart(2, '0')}</div>
-          <div className="text-xs text-cyan-500 uppercase tracking-[0.2em] font-black font-sans">Days</div>
+          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.days.toString().padStart(2, '0')}</div>
+          <div className="text-[8px] md:text-xs text-cyan-500 uppercase tracking-wider md:tracking-[0.2em] font-black font-sans">Days</div>
         </div>
-        <div className="text-6xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
+        <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
         <div className="flex flex-col items-center">
-          <div className="text-6xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.hours.toString().padStart(2, '0')}</div>
-          <div className="text-xs text-cyan-500 uppercase tracking-[0.2em] font-black font-sans">Hours</div>
+          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.hours.toString().padStart(2, '0')}</div>
+          <div className="text-[8px] md:text-xs text-cyan-500 uppercase tracking-wider md:tracking-[0.2em] font-black font-sans">Hours</div>
         </div>
-        <div className="text-6xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
+        <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
         <div className="flex flex-col items-center">
-          <div className="text-6xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-          <div className="text-xs text-cyan-500 uppercase tracking-[0.2em] font-black font-sans">Minutes</div>
+          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+          <div className="text-[8px] md:text-xs text-cyan-500 uppercase tracking-wider md:tracking-[0.2em] font-black font-sans">Minutes</div>
         </div>
-        <div className="text-6xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
+        <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
         <div className="flex flex-col items-center">
-          <div className="text-6xl md:text-8xl font-bold text-cyan-400 mb-2 drop-shadow-[0_0_20px_rgba(0,255,255,0.4)]">{timeLeft.seconds.toString().padStart(2, '0')}</div>
+          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-400 mb-2 drop-shadow-[0_0_20px_rgba(0,255,255,0.4)]">{timeLeft.seconds.toString().padStart(2, '0')}</div>
           <div className="text-xs text-cyan-500 uppercase tracking-[0.2em] font-black font-sans">Seconds</div>
         </div>
       </div>
