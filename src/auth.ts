@@ -42,7 +42,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           "krishmittalpatel034@gmail.com",
           "randomchizkeliye@gmail.com",
           "kshruthi206@gmail.com",
-          "niharamariam2005@gmail.com"
+          "niharamariam2005@gmail.com",
+          "krishpatel1352006@gmail.com",
+          "krishmpatel18@gmail.com",
+          "education.anayy@gmail.com",
+          "krish2256patel@gmail.com"
         ];
         const allAdmins = [...adminEmails, ...hardcodedAdmins];
 
