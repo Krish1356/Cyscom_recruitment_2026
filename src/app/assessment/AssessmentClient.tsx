@@ -83,10 +83,12 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     };
 
     const handleCopy = (e: ClipboardEvent) => {
+      e.preventDefault();
       logIntegrityEvent("COPY", "User copied text");
     };
 
     const handlePaste = (e: ClipboardEvent) => {
+      e.preventDefault();
       logIntegrityEvent("PASTE", "User pasted text");
     };
 
