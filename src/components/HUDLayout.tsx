@@ -3,25 +3,21 @@
 import { motion } from "framer-motion";
 import { 
   Home, 
-  Target, 
-  LayoutGrid, 
-  Calendar, 
-  Users, 
-  FileText, 
-  Mail,
-  ShieldCheck,
-  Terminal,
-  Activity
+  Flame, 
+  Briefcase, 
+  HeartHandshake, 
+  MessageSquare,
+  Lock
 } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const NAV_ITEMS = [
   { name: "HOME", icon: Home, href: "#home" },
-  { name: "MISSION", icon: Target, href: "#mission" },
-  { name: "DIVISIONS", icon: LayoutGrid, href: "#divisions" },
-  { name: "WHY JOIN", icon: Users, href: "#why-join" },
-  { name: "CONTACT", icon: Mail, href: "#contact" },
+  { name: "MISSION", icon: Flame, href: "#mission" },
+  { name: "DIVISIONS", icon: Briefcase, href: "#divisions" },
+  { name: "WHY JOIN", icon: HeartHandshake, href: "#why-join" },
+  { name: "CONTACT", icon: MessageSquare, href: "#contact" },
 ];
 
 export function HUDLayout({ children }: { children: React.ReactNode }) {
@@ -34,6 +30,28 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
       setTime(now.toISOString().split("T")[1].split(".")[0]); // e.g. 14:32:05
     }, 1000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveHash(`#${entry.target.id}`);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -70% 0px" }
+    );
+
+    NAV_ITEMS.forEach((item) => {
+      const element = document.querySelector(item.href);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -74,9 +92,14 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
         {/* System Status */}
         <div className="p-6 border-t border-cyan-500/20 bg-[#02050A]">
           <div className="text-[10px] text-cyan-800 uppercase tracking-widest mb-3 font-[family-name:var(--font-black-ops)]">SYSTEM STATUS</div>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_#22c55e] animate-pulse" />
-            <span className="text-xs text-green-400 tracking-widest uppercase">ONLINE</span>
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_#22c55e] animate-pulse" />
+              <span className="text-xs text-green-400 tracking-widest uppercase">ONLINE</span>
+            </div>
+            <Link href="/admin">
+              <Lock className="w-3 h-3 text-cyan-900 hover:text-cyan-400 transition-colors" title="Admin Access" />
+            </Link>
           </div>
           <div className="flex justify-between items-center text-[10px] text-cyan-700">
             <span>RECRUITMENT 2026</span>

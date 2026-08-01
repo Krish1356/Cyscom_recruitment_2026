@@ -257,12 +257,9 @@ function EventCard({ status, title, desc, date, link, color, active }: { status:
       
       <div className="mt-auto pt-4 border-t border-current border-opacity-20 flex justify-between items-center">
         <span className="text-[10px] opacity-60 tracking-widest">{date}</span>
-        {['Home', 'Divisions', '/register', 'Admin Login'].map((link) => (
-          <div key={link} className="flex items-center gap-2 text-cyan-500/70">
-            <span className="w-1 h-1 bg-cyan-500 rounded-full" />
-            <a href={link === 'Admin Login' ? '/login' : (link === '/register' ? link : '#')} className="text-xs hover:underline font-bold uppercase tracking-widest">{link === '/register' ? 'Register' : link}</a>
-          </div>
-        ))}
+        <a href={link} className="text-[10px] font-bold tracking-widest hover:underline flex items-center gap-1">
+          VIEW <ChevronRight className="w-3 h-3" />
+        </a>
       </div>
     </div>
   );
