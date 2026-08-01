@@ -55,10 +55,10 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-[#050B14] text-cyan-500 font-mono">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#050B14] text-cyan-500 font-mono">
       
-      {/* Sidebar */}
-      <aside className="w-64 h-screen sticky top-0 border-r border-cyan-500/20 flex flex-col z-20 bg-[#02050A]">
+      {/* Sidebar - Hidden on mobile, sticky on desktop */}
+      <aside className="hidden md:flex w-64 h-screen sticky top-0 border-r border-cyan-500/20 flex-col z-20 bg-[#02050A]">
         
         {/* Logo Section */}
         <div className="p-6 flex flex-col items-center justify-center border-b border-cyan-500/20">

@@ -30,10 +30,10 @@ export default function Home() {
             INITIALIZING SECURE CONNECTION...
           </div>
           
-          <h1 className="text-7xl md:text-[8rem] text-white tracking-widest mb-2 drop-shadow-[0_0_30px_rgba(0,255,255,0.3)] font-[family-name:var(--font-black-ops)] leading-none">
+          <h1 className="text-5xl md:text-[8rem] text-white tracking-widest mb-2 drop-shadow-[0_0_30px_rgba(0,255,255,0.3)] font-[family-name:var(--font-black-ops)] leading-none">
             CYSCOM
           </h1>
-          <h2 className="text-3xl md:text-5xl text-cyan-400 tracking-[0.2em] mb-12 font-[family-name:var(--font-black-ops)] drop-shadow-[0_0_15px_rgba(0,255,255,0.4)]">RECRUITMENTS 2026</h2>
+          <h2 className="text-xl md:text-5xl text-cyan-400 tracking-[0.2em] mb-12 font-[family-name:var(--font-black-ops)] drop-shadow-[0_0_15px_rgba(0,255,255,0.4)]">RECRUITMENTS 2026</h2>
           
           <div className="text-sm text-cyan-600 mb-4 font-mono">&gt; BUILDING THE FUTURE OF CYBERSECURITY</div>
           <p className="text-base md:text-lg text-cyan-100/70 max-w-lg mb-12 leading-relaxed font-mono">
