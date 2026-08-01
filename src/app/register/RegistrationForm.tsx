@@ -5,16 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registrationSchema, RegistrationFormValues } from "@/lib/validations/registration";
 import { useState } from "react";
 import { submitRegistration } from "../actions/register";
-import { DepartmentType } from "@prisma/client";
+
 import { ShieldAlert, Code2, Palette, Megaphone, Users } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const DEPARTMENTS = [
-  { value: DepartmentType.TECHNICAL, label: "Technical", icon: ShieldAlert },
-  { value: DepartmentType.WEB_DEVELOPMENT, label: "Web Development", icon: Code2 },
-  { value: DepartmentType.DESIGN, label: "Design", icon: Palette },
-  { value: DepartmentType.SOCIAL_MEDIA, label: "Social Media", icon: Megaphone },
-  { value: DepartmentType.EVENT_MANAGEMENT, label: "Event Management", icon: Users },
+  { value: "TECHNICAL", label: "Technical", icon: ShieldAlert },
+  { value: "WEB_DEVELOPMENT", label: "Web Development", icon: Code2 },
+  { value: "DESIGN", label: "Design", icon: Palette },
+  { value: "SOCIAL_MEDIA", label: "Social Media", icon: Megaphone },
+  { value: "EVENT_MANAGEMENT", label: "Event Management", icon: Users },
 ];
 
 export function RegistrationForm() {
