@@ -44,16 +44,16 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
         
         {/* Logo Section */}
         <div className="p-6 flex flex-col items-center justify-center border-b border-cyan-500/20">
-          <div className="w-20 h-20 mb-4 flex items-center justify-center bg-cyan-950/20 rounded-xl cyber-bracket relative">
-            <img src="/logo.png" alt="CYSCOM Logo" className="w-full h-full object-contain p-2 drop-shadow-[0_0_15px_rgba(0,255,255,0.3)]" />
+          <div className="w-20 h-20 mb-4 flex items-center justify-center">
+            <img src="/logo.png" alt="CYSCOM Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(0,255,255,0.3)]" />
           </div>
-          <h1 className="font-bold tracking-widest text-lg text-white">CYSCOM</h1>
+          <h1 className="font-bold tracking-[0.15em] text-2xl text-white font-[family-name:var(--font-black-ops)]">CYSCOM</h1>
           <p className="text-[8px] text-cyan-600 uppercase tracking-widest mt-1 text-center">Cyber Security Student Community Of VIT Chennai</p>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 py-6 px-4 space-y-1 overflow-y-auto custom-scrollbar">
-          <div className="text-[10px] text-cyan-800 uppercase tracking-widest mb-4 px-2">NAVIGATION</div>
+          <div className="text-[10px] text-cyan-800 uppercase tracking-widest mb-4 px-2 font-[family-name:var(--font-black-ops)]">NAVIGATION</div>
           {NAV_ITEMS.map((item) => (
             <Link 
               key={item.name} 
@@ -73,7 +73,7 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
 
         {/* System Status */}
         <div className="p-6 border-t border-cyan-500/20 bg-[#02050A]">
-          <div className="text-[10px] text-cyan-800 uppercase tracking-widest mb-3">SYSTEM STATUS</div>
+          <div className="text-[10px] text-cyan-800 uppercase tracking-widest mb-3 font-[family-name:var(--font-black-ops)]">SYSTEM STATUS</div>
           <div className="flex items-center gap-2 mb-4">
             <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_#22c55e] animate-pulse" />
             <span className="text-xs text-green-400 tracking-widest uppercase">ONLINE</span>

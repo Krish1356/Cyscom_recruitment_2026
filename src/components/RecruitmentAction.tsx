@@ -78,7 +78,7 @@ export function RecruitmentAction() {
             )}
             {(overallStatus === 'SHORTLISTED' || overallStatus === 'INTERVIEW_SCHEDULED') && (
               <div className="text-green-400/90 text-sm mt-2">
-                You have cleared the assessment phase! Please check your email for the next steps and interview details.
+                Congratulations! You have cleared the assessment phase. Further instructions will be provided in the WhatsApp group.
               </div>
             )}
             {overallStatus === 'SELECTED' && (
@@ -88,7 +88,16 @@ export function RecruitmentAction() {
             )}
             {overallStatus === 'ASSESSMENT_COMPLETED' && (
               <div className="text-cyan-200/60 text-sm mt-2">
-                Your assessment has been submitted successfully and is currently under review by our team.
+                <p className="mb-3">Your assessment has been submitted successfully and is currently under review by our team.</p>
+                <p className="mb-3">Please join our WhatsApp group for further information and updates.</p>
+                <a 
+                  href="https://chat.whatsapp.com/L0oAJwzieqaDSsuiKhNuh0?s=cl&p=i&mlu=4" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center border border-cyan-500/50 bg-cyan-950/40 hover:bg-cyan-500 hover:text-black transition-colors px-4 py-2 text-xs uppercase tracking-widest rounded mt-2"
+                >
+                  Join WhatsApp Group
+                </a>
               </div>
             )}
           </div>
