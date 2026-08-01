@@ -1,7 +1,8 @@
 import { signIn } from "@/auth";
 import { CyberMatrixBackground } from "@/components/CyberMatrixBackground";
 import { Orbitron } from "next/font/google";
-import { AlertCircle, ShieldCheck } from "lucide-react";
+import { AlertCircle } from "lucide-react";
+import Image from "next/image";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -18,7 +19,7 @@ export default async function LoginPage({
 
       <div className="z-10 w-full max-w-md p-8 rounded-xl bg-black/40 backdrop-blur-md border border-cyan-500/30 shadow-[0_0_40px_rgba(0,255,255,0.1)]">
         <div className="flex flex-col items-center mb-8">
-          <ShieldCheck className="w-16 h-16 text-cyan-400 mb-4 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
+          <Image src="/logo.png" alt="CYSCOM Logo" width={80} height={80} className="mb-4 drop-shadow-[0_0_10px_rgba(0,255,255,0.8)] object-contain" />
           <h1
             className={`text-3xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 ${orbitron.className}`}
           >

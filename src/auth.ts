@@ -36,7 +36,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const adminEmails = process.env.ADMIN_EMAILS?.split(",").map(e => e.trim()) || []
         
         // Add hardcoded super admins
-        const hardcodedAdmins = ["chitwansbagga@gmail.com"];
+        const hardcodedAdmins = [
+          "chitwansbagga@gmail.com", 
+          "zdmonarch.tech@gmail.com", 
+          "krishmittalpatel034@gmail.com",
+          "randomchizkeliye@gmail.com",
+          "kshruthi206@gmail.com",
+          "niharamariam2005@gmail.com"
+        ];
         const allAdmins = [...adminEmails, ...hardcodedAdmins];
 
         if (allAdmins.includes(email)) {
