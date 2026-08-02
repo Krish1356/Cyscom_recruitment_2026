@@ -57,8 +57,8 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#050B14] text-cyan-500 font-mono">
       
-      {/* Sidebar - Hidden on mobile, sticky on desktop */}
-      <aside className="hidden md:flex w-64 h-screen sticky top-0 border-r border-cyan-500/20 flex-col z-20 bg-[#02050A]">
+      {/* Sidebar - Hidden on mobile, fixed on desktop */}
+      <aside className="hidden md:flex w-64 h-screen fixed left-0 top-0 border-r border-cyan-500/20 flex-col z-20 bg-[#02050A]">
         
         {/* Logo Section */}
         <div className="p-6 flex flex-col items-center justify-center border-b border-cyan-500/20">
@@ -113,7 +113,7 @@ export function HUDLayout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main Content Viewport */}
-      <main className="flex-1 relative flex flex-col min-h-screen">
+      <main className="flex-1 relative flex flex-col min-h-screen md:pl-64">
         <div className="fixed inset-0 terminal-scanline opacity-10 pointer-events-none z-50" />
         <div className="flex-1 w-full max-w-[1600px] mx-auto p-4 md:p-8 space-y-12 pb-32">
           {children}
