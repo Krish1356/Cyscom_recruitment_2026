@@ -19,7 +19,7 @@ export default async function AdminLayout({
     include: { adminProfile: true }
   });
 
-  if (!user || (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN")) {
+  if (!user || user.role !== "SUPER_ADMIN") {
     redirect("/"); // Or show unauthorized
   }
 

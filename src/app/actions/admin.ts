@@ -14,8 +14,8 @@ export async function updateApplicantStage(applicantId: string, newStage: Pipeli
     include: { adminProfile: true }
   });
 
-  if (!user || (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN")) {
-    throw new Error("Unauthorized: Admins only");
+  if (!user || user.role !== "SUPER_ADMIN") {
+    throw new Error("Unauthorized: Super Admins only");
   }
 
   const applicant = await prisma.applicantProfile.findUnique({
@@ -51,7 +51,7 @@ export async function updateApplicantStage(applicantId: string, newStage: Pipeli
     });
   });
 
-  revalidatePath("/admin");
+  revalidatePath("/cyscom-hq");
 }
 
 export async function getApplicantQuickReview(applicantId: string) {
@@ -62,8 +62,8 @@ export async function getApplicantQuickReview(applicantId: string) {
     where: { id: session.user.id }
   });
 
-  if (!user || (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN")) {
-    throw new Error("Unauthorized: Admins only");
+  if (!user || user.role !== "SUPER_ADMIN") {
+    throw new Error("Unauthorized: Super Admins only");
   }
 
   const applicant = await prisma.applicantProfile.findUnique({
@@ -101,8 +101,8 @@ export async function shortlistCandidate(applicantId: string) {
     include: { adminProfile: true }
   });
 
-  if (!user || (user.role !== "ADMIN" && user.role !== "SUPER_ADMIN")) {
-    throw new Error("Unauthorized: Admins only");
+  if (!user || user.role !== "SUPER_ADMIN") {
+    throw new Error("Unauthorized: Super Admins only");
   }
 
   const applicant = await prisma.applicantProfile.findUnique({
@@ -135,5 +135,5 @@ export async function shortlistCandidate(applicantId: string) {
     });
   });
 
-  revalidatePath("/admin");
+  revalidatePath("/cyscom-hq");
 }

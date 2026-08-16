@@ -18,5 +18,5 @@ export async function saveManualScore(answerId: string, score: number) {
     data: { manualScore: score }
   });
 
-  revalidatePath("/admin/review");
+  revalidatePath("/cyscom-hq/review");
 }

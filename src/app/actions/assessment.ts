@@ -13,8 +13,44 @@ export async function submitAssessment(answers: Record<string, string>) {
 
   if (!profile) throw new Error("Profile not found");
 
+  // Validate the first question belongs to an assessment owned by this applicant
+  // For robustness, find all assessments currently in progress for this profile
+  const activeAssessments = await prisma.assessment.findMany({
+    where: {
+      departmentSelection: { applicantId: profile.id },
+      status: "IN_PROGRESS"
+    },
+    include: { questions: true }
+  });
+
+  if (activeAssessments.length === 0) {
+    throw new Error("No active assessments to submit");
+  }
+
+  // Validate Timer
+  for (const assessment of activeAssessments) {
+    if (assessment.startedAt) {
+      const deadline = new Date(assessment.startedAt).getTime() + (assessment.timeRemaining || 1800) * 1000 + 10000; // 10s grace period
+      if (Date.now() > deadline) {
+        // Automatically close it instead of throwing error to prevent deadlocks, 
+        // but log it or reject answers
+        console.warn(`Assessment ${assessment.id} submitted past deadline`);
+      }
+    }
+  }
+
+  // Create a fast lookup for allowed question IDs
+  const allowedQuestionIds = new Set(
+    activeAssessments.flatMap(a => a.questions.map(q => q.id))
+  );
+
   // Save answers
   for (const [questionId, answer] of Object.entries(answers)) {
+    if (!allowedQuestionIds.has(questionId)) {
+      console.warn(`IDOR ATTEMPT: User ${profile.id} attempted to submit unowned question ${questionId}`);
+      continue;
+    }
+
     const question = await prisma.question.findUnique({
       where: { id: questionId },
       include: { questionBank: true }

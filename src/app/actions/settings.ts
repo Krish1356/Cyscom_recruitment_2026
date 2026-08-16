@@ -54,5 +54,5 @@ export async function updateAdminAccess(userId: string, role: Role, designation:
     create: { userId, designation }
   });
 
-  revalidatePath("/admin/settings");
+  revalidatePath("/cyscom-hq/settings");
 }

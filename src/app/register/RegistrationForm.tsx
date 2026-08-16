@@ -5,16 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registrationSchema, RegistrationFormValues } from "@/lib/validations/registration";
 import { useState } from "react";
 import { submitRegistration } from "../actions/register";
-
-import { ShieldAlert, Code2, Palette, Megaphone, Users } from "lucide-react";
+import { ShieldAlert, Code2, Palette, Megaphone, Users, CheckCircle2, AlertCircle, ArrowRight, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const DEPARTMENTS = [
-  { value: "TECHNICAL", label: "Technical", icon: ShieldAlert },
-  { value: "WEB_DEVELOPMENT", label: "Web Development", icon: Code2 },
-  { value: "DESIGN", label: "Design", icon: Palette },
-  { value: "SOCIAL_MEDIA", label: "Social Media", icon: Megaphone },
-  { value: "EVENT_MANAGEMENT", label: "Event Management", icon: Users },
+  { value: "TECHNICAL", label: "Technical", icon: ShieldAlert, desc: "Offensive & Defensive Security" },
+  { value: "WEB_DEVELOPMENT", label: "Web Development", icon: Code2, desc: "Build scalable platforms" },
+  { value: "DESIGN", label: "Design", icon: Palette, desc: "Visual aesthetics & UX" },
+  { value: "SOCIAL_MEDIA", label: "Social Media", icon: Megaphone, desc: "Digital presence & outreach" },
+  { value: "EVENT_MANAGEMENT", label: "Event Management", icon: Users, desc: "Logistics and execution" },
+  { value: "OUTREACH", label: "Outreach", icon: MessageSquare, desc: "Partnerships and Communication" },
 ];
 
 export function RegistrationForm() {
@@ -52,136 +52,183 @@ export function RegistrationForm() {
         return;
       }
       // Handle success redirect or state here
+      window.location.href = "/assessment";
     } catch (err: any) {
-      setError(err.message || "Protocol Failure.");
+      setError(err.message || "Failed to submit application.");
       setIsSubmitting(false);
     }
   };
 
+  // Watch departments to calculate selections
+  const d1 = form.watch("department1");
+  const d2 = form.watch("department2");
+  const selectedCount = (d1 ? 1 : 0) + (d2 ? 1 : 0);
+
   return (
-    <div className="w-full max-w-4xl mx-auto font-mono text-cyan-500">
+    <div className="w-full max-w-3xl mx-auto relative z-10">
       
-      {/* HUD Header */}
-      <div className="border border-cyan-500/30 p-4 mb-6 bg-[#060A13]/80 backdrop-blur-md flex justify-between items-center">
-        <div>
-          <div className="text-[10px] text-cyan-600 mb-1">&gt; INITIALIZING PROTOCOL</div>
-          <h2 className="text-xl font-bold tracking-widest text-white">APPLICANT DOSSIER</h2>
-        </div>
-        <div className="text-right">
-          <div className="text-[10px] text-cyan-600 mb-1">STAGE</div>
-          <div className="text-lg font-bold text-cyan-400">0{step}/02</div>
+      {/* Header */}
+      <div className="mb-10 text-center">
+        <h2 className="text-xs font-mono tracking-[0.2em] text-[#626A72] mb-4 uppercase">RECRUITMENT 2026</h2>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA] mb-4 uppercase">Applicant Profile</h1>
+        
+        {/* Progress Bar */}
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center gap-2">
+            <div className={`w-8 h-1 rounded-sm ${step >= 1 ? 'bg-[#F1F0EA]' : 'bg-white/10'}`} />
+            <span className={`text-xs font-mono ${step >= 1 ? 'text-[#F1F0EA]' : 'text-[#626A72]'}`}>IDENTITY</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className={`w-8 h-1 rounded-sm ${step >= 2 ? 'bg-[#F1F0EA]' : 'bg-white/10'}`} />
+            <span className={`text-xs font-mono ${step >= 2 ? 'text-[#F1F0EA]' : 'text-[#626A72]'}`}>DEPARTMENTS</span>
+          </div>
         </div>
       </div>
 
-      <div className="border border-cyan-500/30 bg-[#060A13]/80 backdrop-blur-md p-8 relative cyber-bracket">
+      <div className="bg-[#10151A] border border-white/5 rounded-sm p-8 md:p-12 shadow-2xl relative overflow-hidden">
         
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        {/* Subtle Glass gradient */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <AnimatePresence mode="wait">
             
-            {/* STEP 1 */}
+            {/* STEP 1: IDENTITY */}
             {step === 1 && (
-              <motion.div key="1" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="space-y-6">
-                <div className="text-xs text-green-400 mb-8 border-b border-cyan-500/20 pb-4 tracking-widest uppercase">
-                  SECTION 01: IDENTITY CONFIRMATION
-                </div>
+              <motion.div key="1" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} transition={{ duration: 0.3 }} className="space-y-8">
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <InputRow label="FULL NAME" error={form.formState.errors.fullName?.message}>
-                    <input {...form.register("fullName")} className="hud-input" placeholder="Enter full name" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <InputRow label="Full Name" error={form.formState.errors.fullName?.message}>
+                    <input {...form.register("fullName")} className="cyscom-input" placeholder="e.g. Alan Turing" />
                   </InputRow>
                   
-                  <InputRow label="REGISTRATION NUMBER" error={form.formState.errors.registrationNumber?.message}>
-                    <input {...form.register("registrationNumber")} className="hud-input uppercase" placeholder="e.g. 23BCE1234" />
+                  <InputRow label="Registration Number" error={form.formState.errors.registrationNumber?.message}>
+                    <input {...form.register("registrationNumber")} className="cyscom-input uppercase" placeholder="e.g. 23BCE1234" />
                   </InputRow>
 
-                  <InputRow label="PHONE NUMBER" error={form.formState.errors.phoneNumber?.message}>
-                    <input {...form.register("phoneNumber")} className="hud-input" placeholder="+91 0000000000" />
+                  <InputRow label="Phone Number" error={form.formState.errors.phoneNumber?.message}>
+                    <input {...form.register("phoneNumber")} className="cyscom-input" placeholder="+91 0000000000" />
                   </InputRow>
 
-                  <InputRow label="BRANCH" error={form.formState.errors.branch?.message}>
-                    <input {...form.register("branch")} className="hud-input" placeholder="e.g. CSE Core" />
+                  <InputRow label="Branch" error={form.formState.errors.branch?.message}>
+                    <input {...form.register("branch")} className="cyscom-input" placeholder="e.g. CSE Core" />
                   </InputRow>
 
-                  <InputRow label="YEAR" error={form.formState.errors.year?.message}>
-                    <select {...form.register("year")} className="hud-input">
-                      <option value="">[ SELECT YEAR ]</option>
-                      <option value="1st Year">1st Year</option>
-                      <option value="2nd Year">2nd Year</option>
-                      <option value="3rd Year">3rd Year</option>
-                    </select>
-                  </InputRow>
+                  <div className="md:col-span-2">
+                    <InputRow label="Current Year" error={form.formState.errors.year?.message}>
+                      <select {...form.register("year")} className="cyscom-input cursor-pointer appearance-none">
+                        <option value="" disabled className="bg-[#0A1110] text-[#626A72]">Select your current year of study</option>
+                        <option value="1st Year" className="bg-[#0A1110]">1st Year</option>
+                        <option value="2nd Year" className="bg-[#0A1110]">2nd Year</option>
+                        <option value="3rd Year" className="bg-[#0A1110]">3rd Year</option>
+                      </select>
+                    </InputRow>
+                  </div>
+                </div>
+
+                <div className="pt-6 flex justify-end border-t border-white/10">
+                  <button type="button" onClick={nextStep} className="px-8 py-3 bg-[#050608] text-[#F1F0EA] border border-white/10 rounded-sm font-bold text-xs tracking-widest hover:border-[#67E8F9] hover:text-[#67E8F9] hover:shadow-[0_0_15px_rgba(103,232,249,0.15)] transition-all flex items-center gap-2 uppercase">
+                    Continue <ArrowRight className="w-4 h-4" />
+                  </button>
                 </div>
               </motion.div>
             )}
 
-            {/* STEP 2 */}
+            {/* STEP 2: DEPARTMENTS */}
             {step === 2 && (
-              <motion.div key="2" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="space-y-8">
-                <div className="text-xs text-green-400 mb-8 border-b border-cyan-500/20 pb-4 tracking-widest uppercase">
-                  SECTION 02: BATTLEFIELD ASSIGNMENT
-                </div>
+              <motion.div key="2" initial={{opacity:0, y:10}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-10}} transition={{ duration: 0.3 }} className="space-y-8">
                 
-                <div className="space-y-4">
-                  <div className="text-[10px] text-cyan-600">PRIMARY DIRECTIVE</div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {DEPARTMENTS.map(dept => (
-                      <DeptSelector 
-                        key={dept.value} dept={dept} 
-                        isSelected={form.watch("department1") === dept.value}
-                        isDisabled={form.watch("department2") === dept.value}
-                        onClick={() => form.setValue("department1", dept.value, {shouldValidate: true})}
-                      />
-                    ))}
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center gap-2 bg-[#050608] border border-white/10 px-4 py-2 rounded-sm mb-4">
+                    <span className="text-[#F1F0EA] font-mono text-xs">{selectedCount} / 2 SELECTED</span>
                   </div>
-                  {form.formState.errors.department1 && <p className="text-red-400 text-[10px]">{form.formState.errors.department1.message}</p>}
+                  <p className="text-[#A4A8AE] font-mono text-xs uppercase tracking-wider">Select exactly two departments you wish to apply for.</p>
                 </div>
 
-                <div className="space-y-4 pt-4">
-                  <div className="text-[10px] text-cyan-600">SECONDARY DIRECTIVE</div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {DEPARTMENTS.map(dept => (
-                      <DeptSelector 
-                        key={dept.value} dept={dept} 
-                        isSelected={form.watch("department2") === dept.value}
-                        isDisabled={form.watch("department1") === dept.value}
-                        onClick={() => form.setValue("department2", form.watch("department2") === dept.value ? "" : dept.value, {shouldValidate: true})}
-                      />
-                    ))}
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {DEPARTMENTS.map((dept) => {
+                    const isSelected = d1 === dept.value || d2 === dept.value;
+                    const isDisabled = !isSelected && selectedCount >= 2;
+
+                    return (
+                      <div 
+                        key={dept.value}
+                        onClick={() => {
+                          if (isSelected) {
+                            if (d1 === dept.value) form.setValue("department1", "", {shouldValidate: true});
+                            if (d2 === dept.value) form.setValue("department2", "", {shouldValidate: true});
+                          } else if (!isDisabled) {
+                            if (!d1) form.setValue("department1", dept.value, {shouldValidate: true});
+                            else if (!d2) form.setValue("department2", dept.value, {shouldValidate: true});
+                          }
+                        }}
+                        className={`group relative p-4 rounded-sm border transition-all cursor-pointer flex items-start gap-4 ${
+                          isSelected 
+                            ? 'bg-[#67E8F9]/5 border-[#67E8F9] shadow-[0_0_15px_rgba(103,232,249,0.1)]' 
+                            : isDisabled 
+                              ? 'opacity-40 cursor-not-allowed border-white/5 bg-transparent' 
+                              : 'border-white/10 hover:border-white/30 hover:bg-[#050608] bg-transparent'
+                        }`}
+                      >
+                        <div className={`p-2 rounded-sm transition-colors ${isSelected ? 'bg-[#67E8F9]/20 text-[#67E8F9]' : 'bg-[#050608] border border-white/5 text-[#626A72] group-hover:text-[#F1F0EA]'}`}>
+                          <dept.icon className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className={`font-bold text-sm mb-1 ${isSelected ? 'text-[#67E8F9]' : 'text-[#F1F0EA]'}`}>{dept.label}</h4>
+                          <p className="text-xs text-[#626A72] font-mono">{dept.desc}</p>
+                        </div>
+                        {isSelected && (
+                          <div className="absolute top-4 right-4 text-[#67E8F9]">
+                            <CheckCircle2 className="w-5 h-5" />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-                
-                {error && <div className="text-red-400 text-[10px] uppercase tracking-widest border border-red-500/30 p-2 bg-red-900/10">ERROR: {error}</div>}
+
+                {/* Validation Warnings */}
+                {(form.formState.errors.department1 || form.formState.errors.department2) && (
+                  <div className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 p-3 rounded-md">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>You must select exactly two departments to proceed.</span>
+                  </div>
+                )}
+
+                {error && (
+                  <div className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 p-3 rounded-md">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>{error}</span>
+                  </div>
+                )}
+
+                <div className="p-4 bg-[#050608] border border-white/5 rounded-sm">
+                  <p className="text-xs text-[#A4A8AE] leading-relaxed font-mono">
+                    <strong className="text-[#F1F0EA]">Important:</strong> These departments will be locked once your assessment begins. Please choose carefully based on your interests and skills.
+                  </p>
+                </div>
+
+                <div className="pt-6 flex items-center justify-between border-t border-white/10">
+                  <button type="button" onClick={prevStep} className="text-[#626A72] text-xs font-bold uppercase tracking-widest hover:text-[#F1F0EA] transition-colors">
+                    Back to Profile
+                  </button>
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting || selectedCount !== 2} 
+                    className="px-8 py-3 bg-[#050608] text-[#F1F0EA] border border-[#00D9FF]/30 hover:border-[#67E8F9] hover:text-[#67E8F9] hover:shadow-[0_0_15px_rgba(103,232,249,0.15)] font-bold text-xs tracking-widest rounded-sm transition-all flex items-center gap-2 uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? "Submitting..." : "Start Assessment"}
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
-
-          <div className="flex justify-between items-center mt-12 pt-6 border-t border-cyan-500/20">
-            {step > 1 ? (
-              <button type="button" onClick={prevStep} className="text-[10px] text-cyan-600 hover:text-cyan-400 uppercase tracking-widest">
-                &lt; ABORT CURRENT STAGE
-              </button>
-            ) : <div></div>}
-            
-            {step < 2 ? (
-              <button type="button" onClick={nextStep} className="border border-cyan-500 bg-cyan-950/30 text-cyan-400 px-6 py-3 text-[10px] uppercase tracking-widest hover:bg-cyan-500 hover:text-black transition-colors cyber-bracket">
-                PROCEED TO NEXT STAGE &gt;
-              </button>
-            ) : (
-              <button type="submit" disabled={isSubmitting} className="border border-green-500 bg-green-950/30 text-green-400 px-8 py-3 text-[10px] uppercase tracking-widest hover:bg-green-500 hover:text-black transition-colors cyber-bracket">
-                {isSubmitting ? "TRANSMITTING..." : "EXECUTE FINAL SUBMISSION"}
-              </button>
-            )}
-          </div>
-
         </form>
       </div>
 
       <style jsx global>{`
-        .hud-input {
-          @apply w-full bg-transparent border-b border-cyan-500/30 text-cyan-300 py-2 focus:outline-none focus:border-cyan-400 text-xs placeholder:text-cyan-900;
-        }
-        select.hud-input option {
-          @apply bg-[#050B14] text-cyan-500;
+        .cyscom-input {
+          @apply w-full bg-[#050608] border border-white/10 text-[#F1F0EA] px-4 py-3 rounded-sm focus:outline-none focus:border-white/30 transition-all text-sm placeholder:text-[#626A72] font-mono;
         }
       `}</style>
     </div>
@@ -189,28 +236,12 @@ export function RegistrationForm() {
 }
 
 // Helpers
-function InputRow({ label, error, children, vertical }: any) {
+function InputRow({ label, error, children }: any) {
   return (
-    <div className={`flex ${vertical ? 'flex-col gap-2' : 'flex-col gap-1'}`}>
-      <div className="text-[9px] text-cyan-700 tracking-widest uppercase">{label}</div>
+    <div className="flex flex-col gap-2">
+      <label className="text-xs font-mono text-[#A4A8AE] uppercase tracking-wider">{label}</label>
       {children}
-      {error && <div className="text-[8px] text-red-400 mt-1 uppercase">{error}</div>}
-    </div>
-  );
-}
-
-function DeptSelector({ dept, isSelected, isDisabled, onClick }: any) {
-  return (
-    <div 
-      onClick={() => !isDisabled && onClick()}
-      className={`border p-3 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors ${
-        isDisabled ? 'border-gray-800 text-gray-700 bg-black/40 cursor-not-allowed' :
-        isSelected ? 'border-cyan-400 text-cyan-300 bg-cyan-900/20 shadow-[0_0_10px_rgba(0,255,255,0.2)]' : 
-        'border-cyan-900 text-cyan-700 hover:border-cyan-700 hover:bg-cyan-950/10'
-      }`}
-    >
-      <dept.icon className="w-6 h-6" />
-      <span className="text-[9px] uppercase tracking-widest text-center">{dept.label}</span>
+      {error && <span className="text-xs font-mono text-red-500">{error}</span>}
     </div>
   );
 }

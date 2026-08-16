@@ -1,265 +1,359 @@
 "use client";
 
-import { HUDLayout } from "@/components/HUDLayout";
-import { 
-  Terminal, ShieldAlert, Code2, Globe, Cpu, Palette, Users, Hexagon,
-  ChevronRight, Play, CheckSquare, ShieldCheck, Target, Network, FileText, ArrowDown, Share2, Mail
-} from "lucide-react";
-import { useState, useEffect } from "react";
+import { MainLayout } from "@/components/MainLayout";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Float, Environment } from "@react-three/drei";
+import { useRef, useState, useEffect } from "react";
+import * as THREE from "three";
+import { Code2, Palette, ShieldAlert, Cpu, TerminalSquare, Network, Search, Crosshair, Users, CheckCircle2, ChevronRight, Clock, Share2, ArrowRight, Mail, MessageSquare } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { RecruitmentAction } from "@/components/RecruitmentAction";
+import DepartmentLab from "@/components/departments/DepartmentLab";
+import { TerminalPreloader } from "@/components/ui/TerminalPreloader";
+import { TypewriterText } from "@/components/ui/TypewriterText";
+import { CyberTopology } from "@/components/canvas/CyberTopology";
 
-export default function Home() {
+// 3D Objects for Divisions
+function FloatingShape({ type, color }: { type: string, color: string }) {
+  const mesh = useRef<THREE.Mesh>(null);
+  useFrame((state) => {
+    if (mesh.current) {
+      mesh.current.rotation.x = state.clock.elapsedTime * 0.2;
+      mesh.current.rotation.y = state.clock.elapsedTime * 0.3;
+    }
+  });
+
   return (
-    <HUDLayout>
-      
-      {/* 01: HERO SECTION */}
-      <section id="home" className="min-h-[85vh] flex flex-col justify-center relative">
-        <div className="absolute inset-0 pointer-events-none hidden md:flex items-center justify-center overflow-hidden z-0">
-          <img 
-            src="/logo.png" 
-            alt="" 
-            className="absolute opacity-10 w-full h-full object-cover object-center drop-shadow-[0_0_30px_rgba(0,255,255,0.2)]" 
-          />
-        </div>
+    <Float speed={2} rotationIntensity={1} floatIntensity={1}>
+      <mesh ref={mesh} position={[0, 0, 0]} castShadow receiveShadow>
+        {type === 'dodecahedron' && <dodecahedronGeometry args={[1.5]} />}
+        {type === 'torus' && <torusKnotGeometry args={[1, 0.3, 100, 16]} />}
+        {type === 'icosahedron' && <icosahedronGeometry args={[1.5, 0]} />}
+        {type === 'box' && <boxGeometry args={[1.8, 1.8, 1.8]} />}
+        {type === 'sphere' && <sphereGeometry args={[1.5, 32, 32]} />}
         
-        <div className="relative z-10 flex flex-col items-center text-center mt-8">
-          <div className="text-xs text-cyan-600 mb-8 flex items-center justify-center gap-2 tracking-widest font-mono">
-            <span className="w-2.5 h-2.5 bg-cyan-500 rounded-full animate-pulse" />
-            INITIALIZING SECURE CONNECTION...
-          </div>
-          
-          <h1 className="text-5xl md:text-[8rem] text-white tracking-widest mb-2 drop-shadow-[0_0_30px_rgba(0,255,255,0.3)] font-[family-name:var(--font-black-ops)] leading-none">
-            CYSCOM
-          </h1>
-          <h2 className="text-xl md:text-5xl text-cyan-400 tracking-[0.2em] mb-12 font-[family-name:var(--font-black-ops)] drop-shadow-[0_0_15px_rgba(0,255,255,0.4)]">RECRUITMENTS 2026</h2>
-          
-          <div className="text-sm text-cyan-600 mb-4 font-mono">&gt; BUILDING THE FUTURE OF CYBERSECURITY</div>
-          <p className="text-base md:text-lg text-cyan-100/70 max-w-lg mb-12 leading-relaxed font-mono">
-            We don't just learn cybersecurity.<br/>
-            We Exploit, We Understand, We Protect.
-          </p>
-
-          {/* Countdown Timer */}
-          <div className="mb-16">
-            <div className="text-xs text-cyan-800 uppercase tracking-[0.2em] mb-6 font-mono font-bold">T-MINUS UNTIL PORTAL CLOSES</div>
-            <CountdownTimer />
-          </div>
-
-          <RecruitmentAction />
-        </div>
-
-        <div className="w-full mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-cyan-500/20 text-center bg-[#030710]/80 backdrop-blur-sm pb-8">
-          <div className="text-center">
-            <div className="text-[9px] text-cyan-700 uppercase tracking-widest mb-1">RECRUITMENT STATUS</div>
-            <div className="text-sm text-green-400 font-bold tracking-wider">ACTIVE</div>
-          </div>
-          <div className="text-center">
-            <div className="text-[9px] text-cyan-700 uppercase tracking-widest mb-1">OPEN DIVISIONS</div>
-            <div className="text-sm text-cyan-200 font-bold tracking-wider">05</div>
-          </div>
-        </div>
-      </section>
-
-      {/* 02: MISSION BRIEFING */}
-      <section id="mission" className="pt-24 pb-12">
-        <Panel title="02 MISSION BRIEFING">
-          <div className="flex flex-col md:flex-row gap-12 p-4 md:p-8">
-            
-            <div className="flex-1">
-              <h3 className="text-2xl text-green-400 mb-6 tracking-widest font-[family-name:var(--font-black-ops)]">DECRYPTING TRANSMISSION...</h3>
-              <div className="space-y-6 text-sm text-cyan-100/70 leading-relaxed font-mono">
-                <p>Welcome, Candidate.</p>
-                <p>You are attempting to join the Cyber Security Community.</p>
-                <p>We do not recruit based on CGPA.<br/>We recruit curiosity.</p>
-                <p>If you are ready to learn, build, break and secure systems - you are in the right place.</p>
-                <p>Mission begins below.</p>
-              </div>
-            </div>
-
-
-          </div>
-
-          <div className="mt-8 mx-4 md:mx-8 pt-8 border-t border-cyan-500/20">
-            <div className="text-xs text-cyan-600 mb-8 tracking-widest">RECRUITMENT PROTOCOL</div>
-            <div className="grid grid-cols-2 md:flex justify-between items-center gap-8">
-              <ProcessStep icon={Globe} label="1. RECON" desc="Discover CYSCOM" active />
-              <ProcessStep icon={FileText} label="2. APPLICATION" desc="Submit Dossier" />
-              <ProcessStep icon={Terminal} label="3. TECHNICAL" desc="Skill Assessment" />
-              <ProcessStep icon={Users} label="4. INTERVIEW" desc="Personal Evaluation" />
-              <ProcessStep icon={CheckSquare} label="5. CLEARANCE" desc="Final Selection" />
-            </div>
-          </div>
-        </Panel>
-      </section>
-
-      {/* 03: DIVISIONS OVERVIEW */}
-      <section id="divisions" className="py-12">
-        <Panel title="03 DIVISIONS OVERVIEW">
-          <div className="p-4 md:p-8">
-            <h3 className="text-2xl text-green-400 mb-2 tracking-widest font-[family-name:var(--font-black-ops)]">OUR DIVISIONS</h3>
-            <p className="text-sm text-cyan-100/50 mb-12">Choose your battlefield. Make an impact.</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <DivisionCard title="TECHNICAL" icon={ShieldAlert} desc="Offensive & Defensive Security. Break systems, find vulnerabilities, secure networks." />
-              <DivisionCard title="WEB DEV" icon={Code2} desc="Build scalable platforms. Secure web applications and architect digital infrastructure." />
-              <DivisionCard title="DESIGN" icon={Palette} desc="Craft stunning, creative posters for events and bring the hacker aesthetic to life." />
-              <DivisionCard title="EVENT MANAGEMENT" icon={Users} desc="Orchestrate mega hackathons and CTF (Capture The Flag) competitions. Logistics, sponsorships, and execution." />
-              <DivisionCard title="SOCIAL MEDIA" icon={Share2} desc="Manage digital presence, craft campaigns, and engage with the global cyber community." />
-            </div>
-          </div>
-        </Panel>
-      </section>
-
-      {/* 04: WHY JOIN CYSCOM */}
-      <section id="why-join" className="py-12">
-        <Panel title="04 WHY JOIN US">
-          <div className="p-4 md:p-8">
-            <h3 className="text-2xl text-green-400 mb-2 tracking-widest font-[family-name:var(--font-black-ops)]">WHY JOIN US ?</h3>
-            <p className="text-sm text-cyan-100/50 mb-12">We organize mind blowing events and we try to do the unthinkable. See it for yourself.</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Box 1 */}
-              <div className="border border-cyan-500/20 bg-[#030710]/40 p-6 cyber-bracket group">
-                <h4 className="text-xl font-bold text-white tracking-wider mb-2 font-[family-name:var(--font-black-ops)] group-hover:text-cyan-300 transition-colors">Biggest cybersecurity community in VIT</h4>
-                <p className="text-xs text-cyan-100/60 leading-relaxed mb-6">We have the biggest cybersecurity community in VIT and we are proud of it.</p>
-                <div className="aspect-video w-full bg-cyan-950/20 border border-cyan-900/50 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[url('/community.JPG')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500"></div>
-                </div>
-              </div>
-
-              {/* Box 2 */}
-              <div className="border border-cyan-500/20 bg-[#030710]/40 p-6 cyber-bracket group">
-                <h4 className="text-xl font-bold text-white tracking-wider mb-2 font-[family-name:var(--font-black-ops)] group-hover:text-cyan-300 transition-colors">We conduct some of the biggest events in VIT Chennai</h4>
-                <p className="text-xs text-cyan-100/60 leading-relaxed mb-6">And we have received a lot of love from the community and participants.</p>
-                <div className="aspect-video w-full bg-cyan-950/20 border border-cyan-900/50 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-[url('/events.JPG')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Panel>
-      </section>
-
-      {/* 05: CONTACT */}
-      <section id="contact" className="py-12">
-        <Panel title="05 SECURE COMM LINK (CONTACT)">
-          <div className="p-4 md:p-8">
-            <h3 className="text-2xl text-green-400 mb-2 tracking-widest font-[family-name:var(--font-black-ops)]">TRANSMISSION CHANNEL</h3>
-            <p className="text-sm text-cyan-100/50 mb-12">Establish a secure connection with CYSCOM command.</p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-              {/* Box 1: Email */}
-              <a href="mailto:cyscom@vit.ac.in" className="flex flex-col items-center justify-center p-8 border border-cyan-500/20 hover:bg-cyan-900/20 hover:border-cyan-500/50 transition-all cyber-bracket text-center group h-full">
-                <Mail className="w-8 h-8 text-cyan-500 group-hover:scale-110 transition-transform mb-4" />
-                <div>
-                  <div className="text-[10px] text-cyan-600 tracking-widest uppercase mb-2">Email</div>
-                  <div className="text-sm text-white font-mono tracking-wider">cyscom@vit.ac.in</div>
-                </div>
-              </a>
-
-              {/* Box 2: Social Networks */}
-              <div className="flex flex-col items-center justify-center border border-cyan-500/10 bg-[#030710]/40 p-8 text-center cyber-bracket h-full">
-                 <h4 className="text-cyan-400 font-bold tracking-widest mb-6">SOCIAL NETWORKS</h4>
-                 <div className="flex flex-wrap justify-center gap-6">
-                   <a href="https://www.instagram.com/cyscomvit?igsh=MWRiazFuZ3RxMG84dQ==" target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-300 tracking-widest uppercase border-b border-transparent hover:border-cyan-300 transition-colors">Instagram</a>
-                   <a href="https://www.linkedin.com/company/cyscomvit/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-300 tracking-widest uppercase border-b border-transparent hover:border-cyan-300 transition-colors">LinkedIn</a>
-                   <a href="https://github.com/cyscomvit" target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-300 tracking-widest uppercase border-b border-transparent hover:border-cyan-300 transition-colors">GitHub</a>
-                 </div>
-              </div>
-            </div>
-          </div>
-        </Panel>
-      </section>
-
-      {/* CALL TO ACTION */}
-      <section id="apply" className="py-24 text-center border-t border-cyan-500/20 mt-12">
-        <h2 className="text-4xl font-bold text-white mb-4 tracking-wider font-[family-name:var(--font-black-ops)]">You scrolled till here ?</h2>
-        <p className="text-cyan-400/70 mb-10">You might as well apply :)</p>
-        <Link href="/register" className="inline-flex items-center justify-center border-2 border-cyan-500/50 bg-black text-white px-8 py-3 text-sm font-bold tracking-widest hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.2)] transition-all rounded-full group">
-          Join Us <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-        </Link>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="border-t border-cyan-500/20 pt-16 pb-8 flex flex-col items-center justify-center text-center">
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="w-10 h-10 flex items-center justify-center">
-            <img src="/logo.png" alt="CYSCOM Logo" className="w-full h-full object-contain drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]" />
-          </div>
-          <span className="text-white font-bold tracking-widest text-lg font-[family-name:var(--font-black-ops)]">CYSCOM VIT</span>
-        </div>
-        <div className="text-[10px] text-cyan-600/80 tracking-widest">
-          &copy; CYSCOM 2026. All Rights Reserved.
-        </div>
-      </footer>
-
-    </HUDLayout>
+        <meshStandardMaterial 
+          color={color} 
+          roughness={0.2} 
+          metalness={0.1}
+          envMapIntensity={2}
+          emissive={color}
+          emissiveIntensity={0.1}
+        />
+      </mesh>
+    </Float>
   );
 }
 
-// Helper Components
-function Panel({ title, children, className = "" }: { title: string, children: React.ReactNode, className?: string }) {
+function Division3DCard({ title, desc, type, color, icon: Icon, image }: { title: string, desc: string, type: string, color: string, icon: any, image?: string }) {
   return (
-    <div className={`border border-cyan-500/30 bg-[#060A13]/80 backdrop-blur-md relative overflow-hidden group ${className}`}>
-      <div className="absolute top-0 left-0 px-6 py-2 bg-cyan-500/10 border-b border-r border-cyan-500/30 text-base md:text-lg text-cyan-400 tracking-widest font-[family-name:var(--font-black-ops)] shadow-[0_0_15px_rgba(0,255,255,0.1)]">
+    <div className="group relative bg-[#10151A] border border-white/5 hover:border-[#67E8F9]/30 rounded-sm p-8 transition-all duration-500 overflow-hidden flex flex-col h-[400px]">
+      <div className="absolute inset-0 h-[220px] w-full pointer-events-none flex items-center justify-center p-8">
+        {image ? (
+          <motion.img 
+            src={image} 
+            alt={`${title} visual`} 
+            className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_15px_rgba(103,232,249,0.3)] group-hover:drop-shadow-[0_0_25px_rgba(103,232,249,0.6)]"
+            animate={{ y: [-5, 5, -5] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+          />
+        ) : (
+          <Canvas camera={{ position: [0, 0, 6], fov: 45 }} dpr={[1, 2]}>
+            <ambientLight intensity={0.2} />
+            <directionalLight position={[10, 10, 5]} intensity={1} color={color} />
+            <FloatingShape type={type} color={color} />
+          </Canvas>
+        )}
+      </div>
+      
+      <div className="mt-auto relative z-10 pt-4 bg-gradient-to-t from-[#10151A] via-[#10151A]/90 to-transparent">
+        <div className="w-12 h-12 rounded-sm bg-[#050608] flex items-center justify-center text-[#F1F0EA] mb-6 border border-white/5 group-hover:border-[#67E8F9]/50 group-hover:text-[#67E8F9] transition-colors shadow-sm">
+          {typeof Icon === 'string' ? (
+            <img src={Icon} alt={`${title} icon`} className="w-8 h-8 object-contain" />
+          ) : (
+            <Icon className="w-5 h-5" />
+          )}
+        </div>
+        <h4 className="text-xl font-bold text-[#F1F0EA] tracking-tight mb-3 font-mono uppercase">{title}</h4>
+        <p className="text-sm text-[#A4A8AE] leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+// HUD Panel Component
+function HUDPanel({ title, children, className }: { title: string, children: React.ReactNode, className?: string }) {
+  return (
+    <div className={`border border-white/5 bg-[#10151A]/40 backdrop-blur-md p-4 rounded-sm ${className}`}>
+      <div className="text-[10px] font-mono tracking-widest text-[#626A72] uppercase mb-3 pb-2 border-b border-white/5">
         {title}
       </div>
-      <div className="mt-14 h-full">
+      <div className="font-mono text-xs text-[#A4A8AE] space-y-2">
         {children}
       </div>
     </div>
   );
 }
 
+export default function Home() {
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  return (
+    <main className="min-h-screen bg-[#050608] relative selection:bg-[#67E8F9] selection:text-[#050608]">
+      {/* 1. BOOT / TERMINAL PRELOADER */}
+      {showPreloader && (
+        <TerminalPreloader onComplete={() => setShowPreloader(false)} />
+      )}
+
+      {/* GLOBAL CYBER TOPOLOGY BACKGROUND - Outside motion.div to preserve 'fixed' behavior */}
+      <div 
+        className="fixed inset-0 z-[0] pointer-events-none transition-opacity duration-1000"
+        style={{ opacity: showPreloader ? 0 : 1 }}
+      >
+        {/* Layer 1: Base Atmosphere */}
+        <div className="absolute inset-0 bg-[#050608]" />
+        
+        {/* Layer 2: Live 3D Cyber Topology */}
+        <div className="absolute inset-0">
+          <Canvas camera={{ position: [0, 0, 15], fov: 45 }} dpr={[1, 1.5]}>
+            <CyberTopology />
+          </Canvas>
+        </div>
+        
+        {/* Layer 2.5: Subtle Center Light/Vignette with Blue-Violet atmosphere */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.04)_0%,rgba(5,6,8,0.8)_60%,rgba(5,6,8,1)_100%)] mix-blend-multiply" />
+      </div>
+
+      {/* 2. MAIN CYSCOM WORLD (revealed after transition) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
+        animate={{ 
+          opacity: showPreloader ? 0 : 1, 
+          scale: showPreloader ? 0.95 : 1,
+          filter: showPreloader ? "blur(10px)" : "blur(0px)" 
+        }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="relative z-10 bg-transparent min-h-screen text-[#F1F0EA]"
+        style={{ pointerEvents: showPreloader ? 'none' : 'auto' }}
+      >
+
+        <MainLayout>
+        {/* HERO */}
+        <section id="home" className="pt-20 pb-24 px-6 relative overflow-hidden min-h-screen flex items-center justify-center">
+          
+          {/* Background is now global */}
+
+          {/* HUD Elements Overlay */}
+          <div className="absolute top-32 left-6 hidden xl:block z-10">
+            <HUDPanel title="SYSTEM STATUS">
+              <div className="flex justify-between gap-8"><span>NODE</span> <span className="text-[#A4A8AE]">VIT_CHENNAI</span></div>
+              <div className="flex justify-between gap-8"><span>ACTIVE DEPTS</span> <span className="text-[#00D9FF]">6</span></div>
+              <div className="flex justify-between gap-8"><span>THREATS DETECTED</span> <span className="text-[#67E8F9]">0</span></div>
+            </HUDPanel>
+          </div>
+
+          <div className="absolute bottom-12 right-6 hidden xl:block z-10">
+            <HUDPanel title="RECRUITMENT">
+              <div className="flex justify-between gap-8"><span>STATUS</span> <span className="text-[#67E8F9]">OPEN</span></div>
+              <div className="flex justify-between gap-8"><span>PHASE</span> <span className="text-[#A4A8AE]">01_REGISTRATION</span></div>
+            </HUDPanel>
+          </div>
+
+          {/* Layer 3: Foreground Typography */}
+          <div className="container mx-auto text-center max-w-4xl relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2, duration: 0.8 }}
+            >
+              <h1 className="text-6xl md:text-[8rem] font-bold tracking-tighter mb-6 leading-[0.9] uppercase font-orbitron inline-flex flex-col items-start text-left">
+                <motion.div 
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }} 
+                  transition={{ delay: 2.2 }}
+                  className="text-[#F1F0EA] opacity-90"
+                >BUILD.</motion.div>
+                <motion.div 
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }} 
+                  transition={{ delay: 2.5 }}
+                  className="text-[#F1F0EA] opacity-90"
+                >BREAK.</motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, filter: "blur(10px)" }} 
+                  animate={{ opacity: 1, filter: "blur(0px)" }} 
+                  transition={{ delay: 3, duration: 0.8 }}
+                  className="inline-block"
+                >
+                  <TypewriterText />
+                </motion.div>
+              </h1>
+              <h2 className="text-xl md:text-2xl text-[#A4A8AE] mb-8 font-mono tracking-widest uppercase">
+                CYSCOM — Cyber Security Community, VIT Chennai
+              </h2>
+              
+              <div className="mb-12">
+                <CountdownTimer />
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 3.5, duration: 0.8 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-6"
+            >
+              <Link 
+                href="/register" 
+                className="group w-full sm:w-auto flex items-center justify-center px-10 py-5 bg-[#10151A] text-[#F1F0EA] border border-[#67E8F9]/30 rounded-sm font-bold tracking-widest hover:border-[#67E8F9] hover:bg-[#10151A]/80 transition-all shadow-[0_0_0px_rgba(103,232,249,0)] hover:shadow-[0_0_15px_rgba(103,232,249,0.15)] uppercase"
+              >
+                BEGIN INFILTRATION PROTOCOL <ArrowRight className="ml-2 w-5 h-5 text-[#626A72] group-hover:text-[#67E8F9] group-hover:translate-x-1 transition-all" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Recruitment Process Timeline */}
+        <section className="py-24 bg-black/20 backdrop-blur-[2px] px-6 border-t border-white/5 relative z-10">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="text-base md:text-lg font-mono tracking-[0.2em] text-[#A4A8AE] mb-4">01 PROCESS</h2>
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA] mb-16">Phases of Infiltration</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20 relative">
+              <div className="hidden md:block absolute top-6 left-0 right-0 h-px bg-white/5 -z-10" />
+              
+              <ProcessStep icon={Search} label="Stage 01" desc="Dossier Submission" active />
+              <ProcessStep icon={Crosshair} label="Stage 02" desc="Assessment & Verification" />
+              <ProcessStep icon={Users} label="Stage 03" desc="Clearance Interview" />
+              <ProcessStep icon={CheckCircle2} label="Stage 04" desc="Access Granted" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              <EventCard 
+                status="ACTIVE" 
+                title="CTF & Assessments" 
+                desc="Complete the technical assessments and department-specific challenges." 
+                date="August 16 - August 24, 2026" 
+                active 
+              />
+              <EventCard 
+                status="PENDING" 
+                title="Portal Closes" 
+                desc="The deadline to submit all challenges and finalize your application." 
+                date="August 24, 2026 • 23:59" 
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* DEPARTMENTS - DIGITAL LAB */}
+        <DepartmentLab />
+
+        {/* WHY JOIN */}
+        <section id="why-join" className="py-32 bg-black/20 backdrop-blur-[2px] border-t border-white/5 relative z-10">
+          <div className="container mx-auto px-6">
+            <div className="flex flex-col md:flex-row gap-16 items-center">
+              <div className="flex-1 space-y-8">
+                <h2 className="text-base md:text-lg font-mono tracking-[0.2em] text-[#A4A8AE] mb-4">03 THE COMMUNITY</h2>
+                <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA]">Why join CYSCOM?</h3>
+                <p className="text-lg text-[#A4A8AE] leading-relaxed">
+                  We are the largest cybersecurity community at VIT Chennai. We organize mind-blowing events, intense Capture The Flag (CTF) competitions, and hands-on workshops that bridge the gap between theory and real-world application.
+                </p>
+                <ul className="space-y-4 text-[#F1F0EA] font-medium font-mono text-sm">
+                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#00D9FF]" /> HANDS-ON TECHNICAL EXPERIENCE</li>
+                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#00D9FF]" /> MASSIVE NETWORKING OPPORTUNITIES</li>
+                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#00D9FF]" /> REAL-WORLD PROJECT BUILDING</li>
+                  <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#00D9FF]" /> MENTORSHIP FROM ALUMNI</li>
+                </ul>
+              </div>
+              <div className="flex-1 w-full">
+                <div className="aspect-square bg-[#10151A] border border-white/5 p-2 rounded-sm overflow-hidden relative">
+                  <div className="absolute inset-0 bg-[#67E8F9] mix-blend-overlay opacity-5 z-10" />
+                  <img src="/community.JPG" alt="CYSCOM Community" className="w-full h-full object-cover grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700 rounded-sm" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 07: CONTACT / COMMS */}
+        <section id="contact" className="py-24 bg-black/20 backdrop-blur-[2px] border-t border-white/5 relative z-10">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="text-center mb-16">
+              <h2 className="text-base md:text-lg font-mono tracking-[0.2em] text-[#A4A8AE] mb-4">04 COMMS LINK</h2>
+              <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA]">Establish Secure Connection</h3>
+              <p className="text-[#626A72] mt-4 max-w-2xl mx-auto">Ping the CYSCOM command center. We monitor these channels actively.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Email Comm */}
+              <a href="mailto:cyscom@vit.ac.in" className="group p-8 flex flex-col items-center justify-center bg-[#050608] border border-white/5 hover:border-[#67E8F9]/30 hover:bg-[#67E8F9]/5 rounded-sm transition-all text-center">
+                <div className="w-12 h-12 bg-[#10151A] rounded-sm flex items-center justify-center border border-white/5 group-hover:border-[#67E8F9]/30 group-hover:text-[#67E8F9] text-[#626A72] transition-colors mb-6">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="text-[10px] font-mono tracking-widest text-[#A4A8AE] uppercase mb-2">Direct Mail Protocol</div>
+                <div className="text-lg font-bold text-[#F1F0EA] tracking-wider group-hover:text-[#67E8F9] transition-colors">cyscom@vit.ac.in</div>
+              </a>
+
+              {/* Social Comm */}
+              <div className="p-8 flex flex-col items-center justify-center bg-[#050608] border border-white/5 rounded-sm text-center">
+                <div className="text-[10px] font-mono tracking-widest text-[#A4A8AE] uppercase mb-8">Social Networks</div>
+                <div className="flex flex-wrap justify-center gap-8">
+                  <a href="https://www.instagram.com/cyscomvit?igsh=MWRiazFuZ3RxMG84dQ==" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 text-[#626A72] hover:text-[#67E8F9] transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    <span className="text-[10px] uppercase tracking-widest font-mono">Instagram</span>
+                  </a>
+                  <a href="https://www.linkedin.com/company/cyscomvit/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 text-[#626A72] hover:text-[#67E8F9] transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    <span className="text-[10px] uppercase tracking-widest font-mono">LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-32 bg-black/20 backdrop-blur-[2px] border-t border-white/5 text-center px-6 relative z-10">
+          <h2 className="text-base md:text-lg font-mono tracking-[0.2em] text-[#626A72] mb-4">05 JOIN</h2>
+          <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-[#F1F0EA] mb-10">Ready to secure the future?</h3>
+          <Link href="/register" className="inline-flex items-center justify-center px-10 py-5 bg-transparent text-[#A4A8AE] border border-white/10 rounded-sm font-bold text-lg tracking-widest hover:border-[#67E8F9]/50 hover:text-[#67E8F9] transition-all uppercase">
+            Apply to CYSCOM 2026
+          </Link>
+        </section>
+
+      </MainLayout>
+      </motion.div>
+    </main>
+  );
+}
+
+// Helper Components
 function ProcessStep({ icon: Icon, label, desc, active }: { icon: any, label: string, desc: string, active?: boolean }) {
   return (
-    <div className="flex flex-col items-center gap-3 text-center">
-      <div className={`w-12 h-12 rounded flex items-center justify-center border transition-all duration-500 ${active ? 'border-green-400 bg-green-400/10 text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.3)] scale-110' : 'border-cyan-700 bg-cyan-900/10 text-cyan-700 opacity-70'}`}>
-        <Icon className="w-6 h-6" />
+    <div className={`flex flex-col items-center gap-3 text-center p-6 rounded-sm border shadow-sm relative z-10 ${active ? 'bg-[#10151A] border-white/10' : 'bg-[#050608] border-white/5'}`}>
+      <div className={`w-12 h-12 rounded-sm flex items-center justify-center border transition-all duration-500 ${active ? 'border-[#00D9FF]/50 bg-[#00D9FF]/5 text-[#00D9FF] shadow-[0_0_15px_rgba(0,217,255,0.1)] scale-110' : 'border-white/5 bg-[#10151A] text-[#626A72]'}`}>
+        <Icon className="w-5 h-5" />
       </div>
-      <div>
-        <div className={`text-sm uppercase tracking-widest font-bold mb-1 font-[family-name:var(--font-black-ops)] ${active ? 'text-green-400' : 'text-cyan-600'}`}>{label}</div>
-        <div className="text-[9px] text-cyan-800 uppercase tracking-widest">{desc}</div>
-      </div>
-    </div>
-  );
-}
-
-function DivisionCard({ title, icon: Icon, desc }: { title: string, icon: any, desc: string }) {
-  return (
-    <div className="group relative border border-cyan-500/20 p-8 bg-[#030710]/40 backdrop-blur-sm flex flex-col justify-between hover:bg-cyan-950/20 transition-all duration-300 overflow-hidden">
-      {/* Subtle hover gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-cyan-500/0 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
-      <div className="relative z-10 flex items-center justify-between mb-8">
-        <div className="w-12 h-12 rounded bg-cyan-950/40 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(0,255,255,0.2)] transition-all duration-300">
-          <Icon className="w-5 h-5" />
-        </div>
-        <div className="text-[9px] text-cyan-600 uppercase tracking-widest border border-cyan-800/50 px-2 py-1 bg-cyan-950/20">Active</div>
-      </div>
-      
-      <div className="relative z-10">
-        <h4 className="text-lg font-bold text-white tracking-wider mb-2 group-hover:text-cyan-300 transition-colors">{title}</h4>
-        <p className="text-xs text-cyan-100/60 leading-relaxed">{desc}</p>
+      <div className="mt-2">
+        <div className={`text-xs uppercase tracking-widest font-bold mb-1 font-mono ${active ? 'text-[#F1F0EA]' : 'text-[#626A72]'}`}>{label}</div>
+        <div className="text-sm text-[#626A72]">{desc}</div>
       </div>
     </div>
   );
 }
 
-function EventCard({ status, title, desc, date, link, color, active }: { status: string, title: string, desc: string, date: string, link: string, color: string, active?: boolean }) {
+function EventCard({ status, title, desc, date, active }: { status: string, title: string, desc: string, date: string, active?: boolean }) {
   return (
-    <div className={`border p-6 flex flex-col bg-black/40 ${color} ${active ? 'shadow-[0_0_20px_rgba(59,130,246,0.15)] border-opacity-100 bg-blue-900/10 cyber-bracket' : 'border-opacity-30'}`}>
-      <div className="text-[10px] uppercase tracking-widest mb-6 opacity-80">{status}</div>
-      <h4 className="text-lg font-bold tracking-widest mb-3">{title}</h4>
-      <p className="text-xs opacity-70 mb-8 leading-relaxed">{desc}</p>
+    <div className={`p-6 flex flex-col rounded-sm border transition-colors ${active ? 'bg-[#00D9FF]/5 border-[#00D9FF]/20 shadow-[0_0_20px_rgba(0,217,255,0.05)]' : 'bg-[#10151A] border-white/5'}`}>
+      <div className={`text-[10px] font-mono uppercase tracking-widest mb-6 ${active ? 'text-[#00D9FF]' : 'text-[#626A72]'}`}>{status}</div>
+      <h4 className="text-lg font-bold tracking-tight text-[#F1F0EA] mb-3">{title}</h4>
+      <p className="text-sm text-[#A4A8AE] mb-8 leading-relaxed flex-1">{desc}</p>
       
-      <div className="mt-auto pt-4 border-t border-current border-opacity-20 flex justify-between items-center">
-        <span className="text-[10px] opacity-60 tracking-widest">{date}</span>
-        <a href={link} className="text-[10px] font-bold tracking-widest hover:underline flex items-center gap-1">
-          VIEW <ChevronRight className="w-3 h-3" />
-        </a>
+      <div className="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+        <span className="text-xs text-[#626A72] font-mono flex items-center gap-2">
+          <Clock className="w-3 h-3" /> {date}
+        </span>
       </div>
     </div>
   );
@@ -271,7 +365,7 @@ function CountdownTimer() {
 
   useEffect(() => {
     setMounted(true);
-    const targetDate = new Date("August 17, 2026 23:59:00").getTime();
+    const targetDate = new Date("August 24, 2026 23:59:00 GMT+0530").getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();
@@ -292,29 +386,29 @@ function CountdownTimer() {
     return () => clearInterval(interval);
   }, []);
 
-  if (!mounted) return <div className="h-32"></div>; // Placeholder to avoid hydration mismatch
+  if (!mounted) return <div className="h-24"></div>;
 
   return (
-    <div className="flex justify-center items-start gap-4 md:gap-8 text-center font-[family-name:var(--font-black-ops)]">
-        <div className="flex flex-col items-center">
-          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.days.toString().padStart(2, '0')}</div>
-          <div className="text-[8px] md:text-xs text-cyan-500 uppercase tracking-wider md:tracking-[0.2em] font-black font-sans">Days</div>
-        </div>
-        <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
-        <div className="flex flex-col items-center">
-          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.hours.toString().padStart(2, '0')}</div>
-          <div className="text-[8px] md:text-xs text-cyan-500 uppercase tracking-wider md:tracking-[0.2em] font-black font-sans">Hours</div>
-        </div>
-        <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
-        <div className="flex flex-col items-center">
-          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-white mb-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-          <div className="text-[8px] md:text-xs text-cyan-500 uppercase tracking-wider md:tracking-[0.2em] font-black font-sans">Minutes</div>
-        </div>
-        <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-700/80 -mt-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]">:</div>
-        <div className="flex flex-col items-center">
-          <div className="text-4xl sm:text-5xl md:text-8xl font-bold text-cyan-400 mb-2 drop-shadow-[0_0_20px_rgba(0,255,255,0.4)]">{timeLeft.seconds.toString().padStart(2, '0')}</div>
-          <div className="text-xs text-cyan-500 uppercase tracking-[0.2em] font-black font-sans">Seconds</div>
-        </div>
+    <div className="flex justify-center items-start gap-4 md:gap-8 text-center font-mono">
+      <div className="flex flex-col items-center">
+        <div className="text-3xl md:text-5xl font-orbitron font-black tracking-wider text-[#F1F0EA] mb-2">{timeLeft.days.toString().padStart(2, '0')}</div>
+        <div className="text-[10px] text-[#A4A8AE] uppercase tracking-widest">Days</div>
       </div>
+      <div className="text-3xl md:text-5xl font-orbitron font-bold text-[#626A72] -mt-1">:</div>
+      <div className="flex flex-col items-center">
+        <div className="text-3xl md:text-5xl font-orbitron font-black tracking-wider text-[#F1F0EA] mb-2">{timeLeft.hours.toString().padStart(2, '0')}</div>
+        <div className="text-[10px] text-[#A4A8AE] uppercase tracking-widest">Hours</div>
+      </div>
+      <div className="text-3xl md:text-5xl font-orbitron font-bold text-[#626A72] -mt-1">:</div>
+      <div className="flex flex-col items-center">
+        <div className="text-3xl md:text-5xl font-orbitron font-black tracking-wider text-[#F1F0EA] mb-2">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+        <div className="text-[10px] text-[#A4A8AE] uppercase tracking-widest">Mins</div>
+      </div>
+      <div className="text-3xl md:text-5xl font-orbitron font-bold text-[#626A72] -mt-1">:</div>
+      <div className="flex flex-col items-center">
+        <div className="text-3xl md:text-5xl font-orbitron font-black tracking-wider text-[#67E8F9] mb-2">{timeLeft.seconds.toString().padStart(2, '0')}</div>
+        <div className="text-[10px] text-[#67E8F9] uppercase tracking-widest">Secs</div>
+      </div>
+    </div>
   );
 }

@@ -18,7 +18,12 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const currentAssessments = isTimedPhaseLocked ? pendingAssessments : inProgressAssessments;
 
   const [activeTab, setActiveTab] = useState(0);
-  const initialTimeLeft = inProgressAssessments.reduce((total, a) => total + (a.timeRemaining || 0), 0);
+  const initialTimeLeft = inProgressAssessments.reduce((total, a) => {
+    if (!a.startedAt) return total + (a.timeRemaining || 0);
+    const deadline = new Date(a.startedAt).getTime() + (a.timeRemaining || 1800) * 1000;
+    const remaining = Math.max(0, Math.floor((deadline - Date.now()) / 1000));
+    return total + remaining;
+  }, 0);
   const [timeLeft, setTimeLeft] = useState<number | null>(initialTimeLeft > 0 ? initialTimeLeft : null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -47,7 +52,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
         setActiveTab(0);
         setIsSubmitting(false);
       } else {
-        router.push("/");
+        router.push("/status");
       }
     } catch (e) {
       console.error(e);
@@ -77,29 +82,46 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        logIntegrityEvent("TAB_SWITCH", "User switched tabs or minimized window");
-        alert("WARNING: Tab switching is strictly prohibited and has been recorded.");
+        logIntegrityEvent("PAGE_HIDDEN", "User switched tabs or minimized window");
       }
     };
 
-    const handleCopy = (e: ClipboardEvent) => {
+    const blockAndLog = (e: Event, eventType: string, msg: string) => {
       e.preventDefault();
-      logIntegrityEvent("COPY", "User copied text");
+      logIntegrityEvent(eventType, msg);
     };
 
-    const handlePaste = (e: ClipboardEvent) => {
-      e.preventDefault();
-      logIntegrityEvent("PASTE", "User pasted text");
+    const handleCopy = (e: ClipboardEvent) => blockAndLog(e, "COPY_ATTEMPT", "User attempted to copy text");
+    const handlePaste = (e: ClipboardEvent) => blockAndLog(e, "PASTE_ATTEMPT", "User attempted to paste text");
+    const handleCut = (e: ClipboardEvent) => blockAndLog(e, "CUT_ATTEMPT", "User attempted to cut text");
+    const handleContextMenu = (e: MouseEvent) => blockAndLog(e, "CONTEXT_MENU_ATTEMPT", "User attempted to open context menu");
+    const handleDragDrop = (e: DragEvent) => blockAndLog(e, "TEXT_DRAG_ATTEMPT", "User attempted to drag/drop text");
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x', 'a'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        logIntegrityEvent("KEYBOARD_SHORTCUT_ATTEMPT", `User attempted shortcut: ${e.ctrlKey ? 'Ctrl' : 'Cmd'}+${e.key.toUpperCase()}`);
+      }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
     document.addEventListener("copy", handleCopy);
     document.addEventListener("paste", handlePaste);
+    document.addEventListener("cut", handleCut);
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("dragover", handleDragDrop);
+    document.addEventListener("drop", handleDragDrop);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       document.removeEventListener("copy", handleCopy);
       document.removeEventListener("paste", handlePaste);
+      document.removeEventListener("cut", handleCut);
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("dragover", handleDragDrop);
+      document.removeEventListener("drop", handleDragDrop);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -200,7 +222,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
                 {currentAssessment?.questions.map((q: any, i: number) => (
                   <div key={q.id} className="p-6 border border-cyan-500/30 bg-black/60 rounded">
                     <h3 className="font-mono text-cyan-400 font-bold mb-4">Question {i + 1}</h3>
-                    <p className="text-cyan-50 mb-6 whitespace-pre-wrap">{q.questionBank.description || q.questionBank.content}</p>
+                    <p className="text-cyan-50 mb-6 whitespace-pre-wrap select-none">{q.questionBank.description || q.questionBank.content}</p>
                     {q.questionBank.content?.options ? (
                       <div className="space-y-3">
                         {q.questionBank.content.options.map((opt: string, optIdx: number) => (
@@ -219,6 +241,28 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
                             <span className="font-mono text-sm text-cyan-100">{opt}</span>
                           </label>
                         ))}
+                      </div>
+                    ) : q.questionBank.content?.subQuestions ? (
+                      <div className="space-y-4">
+                        {q.questionBank.content.subQuestions.map((subQ: string, subIdx: number) => {
+                          const parsed = (() => {
+                            try { return JSON.parse(answers[q.id] || "{}") } catch { return {} }
+                          })();
+                          return (
+                            <div key={subIdx} className="space-y-2">
+                              <label className="text-cyan-300 font-mono text-sm font-bold">{subQ}</label>
+                              <textarea 
+                                value={parsed[subQ] || ""}
+                                onChange={(e) => {
+                                  const newParsed = { ...parsed, [subQ]: e.target.value };
+                                  setAnswers(prev => ({ ...prev, [q.id]: JSON.stringify(newParsed) }));
+                                }}
+                                className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[100px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
+                                placeholder={`Enter your response for ${subQ}...`}
+                              />
+                            </div>
+                          );
+                        })}
                       </div>
                     ) : (
                       <div className="space-y-2">

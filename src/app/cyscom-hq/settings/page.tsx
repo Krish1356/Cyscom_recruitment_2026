@@ -10,7 +10,7 @@ export default async function SettingsPage() {
   // Guard the page - only ADMIN or SUPER_ADMIN can access
   // @ts-ignore
   if (!session?.user || (session.user.role !== "SUPER_ADMIN" && session.user.role !== "ADMIN")) {
-    redirect("/admin");
+    redirect("/cyscom-hq");
   }
 
   const admins = await getAdmins();

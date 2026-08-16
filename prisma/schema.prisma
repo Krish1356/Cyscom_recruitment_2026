@@ -82,6 +82,7 @@ enum DepartmentType {
   DESIGN
   SOCIAL_MEDIA
   EVENT_MANAGEMENT
+  OUTREACH
 }
 
 enum RecruitmentStatus {

@@ -34,7 +34,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ applica
   });
 
   if (!applicant) {
-    redirect("/admin");
+    redirect("/cyscom-hq");
   }
 
   return (
@@ -46,7 +46,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ applica
             Reviewing {applicant.user.name} ({applicant.registrationNumber})
           </p>
         </div>
-        <a href="/admin" className="font-mono text-sm border border-cyan-500/30 px-4 py-2 rounded bg-black/50 text-cyan-400 hover:bg-cyan-900/50">
+        <a href="/cyscom-hq" className="font-mono text-sm border border-cyan-500/30 px-4 py-2 rounded bg-black/50 text-cyan-400 hover:bg-cyan-900/50">
           &larr; Back to Pipeline
         </a>
       </div>

@@ -39,40 +39,40 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
         const stageApplicants = applicants.filter(a => a.overallStatus === stage);
         
         return (
-          <div key={stage} className="min-w-[320px] max-w-[320px] bg-[#060A13]/90 border border-cyan-500/30 rounded-none flex flex-col h-full cyber-bracket shadow-[0_0_10px_rgba(0,255,255,0.02)]">
-            <div className="p-4 border-b border-cyan-500/30 bg-cyan-950/20">
-              <h3 className="font-mono font-bold text-cyan-400 text-[10px] tracking-widest uppercase">{stage.replace(/_/g, " ")}</h3>
-              <p className="text-[10px] tracking-widest uppercase text-cyan-600 mt-1">SYS.COUNT: {stageApplicants.length}</p>
+          <div key={stage} className="min-w-[320px] max-w-[320px] bg-[#0B1014] border border-white/5 rounded-lg flex flex-col h-full shadow-lg">
+            <div className="p-4 border-b border-white/5 bg-white/5 rounded-t-lg">
+              <h3 className="font-bold text-[#F1F0EA] text-sm">{stage.replace(/_/g, " ")}</h3>
+              <p className="text-xs text-[#626A72] mt-1">{stageApplicants.length} Applicants</p>
             </div>
             
             <div className="p-4 flex-1 overflow-y-auto space-y-4">
               {stageApplicants.map(applicant => (
-                <div key={applicant.id} className="bg-[#030710]/80 border border-cyan-500/30 rounded-none p-4 shadow-[0_0_15px_rgba(0,255,255,0.02)] hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.1)] transition-all group">
+                <div key={applicant.id} className="bg-[#050608] border border-white/5 rounded-lg p-4 shadow-sm hover:border-[#67E8F9]/30 transition-all group">
                   
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-none bg-cyan-950/50 flex items-center justify-center border border-cyan-500/50 group-hover:border-cyan-400 transition-colors">
-                        <UserIcon className="w-4 h-4 text-cyan-400" />
+                      <div className="w-8 h-8 rounded-full bg-[#0B1014] flex items-center justify-center border border-white/10 group-hover:border-[#67E8F9]/50 transition-colors">
+                        <UserIcon className="w-4 h-4 text-[#A4A8AE]" />
                       </div>
                       <div>
-                        <p className="text-xs font-bold text-cyan-100 tracking-widest uppercase">{applicant.user.name}</p>
-                        <p className="text-[10px] font-mono text-cyan-600 tracking-widest uppercase">{applicant.registrationNumber}</p>
+                        <p className="text-sm font-bold text-[#F1F0EA]">{applicant.user.name}</p>
+                        <p className="text-xs text-[#626A72]">{applicant.registrationNumber}</p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="text-[10px] tracking-widest font-mono text-cyan-600 uppercase mb-4 space-y-2">
-                    <p>BRANCH: <span className="text-cyan-400">{applicant.branch}</span></p>
+                  <div className="text-xs text-[#626A72] mb-4 space-y-2">
+                    <p>Branch: <span className="text-[#A4A8AE]">{applicant.branch}</span></p>
                     <div className="flex gap-2">
                       {applicant.departments.map((d: any) => (
-                        <span key={d.id} className="px-2 py-0.5 bg-cyan-950/30 border border-cyan-500/30 rounded-none text-[9px] text-cyan-400">
+                        <span key={d.id} className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-md text-[10px] text-[#A4A8AE]">
                           {d.department.slice(0, 4)}
                         </span>
                       ))}
                     </div>
                     
                     {applicant.stageHistory && applicant.stageHistory.length > 0 && (
-                      <div className="flex items-center gap-1 mt-2 text-[9px] text-cyan-500/80">
+                      <div className="flex items-center gap-1 mt-2 text-[10px] text-[#626A72]">
                         <Clock className="w-3 h-3" />
                         <span>
                           by {applicant.stageHistory[0].admin.user.name?.split(' ')[0]} • {formatDistanceToNow(new Date(applicant.stageHistory[0].timestamp), { addSuffix: true })}
@@ -87,12 +87,12 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
                       value={applicant.overallStatus} 
                       onValueChange={(val) => handleStageChange(applicant.id, val)}
                     >
-                      <SelectTrigger className="h-8 text-[10px] tracking-widest uppercase bg-[#030710] border-cyan-500/30 rounded-none focus:border-cyan-400 font-mono text-cyan-400">
+                      <SelectTrigger className="h-8 text-xs bg-[#0B1014] border-white/10 rounded-md focus:border-[#67E8F9]/50 text-[#F1F0EA]">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="bg-[#060A13] border border-cyan-500/50 rounded-none">
+                      <SelectContent className="bg-[#0B1014] border border-white/10 rounded-md">
                         {STAGES.map(s => (
-                          <SelectItem key={s} value={s} className="text-[10px] tracking-widest uppercase font-mono text-cyan-400 focus:bg-cyan-950/50 focus:text-cyan-300">{s.replace(/_/g, " ")}</SelectItem>
+                          <SelectItem key={s} value={s} className="text-xs text-[#A4A8AE] focus:bg-white/5 focus:text-[#F1F0EA]">{s.replace(/_/g, " ")}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -100,7 +100,7 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
                     <div className="flex items-center gap-2 mt-2">
                       <a 
                         href={`/admin/review/${applicant.id}`} 
-                        className="flex-1 flex items-center justify-center gap-2 h-8 text-[10px] bg-cyan-600/20 border border-cyan-500/50 rounded hover:bg-cyan-500/30 text-cyan-200 transition-colors font-mono"
+                        className="flex-1 flex items-center justify-center gap-2 h-8 text-xs bg-white/5 border border-white/10 rounded-md hover:bg-white/10 text-[#F1F0EA] transition-colors"
                       >
                         Review Assessment
                       </a>
@@ -108,7 +108,7 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
                       <button 
                         onClick={() => setQuickViewId(applicant.id)}
                         title="Quick View Answers"
-                        className="flex items-center justify-center h-8 w-8 bg-blue-900/40 border border-blue-500/50 rounded hover:bg-blue-800/60 text-blue-400 transition-colors"
+                        className="flex items-center justify-center h-8 w-8 bg-[#0891B2]/20 border border-[#67E8F9]/30 rounded-md hover:bg-[#0891B2]/40 text-[#67E8F9] transition-colors"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
@@ -119,7 +119,7 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
                           target="_blank"
                           rel="noreferrer"
                           title="Message on WhatsApp"
-                          className="flex items-center justify-center h-8 w-8 bg-green-900/40 border border-green-500/50 rounded hover:bg-green-800/60 text-green-400 transition-colors"
+                          className="flex items-center justify-center h-8 w-8 bg-green-500/10 border border-green-500/30 rounded-md hover:bg-green-500/20 text-green-400 transition-colors"
                         >
                           <MessageCircle className="w-4 h-4" />
                         </a>
