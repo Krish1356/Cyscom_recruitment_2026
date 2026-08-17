@@ -68,13 +68,13 @@ const IconDesign = () => (
 
 const getIcon = (type: DepartmentType) => {
   switch (type) {
-    case "TECHNICAL": return <IconTechnical />;
-    case "WEB_DEVELOPMENT": return <IconWebDev />;
-    case "SOCIAL_MEDIA": return <IconSocialMedia />;
-    case "EVENT_MANAGEMENT": return <IconEvent />;
+    case "TECHNICAL": return <img src="/departments/Tech.png" alt="Technical" className="w-6 h-6 object-contain" />;
+    case "WEB_DEVELOPMENT": return <img src="/departments/dEV.png" alt="Web Development" className="w-6 h-6 object-contain" />;
+    case "SOCIAL_MEDIA": return <img src="/departments/SM.png" alt="Social Media" className="w-6 h-6 object-contain" />;
+    case "EVENT_MANAGEMENT": return <img src="/departments/EM.png" alt="Event Management" className="w-6 h-6 object-contain" />;
     case "OUTREACH": return <IconOutreach />;
-    case "DESIGN": return <IconDesign />;
-    default: return <IconTechnical />;
+    case "DESIGN": return <img src="/departments/Design.png" alt="Design" className="w-6 h-6 object-contain" />;
+    default: return <IconOutreach />;
   }
 };
 

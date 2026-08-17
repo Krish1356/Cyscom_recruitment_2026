@@ -9,11 +9,11 @@ import { ShieldAlert, Code2, Palette, Megaphone, Users, CheckCircle2, AlertCircl
 import { motion, AnimatePresence } from "framer-motion";
 
 const DEPARTMENTS = [
-  { value: "TECHNICAL", label: "Technical", icon: ShieldAlert, desc: "Offensive & Defensive Security" },
-  { value: "WEB_DEVELOPMENT", label: "Web Development", icon: Code2, desc: "Build scalable platforms" },
-  { value: "DESIGN", label: "Design", icon: Palette, desc: "Visual aesthetics & UX" },
-  { value: "SOCIAL_MEDIA", label: "Social Media", icon: Megaphone, desc: "Digital presence & outreach" },
-  { value: "EVENT_MANAGEMENT", label: "Event Management", icon: Users, desc: "Logistics and execution" },
+  { value: "TECHNICAL", label: "Technical", icon: ({ className }: any) => <img src="/departments/Tech.png" className={`object-contain ${className || "w-5 h-5"}`} alt="Technical" />, desc: "Offensive & Defensive Security" },
+  { value: "WEB_DEVELOPMENT", label: "Web Development", icon: ({ className }: any) => <img src="/departments/dEV.png" className={`object-contain ${className || "w-5 h-5"}`} alt="Web Development" />, desc: "Build scalable platforms" },
+  { value: "DESIGN", label: "Design", icon: ({ className }: any) => <img src="/departments/Design.png" className={`object-contain ${className || "w-5 h-5"}`} alt="Design" />, desc: "Visual aesthetics & UX" },
+  { value: "SOCIAL_MEDIA", label: "Social Media", icon: ({ className }: any) => <img src="/departments/SM.png" className={`object-contain ${className || "w-5 h-5"}`} alt="Social Media" />, desc: "Digital presence & outreach" },
+  { value: "EVENT_MANAGEMENT", label: "Event Management", icon: ({ className }: any) => <img src="/departments/EM.png" className={`object-contain ${className || "w-5 h-5"}`} alt="Event Management" />, desc: "Logistics and execution" },
   { value: "OUTREACH", label: "Outreach", icon: MessageSquare, desc: "Partnerships and Communication" },
 ];
 
