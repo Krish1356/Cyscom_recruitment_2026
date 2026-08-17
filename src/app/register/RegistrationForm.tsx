@@ -99,19 +99,19 @@ export function RegistrationForm() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <InputRow label="Full Name" error={form.formState.errors.fullName?.message}>
-                    <input {...form.register("fullName")} className="cyscom-input" placeholder="e.g. Alan Turing" />
+                    <input {...form.register("fullName")} className="cyscom-input" placeholder="Enter your Full Name" />
                   </InputRow>
                   
                   <InputRow label="Registration Number" error={form.formState.errors.registrationNumber?.message}>
-                    <input {...form.register("registrationNumber")} className="cyscom-input uppercase" placeholder="e.g. 23BCE1234" />
+                    <input {...form.register("registrationNumber")} className="cyscom-input uppercase" placeholder="Enter your Registration Number" />
                   </InputRow>
 
                   <InputRow label="Phone Number" error={form.formState.errors.phoneNumber?.message}>
-                    <input {...form.register("phoneNumber")} className="cyscom-input" placeholder="+91 0000000000" />
+                    <input {...form.register("phoneNumber")} className="cyscom-input" placeholder="Enter your Phone Number" />
                   </InputRow>
 
                   <InputRow label="Branch" error={form.formState.errors.branch?.message}>
-                    <input {...form.register("branch")} className="cyscom-input" placeholder="e.g. CSE Core" />
+                    <input {...form.register("branch")} className="cyscom-input" placeholder="Enter your Branch" />
                   </InputRow>
 
                   <div className="md:col-span-2">

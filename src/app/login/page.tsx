@@ -23,8 +23,8 @@ export default async function LoginPage({
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
             <div className="flex flex-col items-center mb-10">
-              <div className="w-16 h-16 rounded-md bg-[#050608] border border-white/10 flex items-center justify-center mb-6 shadow-sm">
-                <Lock className="w-8 h-8 text-[#F1F0EA]" />
+              <div className="w-16 h-16 rounded-md bg-[#050608] border border-white/10 flex items-center justify-center mb-6 shadow-sm overflow-hidden">
+                <Image src="/logo.png" alt="CYSCOM Logo" width={40} height={40} className="object-contain" />
               </div>
               <h2 className="text-xs font-mono tracking-[0.2em] text-[#626A72] mb-2 uppercase">Recruitment 2026</h2>
               <h1 className="text-3xl font-bold tracking-tight text-[#F1F0EA]">AUTHENTICATION</h1>
