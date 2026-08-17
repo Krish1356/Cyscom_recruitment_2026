@@ -8,51 +8,57 @@ export async function generateAssessments(applicantId: string) {
 
   if (selections.length === 0) return [];
 
-  const createdAssessments = [];
-
   for (const selection of selections) {
-    // Check if assessment already exists
-    const existing = await prisma.assessment.findFirst({
-      where: { departmentSelectionId: selection.id }
+    // 1. Create General (Untimed) Assessment
+    const existingGeneral = await prisma.assessment.findFirst({
+      where: { departmentSelectionId: selection.id, status: { not: "PENDING" } }
     });
-    if (existing) continue;
-
-    let timeRemaining = 1800;
-    if (selection.department === "WEB_DEVELOPMENT") {
-      timeRemaining = 30; // 30 seconds
-    } else if (selection.department === "TECHNICAL") {
-      timeRemaining = 90; // 90 seconds
-    }
-
-    const assessment = await prisma.assessment.create({
-      data: {
-        departmentSelectionId: selection.id,
-        status: "PENDING",
-        timeRemaining: timeRemaining
-      }
-    });
-
-    // Assign questions
-    const qb = await prisma.questionBank.findMany({
-      where: { department: selection.department }
-    });
-
-    // Randomize and select 5 questions (or all if less)
-    const selected = qb.sort(() => 0.5 - Math.random()).slice(0, 5);
-
-    for (const q of selected) {
-      await prisma.question.create({
+    
+    if (!existingGeneral) {
+      const generalAssessment = await prisma.assessment.create({
         data: {
-          assessmentId: assessment.id,
-          questionBankId: q.id
+          departmentSelectionId: selection.id,
+          status: "IN_PROGRESS", // Immediately unlocked
+          timeRemaining: null // Untimed
         }
       });
-    }
-    
-    // Create one Technical CTF question as well if it's not a technical department?
-    // According to requirements, there should be a CTF. If there's a CTF department in QuestionBank, we can pull from it.
 
-    createdAssessments.push(assessment);
+      const genQuestions = await prisma.questionBank.findMany({
+        where: { department: selection.department, type: "GENERAL" }
+      });
+      // Randomize and select up to 6
+      const selectedGen = genQuestions.sort(() => 0.5 - Math.random()).slice(0, 6);
+      for (const q of selectedGen) {
+        await prisma.question.create({ data: { assessmentId: generalAssessment.id, questionBankId: q.id } });
+      }
+    }
+
+    // 2. Create Timed Assessment (Only for WEB_DEVELOPMENT or TECHNICAL)
+    if (selection.department === "WEB_DEVELOPMENT" || selection.department === "TECHNICAL") {
+      const existingTimed = await prisma.assessment.findFirst({
+        where: { departmentSelectionId: selection.id, timeRemaining: { not: null } }
+      });
+      
+      if (!existingTimed) {
+        const timeLimit = selection.department === "WEB_DEVELOPMENT" ? 30 : 120;
+        
+        const timedAssessment = await prisma.assessment.create({
+          data: {
+            departmentSelectionId: selection.id,
+            status: "PENDING", // Locked until Phase 2 starts
+            timeRemaining: timeLimit
+          }
+        });
+
+        const timedQuestions = await prisma.questionBank.findMany({
+          where: { department: selection.department, type: "TIMED" }
+        });
+        const selectedTimed = timedQuestions.sort(() => 0.5 - Math.random()).slice(0, 5);
+        for (const q of selectedTimed) {
+          await prisma.question.create({ data: { assessmentId: timedAssessment.id, questionBankId: q.id } });
+        }
+      }
+    }
   }
 
   // Fetch complete assessment data to return
