@@ -176,28 +176,31 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
       </header>
 
       {/* Main Content */}
-      <div className="z-10 flex flex-1 overflow-hidden">
+      <div className="z-10 flex flex-col md:flex-row flex-1 overflow-hidden">
         
         {/* Sidebar */}
-        <aside className="w-64 border-r border-cyan-500/30 bg-black/60 backdrop-blur-md p-4 flex flex-col gap-4">
-          <div className="text-xs font-mono text-cyan-500 mb-2 uppercase tracking-widest">Departments</div>
-          {currentAssessments.map((assessment, idx) => (
-            <button
-              key={assessment.id}
-              onClick={() => setActiveTab(idx)}
-              className={`text-left font-mono p-3 rounded border transition-all ${
-                activeTab === idx 
-                  ? "bg-cyan-900/50 border-cyan-400 text-cyan-100 shadow-[0_0_15px_rgba(0,255,255,0.2)]" 
-                  : "bg-black/40 border-cyan-900/50 text-cyan-100/60 hover:border-cyan-500/50 hover:text-cyan-300"
-              }`}
-            >
-              {assessment.departmentSelection.department} {assessment.timeRemaining ? "(Timed)" : "(General)"}
-            </button>
-          ))}
+        <aside className="w-full md:w-64 border-b md:border-b-0 md:border-r border-cyan-500/30 bg-black/60 backdrop-blur-md p-4 flex flex-col gap-4 flex-shrink-0">
+          <div className="text-xs font-mono text-cyan-500 mb-0 md:mb-2 uppercase tracking-widest hidden md:block">Departments</div>
+          
+          <div className="flex flex-row md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+            {currentAssessments.map((assessment, idx) => (
+              <button
+                key={assessment.id}
+                onClick={() => setActiveTab(idx)}
+                className={`text-left font-mono p-3 rounded border transition-all whitespace-nowrap flex-shrink-0 ${
+                  activeTab === idx 
+                    ? "bg-cyan-900/50 border-cyan-400 text-cyan-100 shadow-[0_0_15px_rgba(0,255,255,0.2)]" 
+                    : "bg-black/40 border-cyan-900/50 text-cyan-100/60 hover:border-cyan-500/50 hover:text-cyan-300"
+                }`}
+              >
+                {assessment.departmentSelection.department} {assessment.timeRemaining ? "(Timed)" : "(General)"}
+              </button>
+            ))}
+          </div>
 
-          <div className="mt-auto p-4 bg-red-950/30 border border-red-500/30 rounded">
+          <div className="mt-auto p-4 bg-red-950/30 border border-red-500/30 rounded hidden md:block">
             <div className="flex items-center gap-2 text-red-400 mb-2">
-              <ShieldAlert className="w-4 h-4" />
+              <ShieldAlert className="w-4 h-4 shrink-0" />
               <span className="text-sm font-bold font-mono">INTEGRITY CHECK</span>
             </div>
             <p className="text-xs text-red-200/70 font-mono">
@@ -207,7 +210,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
         </aside>
 
         {/* Assessment Area */}
-        <main className="flex-1 p-8 overflow-y-auto bg-black/40 backdrop-blur-sm">
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-black/40 backdrop-blur-sm">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 className="text-2xl font-mono font-bold text-cyan-300 border-b border-cyan-500/30 pb-4">
               {currentAssessment?.departmentSelection.department} Assessment
