@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { AssessmentClient } from "./AssessmentClient";
+import { generateAssessments } from "../actions/generateAssessments";
 
 export default async function AssessmentPage() {
   const session = await auth();
@@ -18,7 +19,7 @@ export default async function AssessmentPage() {
     redirect("/register");
   }
 
-  const assessments = await prisma.assessment.findMany({
+  let assessments = await prisma.assessment.findMany({
     where: {
       departmentSelection: {
         applicantId: profile.id
@@ -35,8 +36,8 @@ export default async function AssessmentPage() {
   });
 
   if (assessments.length === 0) {
-    // Assessment hasn't been started, go back to dashboard
-    redirect("/");
+    // Generate assessments lazy-load
+    assessments = await generateAssessments(profile.id);
   }
 
   return <AssessmentClient assessments={assessments} />;
