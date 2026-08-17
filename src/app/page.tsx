@@ -96,7 +96,21 @@ function HUDPanel({ title, children, className }: { title: string, children: Rea
 }
 
 export default function Home() {
-  const [showPreloader, setShowPreloader] = useState(true);
+  const [showPreloader, setShowPreloader] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem("cyscom_visited");
+    if (!hasVisited) {
+      setShowPreloader(true);
+      sessionStorage.setItem("cyscom_visited", "true");
+    }
+    setIsFirstLoad(false);
+  }, []);
+
+  if (isFirstLoad) {
+    return <main className="min-h-screen bg-[#050608]" />;
+  }
 
   return (
     <main className="min-h-screen bg-[#050608] relative selection:bg-[#67E8F9] selection:text-[#050608]">
