@@ -89,10 +89,8 @@ export async function submitRegistration(data: RegistrationFormValues) {
   });
 
   // Revalidate layout/dashboard data
-  revalidatePath("/");
+  revalidatePath("/status");
 
-  // Redirect to home page
-  redirect("/");
-  // Note: redirect() throws an internal error that Next.js catches to handle the redirect,
-  // so we don't return anything here.
+  // Redirect to status page
+  redirect("/status");
 }

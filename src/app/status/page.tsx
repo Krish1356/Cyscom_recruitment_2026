@@ -112,7 +112,19 @@ export default async function StatusPage() {
               </div>
             )}
             
-            {!info.showWhatsapp && (
+            {!info.showWhatsapp && status === "APPLIED" && (
+              <div className="mt-8 pt-8 border-t border-white/10">
+                <a 
+                  href="/assessment" 
+                  className="group inline-flex items-center justify-center px-8 py-4 bg-cyan-950/30 text-cyan-400 border border-cyan-500/30 rounded font-bold tracking-widest hover:bg-cyan-900/50 hover:text-cyan-300 transition-all duration-300 shadow-[0_0_20px_rgba(0,255,255,0.1)] hover:shadow-[0_0_30px_rgba(0,255,255,0.2)] uppercase"
+                >
+                  Start Assessment
+                  <Terminal className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            )}
+            
+            {!info.showWhatsapp && status !== "APPLIED" && (
               <div className="mt-8 pt-8 border-t border-white/10">
                 <a href="/" className="text-xs font-mono text-[#626A72] hover:text-[#00D9FF] transition-colors uppercase tracking-widest">
                   Return to Command Center
