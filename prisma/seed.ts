@@ -71,14 +71,15 @@ async function main() {
 
   console.log("Seeding Web Dev (General)...");
   const webDevGen = [
-    "Why do you wanna join CYSCOM, especially the Dev Dept?",
-    "What are tech stacks you know about? Have you worked on any projects in the past?",
-    "Have you built any websites or personal projects? Tell us about your favorite one.",
-    "What's the biggest challenge you've faced while developing something?",
-    "Imagine a feature isn't working right before deployment. What would you do?"
+    { title: "Profile Links", content: "Please provide the links to your GitHub and LinkedIn profiles." },
+    { title: "General Question", content: "Why do you wanna join CYSCOM, especially the Dev Dept?" },
+    { title: "General Question", content: "What are tech stacks you know about? Have you worked on any projects in the past?" },
+    { title: "General Question", content: "Have you built any websites or personal projects? Tell us about your favorite one." },
+    { title: "General Question", content: "What's the biggest challenge you've faced while developing something?" },
+    { title: "General Question", content: "Imagine a feature isn't working right before deployment. What would you do?" }
   ];
   for (const q of webDevGen) {
-    await prisma.questionBank.create({ data: { department: "WEB_DEVELOPMENT", type: "GENERAL", title: "General Question", content: q } });
+    await prisma.questionBank.create({ data: { department: "WEB_DEVELOPMENT", type: "GENERAL", title: q.title, content: q.content } });
   }
 
   console.log("Seeding Web Dev (Timed)...");
@@ -97,15 +98,16 @@ async function main() {
 
   console.log("Seeding Technical (General)...");
   const techGen = [
-    "Why do you want to join the Technical Department?",
-    "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
-    "How do you approach learning something completely new?",
-    "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?",
-    "If Google didn't exist for a day, how would you solve technical problems?",
-    "What motivates you more: winning competitions or learning new things?"
+    { title: "Profile Links", content: "Please provide the links to your GitHub and LinkedIn profiles." },
+    { title: "General Question", content: "Why do you want to join the Technical Department?" },
+    { title: "General Question", content: "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?" },
+    { title: "General Question", content: "How do you approach learning something completely new?" },
+    { title: "General Question", content: "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?" },
+    { title: "General Question", content: "If Google didn't exist for a day, how would you solve technical problems?" },
+    { title: "General Question", content: "What motivates you more: winning competitions or learning new things?" }
   ];
   for (const q of techGen) {
-    await prisma.questionBank.create({ data: { department: "TECHNICAL", type: "GENERAL", title: "General Question", content: q } });
+    await prisma.questionBank.create({ data: { department: "TECHNICAL", type: "GENERAL", title: q.title, content: q.content } });
   }
 
   console.log("Seeding Technical (Timed)...");

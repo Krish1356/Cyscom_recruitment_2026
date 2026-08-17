@@ -26,8 +26,17 @@ export async function generateAssessments(applicantId: string) {
       const genQuestions = await prisma.questionBank.findMany({
         where: { department: selection.department, type: "GENERAL" }
       });
-      // Randomize and select up to 6
-      const selectedGen = genQuestions.sort(() => 0.5 - Math.random()).slice(0, 6);
+      
+      const profileLinkQuestion = genQuestions.find(q => q.title === "Profile Links");
+      const otherQuestions = genQuestions.filter(q => q.title !== "Profile Links");
+      
+      // Randomize and select up to 5 remaining questions
+      const selectedGen = otherQuestions.sort(() => 0.5 - Math.random()).slice(0, 5);
+      
+      if (profileLinkQuestion) {
+        await prisma.question.create({ data: { assessmentId: generalAssessment.id, questionBankId: profileLinkQuestion.id } });
+      }
+
       for (const q of selectedGen) {
         await prisma.question.create({ data: { assessmentId: generalAssessment.id, questionBankId: q.id } });
       }
