@@ -95,9 +95,12 @@ function HUDPanel({ title, children, className }: { title: string, children: Rea
   );
 }
 
+import { getSession } from "next-auth/react";
+
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [session, setSession] = useState<any>(null);
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("cyscom_visited");
@@ -105,7 +108,12 @@ export default function Home() {
       setShowPreloader(true);
       sessionStorage.setItem("cyscom_visited", "true");
     }
-    setIsFirstLoad(false);
+    
+    // Fetch session on client side
+    getSession().then((sess) => {
+      setSession(sess);
+      setIsFirstLoad(false);
+    });
   }, []);
 
   if (isFirstLoad) {
@@ -151,7 +159,7 @@ export default function Home() {
         style={{ pointerEvents: showPreloader ? 'none' : 'auto' }}
       >
 
-        <MainLayout>
+        <MainLayout session={session}>
         {/* HERO */}
         <section id="home" className="pt-20 pb-24 px-6 relative overflow-hidden min-h-screen flex items-center justify-center">
           
