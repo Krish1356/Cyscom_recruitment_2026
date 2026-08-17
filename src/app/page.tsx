@@ -95,7 +95,7 @@ function HUDPanel({ title, children, className }: { title: string, children: Rea
   );
 }
 
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(false);
@@ -223,7 +223,7 @@ export default function Home() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.5, duration: 0.8 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-6"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6"
             >
               <Link 
                 href="/register" 
@@ -231,6 +231,15 @@ export default function Home() {
               >
                 BEGIN INFILTRATION PROTOCOL <ArrowRight className="ml-2 w-5 h-5 text-[#626A72] group-hover:text-[#67E8F9] group-hover:translate-x-1 transition-all" />
               </Link>
+              
+              {session && (
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="w-full sm:w-auto px-6 py-5 border border-[#ef4444]/20 text-[#ef4444]/70 hover:bg-[#ef4444]/10 hover:border-[#ef4444]/50 hover:text-[#ef4444] rounded-sm font-mono text-xs uppercase tracking-widest transition-all"
+                >
+                  ABORT / LOGOUT
+                </button>
+              )}
             </motion.div>
           </div>
         </section>
