@@ -268,7 +268,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <EventCard 
                 status="ACTIVE" 
-                title="CTF & Assessments" 
+                title="Assessments" 
                 desc="Complete the technical assessments and department-specific challenges." 
                 date="August 16 - August 24, 2026" 
                 active 
