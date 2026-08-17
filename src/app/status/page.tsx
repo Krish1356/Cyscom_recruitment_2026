@@ -82,9 +82,9 @@ export default async function StatusPage() {
         <div className="pt-32 pb-24 px-6 min-h-screen flex items-center justify-center relative z-10">
           <div className="w-full max-w-2xl bg-black/60 backdrop-blur-md border border-white/10 rounded-lg p-10 shadow-[0_0_50px_rgba(0,255,255,0.05)] text-center">
             
-            <div className="inline-flex items-center justify-center p-6 rounded-full bg-black/50 border border-white/5 mb-8 relative">
-              <div className="absolute inset-0 rounded-full animate-ping opacity-20 bg-current" style={{ color: "inherit" }} />
-              <Icon className={`w-16 h-16 ${info.color}`} />
+            <div className={`inline-flex items-center justify-center p-6 rounded-full bg-black/50 border border-white/5 mb-8 relative ${info.color}`}>
+              <div className="absolute inset-0 rounded-full animate-ping opacity-20 bg-current" />
+              <img src="/logo.png" alt="CYSCOM Logo" className="w-16 h-16 object-contain drop-shadow-[0_0_15px_currentColor] relative z-10" />
             </div>
 
             <h1 className={`text-3xl md:text-5xl font-mono font-bold tracking-widest uppercase mb-4 ${info.color}`}>
