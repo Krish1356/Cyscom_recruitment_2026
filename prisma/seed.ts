@@ -10,7 +10,9 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  console.log("Clearing old QuestionBank entries...");
+  console.log("Clearing old data (Questions, Assessments, and QuestionBank)...");
+  await prisma.question.deleteMany({});
+  await prisma.assessment.deleteMany({});
   await prisma.questionBank.deleteMany({});
 
   console.log("Seeding Social Media...");
