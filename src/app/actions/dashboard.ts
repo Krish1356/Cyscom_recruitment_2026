@@ -117,8 +117,8 @@ export async function startAssessment() {
       // Create TIMED Assessment if there are technical questions
       if (timedQuestions.length > 0) {
         let timeRemaining: number | null = null;
-        if (dept.department === "WEB_DEVELOPMENT") timeRemaining = 30;
-        else if (dept.department === "TECHNICAL") timeRemaining = 90;
+        if (dept.department === "WEB_DEVELOPMENT") timeRemaining = 20;
+        else if (dept.department === "TECHNICAL") timeRemaining = 60;
 
         const timedAssessment = await tx.assessment.create({
           data: {

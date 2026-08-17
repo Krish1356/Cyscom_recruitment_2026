@@ -49,7 +49,7 @@ export async function generateAssessments(applicantId: string) {
       });
       
       if (!existingTimed) {
-        const timeLimit = selection.department === "WEB_DEVELOPMENT" ? 30 : 90;
+        const timeLimit = selection.department === "WEB_DEVELOPMENT" ? 20 : 60;
         
         const timedAssessment = await prisma.assessment.create({
           data: {
