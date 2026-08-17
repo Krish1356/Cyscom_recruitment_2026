@@ -17,11 +17,18 @@ export async function generateAssessments(applicantId: string) {
     });
     if (existing) continue;
 
+    let timeRemaining = 1800;
+    if (selection.department === "WEB_DEVELOPMENT") {
+      timeRemaining = 30; // 30 seconds
+    } else if (selection.department === "TECHNICAL") {
+      timeRemaining = 90; // 90 seconds
+    }
+
     const assessment = await prisma.assessment.create({
       data: {
         departmentSelectionId: selection.id,
         status: "PENDING",
-        timeRemaining: 1800 // 30 minutes
+        timeRemaining: timeRemaining
       }
     });
 
