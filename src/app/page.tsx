@@ -96,11 +96,13 @@ function HUDPanel({ title, children, className }: { title: string, children: Rea
 }
 
 import { getSession, signOut } from "next-auth/react";
+import { getRegistrationCount } from "@/app/actions/stats";
 
 export default function Home() {
   const [showPreloader, setShowPreloader] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [session, setSession] = useState<any>(null);
+  const [regCount, setRegCount] = useState<number>(0);
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem("cyscom_visited");
@@ -109,9 +111,13 @@ export default function Home() {
       sessionStorage.setItem("cyscom_visited", "true");
     }
     
-    // Fetch session on client side
-    getSession().then((sess) => {
+    // Fetch session and stats on client side
+    Promise.all([
+      getSession(),
+      getRegistrationCount()
+    ]).then(([sess, count]) => {
       setSession(sess);
+      setRegCount(count);
       setIsFirstLoad(false);
     });
   }, []);
@@ -170,7 +176,7 @@ export default function Home() {
             <HUDPanel title="SYSTEM STATUS">
               <div className="flex justify-between gap-8"><span>NODE</span> <span className="text-[#A4A8AE]">VIT_CHENNAI</span></div>
               <div className="flex justify-between gap-8"><span>ACTIVE DEPTS</span> <span className="text-[#00D9FF]">6</span></div>
-              <div className="flex justify-between gap-8"><span>THREATS DETECTED</span> <span className="text-[#67E8F9]">0</span></div>
+              <div className="flex justify-between gap-8"><span>REGISTRATIONS</span> <span className="text-[#67E8F9]">{regCount}</span></div>
             </HUDPanel>
           </div>
 
@@ -248,7 +254,7 @@ export default function Home() {
         <section className="py-24 bg-black/20 backdrop-blur-[2px] px-6 border-t border-white/5 relative z-10">
           <div className="container mx-auto max-w-6xl">
             <h2 className="text-base md:text-lg font-mono tracking-[0.2em] text-[#A4A8AE] mb-4">01 PROCESS</h2>
-            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA] mb-16">Phases of Infiltration</h3>
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA] mb-16 font-orbitron uppercase">Phases of Infiltration</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20 relative">
               <div className="hidden md:block absolute top-6 left-0 right-0 h-px bg-white/5 -z-10" />

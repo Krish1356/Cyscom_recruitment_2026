@@ -112,14 +112,14 @@ async function main() {
 
   console.log("Seeding Technical (Timed)...");
   const techTimed = [
-    "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?\nA. Trying random tools immediately\nB. Understanding the challenge statement\nC. Searching for write-ups before attempting\nD. Writing your own script from scratch",
-    "A challenge gives almost no information. Your first instinct is to:\nA. Gather as much information as possible\nB. Guess the answer\nC. Search the exact title online\nD. Skip immediately",
-    "A challenge behaves differently than expected. Your first assumption is:\nA. The challenge is broken\nB. I'm missing some information\nC. The organizers made a mistake\nD. My laptop is faulty",
-    "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?\nA. HTTP headers\nB. Page source\nC. Cookies\nD. Network requests",
-    "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?\nA. Ignore password.txt completely.\nB. Check whether the statement itself is a clue or misdirection.\nC. Delete password.txt.\nD. Search online for the password."
+    { q: "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?", options: ["Trying random tools immediately", "Understanding the challenge statement", "Searching for write-ups before attempting", "Writing your own script from scratch"], answer: "Understanding the challenge statement" },
+    { q: "A challenge gives almost no information. Your first instinct is to:", options: ["Gather as much information as possible", "Guess the answer", "Search the exact title online", "Skip immediately"], answer: "Gather as much information as possible" },
+    { q: "A challenge behaves differently than expected. Your first assumption is:", options: ["The challenge is broken", "I'm missing some information", "The organizers made a mistake", "My laptop is faulty"], answer: "I'm missing some information" },
+    { q: "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?", options: ["HTTP headers", "Page source", "Cookies", "Network requests"], answer: "Page source" },
+    { q: "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?", options: ["Ignore password.txt completely.", "Check whether the statement itself is a clue or misdirection.", "Delete password.txt.", "Search online for the password."], answer: "Check whether the statement itself is a clue or misdirection." }
   ];
-  for (const q of techTimed) {
-    await prisma.questionBank.create({ data: { department: "TECHNICAL", type: "TIMED", title: "Timed Question", content: q } });
+  for (const item of techTimed) {
+    await prisma.questionBank.create({ data: { department: "TECHNICAL", type: "TIMED", title: "MCQ Question", description: item.q, content: { options: item.options, answer: item.answer } } });
   }
 
   console.log("Seeding complete!");
