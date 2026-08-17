@@ -22,12 +22,12 @@ async function main() {
 
   console.log("Seeding Event Management...");
   const eventManagement = [
-    "Describe situation where u organized or coordinated an event in school",
-    "What qualities do u think are most imp for someone in em? Which of those do u possess",
-    "30mins before an event starts only two of the 10 volunteers show up what do u do",
-    "10 mins before an event chief guest stuck in traffic",
-    "Would you rather be the person on stage or the one making everything run behind the scenes? Why",
-    "What's the best advertisement you've seen recently, and why did it work?"
+    "Describe a situation where you organized or coordinated an event at your school.",
+    "What qualities do you think are most important for someone in Event Management (EM)? Which of those qualities do you possess?",
+    "Thirty minutes before an event starts, only two of the ten volunteers show up. What would you do?",
+    "Ten minutes before the event begins, you learn that the chief guest is stuck in traffic. How would you handle the situation?",
+    "Would you rather be the person on stage or the one working behind the scenes to make everything run smoothly? Why?",
+    "What's the best advertisement you've seen recently, and why do you think it was effective?"
   ];
   for (const q of eventManagement) {
     await prisma.questionBank.create({ data: { department: "EVENT_MANAGEMENT", type: "GENERAL", title: "General Question", content: q } });
