@@ -99,7 +99,7 @@ export function KanbanBoard({ applicants }: { applicants: any[] }) {
                     
                     <div className="flex items-center gap-2 mt-2">
                       <a 
-                        href={`/admin/review/${applicant.id}`} 
+                        href={`/cyscom-hq/review/${applicant.id}`} 
                         className="flex-1 flex items-center justify-center gap-2 h-8 text-xs bg-white/5 border border-white/10 rounded-md hover:bg-white/10 text-[#F1F0EA] transition-colors"
                       >
                         Review Assessment

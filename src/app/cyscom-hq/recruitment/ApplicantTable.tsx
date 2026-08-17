@@ -216,7 +216,7 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
                       <Eye className="w-4 h-4" />
                     </button>
                     <a 
-                      href={`/admin/review/${app.id}`}
+                      href={`/cyscom-hq/review/${app.id}`}
                       className="p-2 bg-white/5 text-[#F1F0EA] rounded-md border border-white/10 hover:bg-white/10 transition-all"
                       title="Full Review"
                     >
