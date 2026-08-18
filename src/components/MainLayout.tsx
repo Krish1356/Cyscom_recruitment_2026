@@ -45,14 +45,11 @@ export function MainLayout({ children, session }: { children: ReactNode, session
               </div>
             ) : (
               <div className="flex items-center gap-4">
-                <Link href="/login" className="hidden md:block text-sm font-bold text-[#626A72] hover:text-[#F1F0EA] transition-colors tracking-widest uppercase">
-                  Login
-                </Link>
                 <Link 
-                  href="/register" 
+                  href="/login" 
                   className="px-6 py-2 bg-[#10151A] text-[#F1F0EA] text-xs font-bold tracking-widest rounded-sm border border-white/10 hover:shadow-[0_0_15px_rgba(103,232,249,0.15)] hover:border-[#67E8F9]/50 hover:text-[#67E8F9] transition-all uppercase"
                 >
-                  Apply Now
+                  Login
                 </Link>
               </div>
             )}
