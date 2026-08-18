@@ -2,8 +2,16 @@
 
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod";
+
+const submitAssessmentSchema = z.record(z.string().uuid(), z.string().max(5000));
 
 export async function submitAssessment(answers: Record<string, string>) {
+  const parsedAnswers = submitAssessmentSchema.safeParse(answers);
+  if (!parsedAnswers.success) {
+    throw new Error("Invalid answers payload");
+  }
+
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthorized");
 
@@ -32,9 +40,7 @@ export async function submitAssessment(answers: Record<string, string>) {
     if (assessment.startedAt) {
       const deadline = new Date(assessment.startedAt).getTime() + (assessment.timeRemaining || 1800) * 1000 + 10000; // 10s grace period
       if (Date.now() > deadline) {
-        // Automatically close it instead of throwing error to prevent deadlocks, 
-        // but log it or reject answers
-        console.warn(`Assessment ${assessment.id} submitted past deadline`);
+        throw new Error("Assessment deadline has passed");
       }
     }
   }
@@ -45,7 +51,7 @@ export async function submitAssessment(answers: Record<string, string>) {
   );
 
   // Save answers
-  for (const [questionId, answer] of Object.entries(answers)) {
+  for (const [questionId, answer] of Object.entries(parsedAnswers.data)) {
     if (!allowedQuestionIds.has(questionId)) {
       console.warn(`IDOR ATTEMPT: User ${profile.id} attempted to submit unowned question ${questionId}`);
       continue;

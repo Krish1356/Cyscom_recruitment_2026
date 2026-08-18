@@ -14,19 +14,12 @@ export async function submitRegistration(data: RegistrationFormValues) {
     return { error: "Unauthorized" };
   }
 
+  const userEmail = session.user.email?.toLowerCase() || "";
+  const bypassEmails = process.env.BYPASS_EMAILS?.split(",").map(e => e.trim().toLowerCase()).filter(Boolean) || [];
+
   if (
-    !session.user.email?.endsWith("@vitstudent.ac.in") && 
-    session.user.email !== "krishpatel1352006@gmail.com" &&
-    session.user.email !== "krishmpatel18@gmail.com" &&
-    session.user.email !== "krishmittalpatel034@gmail.com" &&
-    session.user.email !== "chitwansbagga@gmail.com" &&
-    session.user.email !== "education.anayy@gmail.com" &&
-    session.user.email !== "niharamariam2005@gmail.com" &&
-    session.user.email !== "krish2256patel@gmail.com" &&
-    session.user.email !== "chitwansingh06@gmail.com" &&
-    session.user.email !== "m.akshitha537@gmail.com" &&
-    session.user.email !== "shahvijval@gmail.com" &&
-    session.user.email !== "aakansh15.gupta@gmail.com"
+    !userEmail.endsWith("@vitstudent.ac.in") && 
+    !bypassEmails.includes(userEmail)
   ) {
     return { error: "Only @vitstudent.ac.in emails are allowed to register for recruitment." };
   }

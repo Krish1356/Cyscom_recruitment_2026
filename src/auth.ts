@@ -9,7 +9,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID!,
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
-      allowDangerousEmailAccountLinking: true,
     }),
   ],
   callbacks: {
@@ -17,9 +16,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (account?.provider === "google") {
         const email = user.email
         if (!email) return false
+        const bypassEmails = process.env.BYPASS_EMAILS?.split(",").map(e => e.trim().toLowerCase()).filter(Boolean) || [];
+        const normalizedEmail = email.toLowerCase();
 
         // 1. Allow all VIT students and the test account
-        if (email.endsWith("@vitstudent.ac.in") || email === "krishpatel1352006@gmail.com" || email === "krishmpatel18@gmail.com" || email === "krishmittalpatel034@gmail.com" || email === "education.anayy@gmail.com" || email === "niharamariam2005@gmail.com" || email === "krish2256patel@gmail.com" || email === "chitwansingh06@gmail.com" || email === "m.akshitha537@gmail.com" || email === "shahvijval@gmail.com" || email === "aakansh15.gupta@gmail.com") {
+        if (normalizedEmail.endsWith("@vitstudent.ac.in") || bypassEmails.includes(normalizedEmail)) {
           return true
         }
 
@@ -33,27 +34,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         // 3. Check if the user is in the predefined ADMIN_EMAILS list (to bootstrap the first admins)
-        const adminEmails = process.env.ADMIN_EMAILS?.split(",").map(e => e.trim()) || []
-        
-        // Add hardcoded super admins
-        const hardcodedAdmins = [
-          "chitwansbagga@gmail.com", 
-          "zdmonarch.tech@gmail.com", 
-          "krishmittalpatel034@gmail.com",
-          "randomchizkeliye@gmail.com",
-          "kshruthi206@gmail.com",
-          "niharamariam2005@gmail.com",
-          "krishpatel1352006@gmail.com",
-          "krishmpatel18@gmail.com",
-          "education.anayy@gmail.com",
-          "krish2256patel@gmail.com",
-          "chitwansingh06@gmail.com",
-          "shahvijval@gmail.com",
-          "aakansh15.gupta@gmail.com"
-        ];
-        const allAdmins = [...adminEmails, ...hardcodedAdmins];
+        const adminEmails = process.env.ADMIN_EMAILS?.split(",").map(e => e.trim().toLowerCase()).filter(Boolean) || []
 
-        if (allAdmins.includes(email)) {
+        if (adminEmails.includes(normalizedEmail)) {
           // Auto-upgrade their role in the database to SUPER_ADMIN
           const existing = await prisma.user.findUnique({ where: { email } });
           if (existing && existing.role !== "SUPER_ADMIN") {
