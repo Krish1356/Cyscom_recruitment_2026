@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 
-const submitAssessmentSchema = z.record(z.string().uuid(), z.string().max(5000));
+const submitAssessmentSchema = z.record(z.string(), z.string().max(5000));
 
 export async function submitAssessment(answers: Record<string, string>) {
   const parsedAnswers = submitAssessmentSchema.safeParse(answers);
