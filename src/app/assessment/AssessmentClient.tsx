@@ -46,16 +46,23 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   // Time management
   const initialTimeLeft = (() => {
     if (inProgressAssessments.length === 0) return 0;
-    const totalTimeAllocated = inProgressAssessments.reduce((sum, a) => sum + (a.timeRemaining || 1800), 0);
-    const startedAt = inProgressAssessments.find(a => a.startedAt)?.startedAt;
+    
+    const timedAssessments = inProgressAssessments.filter(a => a.timeRemaining !== null && a.timeRemaining > 0);
+    if (timedAssessments.length === 0) return 0;
+
+    const totalTimeAllocated = timedAssessments.reduce((sum, a) => sum + a.timeRemaining, 0);
+    const startedAt = timedAssessments.find(a => a.startedAt)?.startedAt;
     
     if (!startedAt) return totalTimeAllocated;
     
+    // Allow negative time so the useEffect can instantly trigger a submit if the clock says we're late
     const timeElapsed = Math.floor((Date.now() - new Date(startedAt).getTime()) / 1000);
-    return Math.max(0, totalTimeAllocated - timeElapsed);
+    return totalTimeAllocated - timeElapsed;
   })();
   
-  const [timeLeft, setTimeLeft] = useState<number | null>(initialTimeLeft > 0 ? initialTimeLeft : null);
+  // If there are timed assessments, we MUST track timeLeft (even if it's <= 0) to trigger auto-submit
+  const hasTimedAssessments = inProgressAssessments.some(a => a.timeRemaining && a.timeRemaining > 0);
+  const [timeLeft, setTimeLeft] = useState<number | null>(hasTimedAssessments ? initialTimeLeft : null);
 
   useEffect(() => {
     if (timeLeft === null) return;
@@ -378,8 +385,9 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   };
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
+    const absSeconds = Math.max(0, seconds);
+    const m = Math.floor(absSeconds / 60);
+    const s = absSeconds % 60;
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
