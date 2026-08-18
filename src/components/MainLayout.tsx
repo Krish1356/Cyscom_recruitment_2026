@@ -17,7 +17,7 @@ export function MainLayout({ children, session }: { children: ReactNode, session
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-bold tracking-widest text-[#F1F0EA] hover:text-[#67E8F9] transition-colors relative group">
+            <Link href="/#home" className="text-sm font-bold tracking-widest text-[#F1F0EA] hover:text-[#67E8F9] transition-colors relative group">
               HOME
               <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#67E8F9] opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
