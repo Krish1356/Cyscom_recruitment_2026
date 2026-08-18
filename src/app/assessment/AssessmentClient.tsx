@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { CyberMatrixBackground } from "@/components/CyberMatrixBackground";
 import { ShieldAlert, Clock, Terminal, Send } from "lucide-react";
-import { logIntegrityEvent } from "../actions/integrity";
+
 import { startTimedAssessments, submitAssessment } from "../actions/assessment";
 import { useRouter } from "next/navigation";
 
@@ -78,52 +78,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     }
   };
 
-  // Anti-Cheat / Integrity Monitoring
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        logIntegrityEvent("PAGE_HIDDEN", "User switched tabs or minimized window");
-      }
-    };
 
-    const blockAndLog = (e: Event, eventType: string, msg: string) => {
-      e.preventDefault();
-      logIntegrityEvent(eventType, msg);
-    };
-
-    const handleCopy = (e: ClipboardEvent) => blockAndLog(e, "COPY_ATTEMPT", "User attempted to copy text");
-    const handlePaste = (e: ClipboardEvent) => blockAndLog(e, "PASTE_ATTEMPT", "User attempted to paste text");
-    const handleCut = (e: ClipboardEvent) => blockAndLog(e, "CUT_ATTEMPT", "User attempted to cut text");
-    const handleContextMenu = (e: MouseEvent) => blockAndLog(e, "CONTEXT_MENU_ATTEMPT", "User attempted to open context menu");
-    const handleDragDrop = (e: DragEvent) => blockAndLog(e, "TEXT_DRAG_ATTEMPT", "User attempted to drag/drop text");
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'x', 'a'].includes(e.key.toLowerCase())) {
-        e.preventDefault();
-        logIntegrityEvent("KEYBOARD_SHORTCUT_ATTEMPT", `User attempted shortcut: ${e.ctrlKey ? 'Ctrl' : 'Cmd'}+${e.key.toUpperCase()}`);
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    document.addEventListener("copy", handleCopy);
-    document.addEventListener("paste", handlePaste);
-    document.addEventListener("cut", handleCut);
-    document.addEventListener("contextmenu", handleContextMenu);
-    document.addEventListener("dragover", handleDragDrop);
-    document.addEventListener("drop", handleDragDrop);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      document.removeEventListener("copy", handleCopy);
-      document.removeEventListener("paste", handlePaste);
-      document.removeEventListener("cut", handleCut);
-      document.removeEventListener("contextmenu", handleContextMenu);
-      document.removeEventListener("dragover", handleDragDrop);
-      document.removeEventListener("drop", handleDragDrop);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -201,15 +156,6 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
             ))}
           </div>
 
-          <div className="mt-auto p-4 bg-red-950/30 border border-red-500/30 rounded hidden md:block">
-            <div className="flex items-center gap-2 text-red-400 mb-2">
-              <ShieldAlert className="w-4 h-4 shrink-0" />
-              <span className="text-sm font-bold font-mono">INTEGRITY CHECK</span>
-            </div>
-            <p className="text-xs text-red-200/70 font-mono">
-              Tab switching and copy-pasting is strictly monitored. Violations will flag your application.
-            </p>
-          </div>
         </aside>
 
         {/* Assessment Area */}
