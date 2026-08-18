@@ -90,21 +90,23 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
 
   if (isTimedPhaseLocked) {
     return (
-      <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-black/90">
-        <CyberMatrixBackground />
-        <div className="z-10 bg-black/60 p-10 border border-cyan-500/50 rounded max-w-lg text-center backdrop-blur-sm shadow-[0_0_30px_rgba(0,255,255,0.1)] cyber-bracket">
-          <Terminal className="w-12 h-12 text-cyan-400 mx-auto mb-6" />
-          <h2 className="text-2xl font-mono text-cyan-300 mb-4 font-bold tracking-widest uppercase">General Phase Complete</h2>
-          <p className="text-cyan-100/70 mb-8 font-mono">
-            You have successfully submitted the general questions. You now have a timed technical assessment for your remaining departments.
-            The timer will begin as soon as you proceed.
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-gray-300 bg-[#0A0A0A] font-mono p-4">
+        <div className="z-10 bg-[#111111] p-8 border border-gray-800 rounded-sm max-w-lg text-center w-full shadow-2xl">
+          <Terminal className="w-8 h-8 text-gray-400 mx-auto mb-4" />
+          <h2 className="text-lg text-gray-200 mb-4 font-bold uppercase tracking-widest border-b border-gray-800 pb-4">
+            STATUS: GENERAL PHASE COMPLETE
+          </h2>
+          <p className="text-gray-400 mb-8 text-sm leading-relaxed text-left">
+            &gt; You have successfully submitted the general questions.
+            <br /><br />
+            &gt; You now have a timed technical assessment for your remaining departments. The timer will begin as soon as you proceed.
           </p>
           <button 
             onClick={handleStartTimed}
             disabled={isSubmitting}
-            className="inline-flex items-center justify-center border border-yellow-500 bg-yellow-950/20 text-yellow-400 px-8 py-4 text-xs uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition-colors disabled:opacity-50"
+            className="w-full inline-flex items-center justify-center border border-gray-700 bg-[#1A1A1A] text-gray-300 px-8 py-4 text-xs uppercase tracking-widest hover:border-[#4ade80] hover:text-[#4ade80] transition-colors disabled:opacity-50"
           >
-            {isSubmitting ? "INITIALIZING..." : "BEGIN TIMED ASSESSMENT"}
+            {isSubmitting ? "[ INITIALIZING... ]" : "[ BEGIN TIMED ASSESSMENT ]"}
           </button>
         </div>
       </div>
@@ -112,20 +114,24 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col text-white overflow-hidden bg-black/90">
-      <CyberMatrixBackground />
+    <div className="relative min-h-screen flex flex-col text-gray-300 overflow-hidden bg-[#0A0A0A] font-mono selection:bg-[#4ade80] selection:text-[#0A0A0A]">
       
       {/* Header */}
-      <header className="z-10 flex items-center justify-between p-4 border-b border-cyan-500/30 bg-black/80 backdrop-blur-md">
-        <div className="flex items-center gap-2">
-          <Terminal className="w-6 h-6 text-cyan-400" />
-          <h1 className="font-mono text-xl font-bold tracking-widest text-cyan-400">CYSCOM // TERMINAL</h1>
+      <header className="z-10 flex flex-col sm:flex-row sm:items-center justify-between p-4 border-b border-gray-800 bg-[#111111] gap-4">
+        <div className="flex items-center gap-3">
+          <Terminal className="w-5 h-5 text-gray-500" />
+          <div className="flex flex-col">
+            <h1 className="text-sm font-bold tracking-widest text-gray-200">CYSCOM ASSESSMENT TERMINAL</h1>
+            <span className="text-xs text-gray-500">SESSION: ACTIVE</span>
+          </div>
         </div>
         
         {timeLeft !== null && (
-          <div className="flex items-center gap-4 bg-cyan-950/50 px-4 py-2 rounded border border-cyan-500/50">
-            <Clock className="w-5 h-5 text-cyan-300" />
-            <span className="font-mono text-xl font-bold text-cyan-100">{formatTime(timeLeft)}</span>
+          <div className="flex items-center gap-3 bg-[#1A1A1A] px-4 py-2 border border-gray-800 rounded-sm">
+            <Clock className="w-4 h-4 text-gray-400" />
+            <span className={`text-sm font-bold tracking-widest ${timeLeft < 300 ? 'text-red-400' : timeLeft < 600 ? 'text-amber-400' : 'text-gray-200'}`}>
+              [ TIMER ] {formatTime(timeLeft)}
+            </span>
           </div>
         )}
       </header>
@@ -134,8 +140,8 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
       <div className="z-10 flex flex-col md:flex-row flex-1 overflow-hidden">
         
         {/* Sidebar */}
-        <aside className="w-full md:w-64 border-b md:border-b-0 md:border-r border-cyan-500/30 bg-black/60 backdrop-blur-md p-4 flex flex-col gap-4 flex-shrink-0">
-          <div className="text-xs font-mono text-cyan-500 mb-0 md:mb-2 uppercase tracking-widest hidden md:block">Departments</div>
+        <aside className="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-800 bg-[#111111] p-4 flex flex-col gap-2 flex-shrink-0">
+          <div className="text-xs text-gray-500 mb-2 uppercase tracking-widest">/departments/</div>
           
           <div className="flex flex-row md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
             {currentAssessments.map((assessment, idx) => (
@@ -145,87 +151,110 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
                   setActiveTab(idx);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`text-left font-mono p-3 rounded border transition-all whitespace-nowrap flex-shrink-0 ${
+                className={`text-left text-xs p-3 rounded-sm border transition-all whitespace-nowrap flex-shrink-0 ${
                   activeTab === idx 
-                    ? "bg-cyan-900/50 border-cyan-400 text-cyan-100 shadow-[0_0_15px_rgba(0,255,255,0.2)]" 
-                    : "bg-black/40 border-cyan-900/50 text-cyan-100/60 hover:border-cyan-500/50 hover:text-cyan-300"
+                    ? "bg-[#1A1A1A] border-[#4ade80] text-[#4ade80]" 
+                    : "bg-transparent border-gray-800 text-gray-400 hover:border-gray-600 hover:text-gray-200"
                 }`}
               >
+                {activeTab === idx ? '> ' : '  '}
                 {assessment.departmentSelection.department} {assessment.timeRemaining ? "(Timed)" : "(General)"}
               </button>
             ))}
           </div>
-
         </aside>
 
         {/* Assessment Area */}
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-black/40 backdrop-blur-sm">
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-[#0A0A0A]">
           <div className="max-w-4xl mx-auto space-y-8">
-            <h2 className="text-2xl font-mono font-bold text-cyan-300 border-b border-cyan-500/30 pb-4">
-              {currentAssessment?.departmentSelection.department} Assessment
-            </h2>
+            <div className="border-b border-gray-800 pb-4">
+              <h2 className="text-sm font-bold text-gray-200 uppercase tracking-widest">
+                $ view-assessment --dept="{currentAssessment?.departmentSelection.department}"
+              </h2>
+            </div>
             
             {currentAssessment?.questions.length === 0 ? (
-              <div className="p-8 text-center border border-cyan-500/20 bg-cyan-950/20 rounded text-cyan-100/60 font-mono">
-                No questions available for this department yet.
+              <div className="p-8 text-center border border-gray-800 bg-[#111111] rounded-sm text-gray-500 text-sm">
+                &gt; No questions available for this department yet.
               </div>
             ) : (
-              <div className="space-y-6">
+              <div className="space-y-12">
                 {currentAssessment?.questions.map((q: any, i: number) => (
-                  <div key={q.id} className="p-6 border border-cyan-500/30 bg-black/60 rounded">
-                    <h3 className="font-mono text-cyan-400 font-bold mb-4">Question {i + 1}</h3>
-                    <p className="text-cyan-50 mb-6 whitespace-pre-wrap select-none">{q.questionBank.description || q.questionBank.content}</p>
+                  <div key={q.id} className="space-y-4">
+                    <div className="text-xs text-gray-500 uppercase tracking-widest">
+                      $ assessment --question {String(i + 1).padStart(2, '0')}
+                    </div>
+                    
+                    <p className="text-gray-300 whitespace-pre-wrap select-none leading-relaxed text-sm md:text-base">
+                      {q.questionBank.description || q.questionBank.content}
+                    </p>
+                    
                     {q.questionBank.content?.options ? (
-                      <div className="space-y-3">
-                        {q.questionBank.content.options.map((opt: string, optIdx: number) => (
-                          <label key={optIdx} className={`flex items-center gap-3 p-3 border rounded cursor-pointer transition-colors ${answers[q.id] === opt ? 'border-cyan-400 bg-cyan-900/30' : 'border-cyan-900/50 bg-black/40 hover:border-cyan-700'}`}>
-                            <input 
-                              type="radio" 
-                              name={`q-${q.id}`} 
-                              value={opt}
-                              checked={answers[q.id] === opt}
-                              onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt }))}
-                              className="hidden"
-                            />
-                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${answers[q.id] === opt ? 'border-cyan-400' : 'border-cyan-700'}`}>
-                              {answers[q.id] === opt && <div className="w-2 h-2 rounded-full bg-cyan-400" />}
-                            </div>
-                            <span className="font-mono text-sm text-cyan-100">{opt}</span>
-                          </label>
-                        ))}
+                      <div className="space-y-2 mt-4">
+                        {q.questionBank.content.options.map((opt: string, optIdx: number) => {
+                          const optionLabel = String.fromCharCode(65 + optIdx); // A, B, C, D...
+                          const isSelected = answers[q.id] === opt;
+                          return (
+                            <label 
+                              key={optIdx} 
+                              className={`flex items-start gap-4 p-4 border rounded-sm cursor-pointer transition-colors ${
+                                isSelected 
+                                  ? 'border-[#4ade80] bg-[#112211] text-[#4ade80]' 
+                                  : 'border-gray-800 bg-[#111111] hover:border-gray-600 text-gray-400'
+                              }`}
+                            >
+                              <input 
+                                type="radio" 
+                                name={`q-${q.id}`} 
+                                value={opt}
+                                checked={isSelected}
+                                onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt }))}
+                                className="hidden"
+                              />
+                              <span className="font-bold shrink-0 mt-0.5">
+                                [ {optionLabel} ]
+                              </span>
+                              <span className={`text-sm ${isSelected ? 'text-[#4ade80]' : 'text-gray-300'}`}>
+                                {opt}
+                              </span>
+                            </label>
+                          );
+                        })}
                       </div>
                     ) : q.questionBank.content?.subQuestions ? (
-                      <div className="space-y-4">
+                      <div className="space-y-6 mt-6">
                         {q.questionBank.content.subQuestions.map((subQ: string, subIdx: number) => {
                           const parsed = (() => {
                             try { return JSON.parse(answers[q.id] || "{}") } catch { return {} }
                           })();
                           return (
                             <div key={subIdx} className="space-y-2">
-                              <label className="text-cyan-300 font-mono text-sm font-bold">{subQ}</label>
+                              <label className="text-gray-400 text-xs font-bold uppercase tracking-widest">
+                                &gt; {subQ}
+                              </label>
                               <textarea 
                                 value={parsed[subQ] || ""}
                                 onChange={(e) => {
                                   const newParsed = { ...parsed, [subQ]: e.target.value };
                                   setAnswers(prev => ({ ...prev, [q.id]: JSON.stringify(newParsed) }));
                                 }}
-                                className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[100px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
-                                placeholder={`Enter your response for ${subQ}...`}
+                                className="w-full bg-[#111111] border border-gray-800 rounded-sm p-4 text-gray-300 text-sm min-h-[100px] focus:outline-none focus:border-[#4ade80] focus:ring-1 focus:ring-[#4ade80]/50 transition-colors placeholder:text-gray-700"
+                                placeholder="..."
                               />
                             </div>
                           );
                         })}
                       </div>
                     ) : (
-                      <div className="space-y-2">
+                      <div className="space-y-2 mt-6">
                         <textarea 
                           value={answers[q.id] || ""}
                           onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
-                          className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[250px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
-                          placeholder="Enter your response here..."
+                          className="w-full bg-[#111111] border border-gray-800 rounded-sm p-4 text-gray-300 text-sm min-h-[200px] focus:outline-none focus:border-[#4ade80] focus:ring-1 focus:ring-[#4ade80]/50 transition-colors placeholder:text-gray-700"
+                          placeholder="> Enter response here..."
                         />
-                        <p className="text-xs text-cyan-500/60 font-mono italic">
-                          * If this question asks for an upload or file, please paste your public Google Drive (or similar) link in the box above. Ensure access is set to "Anyone with the link".
+                        <p className="text-xs text-gray-600 italic">
+                          &gt; Note: If this question requires a file, paste a public link (e.g. Google Drive with "Anyone with link" access) above.
                         </p>
                       </div>
                     )}
@@ -234,31 +263,31 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
               </div>
             )}
             
-            <div className="pt-8 border-t border-cyan-500/30 flex justify-end">
-              {activeTab < currentAssessments.length - 1 ? (
-                <button 
-                  onClick={() => {
-                    setActiveTab(prev => prev + 1);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center"
-                >
-                  NEXT SECTION <Send className="w-5 h-5 ml-2" />
-                </button>
-              ) : (
-                <button 
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? "SUBMITTING..." : (
-                    <>
-                      <Send className="w-5 h-5 mr-2" />
-                      SUBMIT ALL ASSESSMENTS
-                    </>
-                  )}
-                </button>
-              )}
+            <div className="pt-12 mt-12 border-t border-gray-800 flex justify-between items-center">
+              <div className="text-xs text-gray-500 uppercase tracking-widest hidden sm:block">
+                STATUS: READY
+              </div>
+              <div className="flex justify-end w-full sm:w-auto">
+                {activeTab < currentAssessments.length - 1 ? (
+                  <button 
+                    onClick={() => {
+                      setActiveTab(prev => prev + 1);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="bg-transparent border border-gray-700 hover:border-[#4ade80] hover:text-[#4ade80] text-gray-300 font-bold text-sm px-6 py-3 rounded-sm transition-all tracking-wider flex items-center"
+                  >
+                    [ NEXT → ]
+                  </button>
+                ) : (
+                  <button 
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className="bg-transparent border border-gray-700 hover:border-[#4ade80] hover:text-[#4ade80] text-gray-300 font-bold text-sm px-6 py-3 rounded-sm transition-all tracking-wider flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? "[ SUBMITTING... ]" : "[ SUBMIT ALL ASSESSMENTS ]"}
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </main>
