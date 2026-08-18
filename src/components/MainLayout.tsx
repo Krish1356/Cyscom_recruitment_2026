@@ -26,7 +26,7 @@ export function MainLayout({ children, session }: { children: ReactNode, session
               <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#67E8F9] opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
             <Link href="/#contact" className="text-sm font-bold tracking-widest text-[#626A72] hover:text-[#67E8F9] transition-colors relative group">
-              COMMUNITY
+              CONTACT
               <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#67E8F9] opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
           </div>
