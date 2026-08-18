@@ -36,12 +36,13 @@ export async function submitAssessment(answers: Record<string, string>) {
   }
 
   // Validate Timer
-  for (const assessment of activeAssessments) {
-    if (assessment.startedAt) {
-      const deadline = new Date(assessment.startedAt).getTime() + (assessment.timeRemaining || 1800) * 1000 + 10000; // 10s grace period
-      if (Date.now() > deadline) {
-        throw new Error("Assessment deadline has passed");
-      }
+  if (activeAssessments.length > 0 && activeAssessments[0].startedAt) {
+    const totalTimeAllocated = activeAssessments.reduce((sum, a) => sum + (a.timeRemaining || 1800), 0);
+    const earliestStart = Math.min(...activeAssessments.map(a => new Date(a.startedAt!).getTime()));
+    const deadline = earliestStart + (totalTimeAllocated * 1000) + 15000; // 15s grace period
+
+    if (Date.now() > deadline) {
+      throw new Error("Assessment deadline has passed");
     }
   }
 

@@ -44,12 +44,16 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   // Time management
-  const initialTimeLeft = inProgressAssessments.reduce((total, a) => {
-    if (!a.startedAt) return total + (a.timeRemaining || 0);
-    const deadline = new Date(a.startedAt).getTime() + (a.timeRemaining || 1800) * 1000;
-    const remaining = Math.max(0, Math.floor((deadline - Date.now()) / 1000));
-    return total + remaining;
-  }, 0);
+  const initialTimeLeft = (() => {
+    if (inProgressAssessments.length === 0) return 0;
+    const totalTimeAllocated = inProgressAssessments.reduce((sum, a) => sum + (a.timeRemaining || 1800), 0);
+    const startedAt = inProgressAssessments.find(a => a.startedAt)?.startedAt;
+    
+    if (!startedAt) return totalTimeAllocated;
+    
+    const timeElapsed = Math.floor((Date.now() - new Date(startedAt).getTime()) / 1000);
+    return Math.max(0, totalTimeAllocated - timeElapsed);
+  })();
   
   const [timeLeft, setTimeLeft] = useState<number | null>(initialTimeLeft > 0 ? initialTimeLeft : null);
 
@@ -339,10 +343,14 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
       } else {
         setTimeout(() => router.push("/status"), 1500);
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      pushHistory("error", "Transmission failed. Retrying...");
-      setIsSubmitting(false);
+      if (e?.message?.includes("deadline") || String(e).includes("deadline")) {
+        pushHistory("error", "Transmission failed: Deadline passed. Please contact an admin.");
+      } else {
+        pushHistory("error", "Transmission failed. Next attempt in 10 seconds...");
+        setTimeout(() => setIsSubmitting(false), 10000);
+      }
     }
   };
 
