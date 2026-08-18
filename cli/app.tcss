@@ -1,0 +1,140 @@
+Screen {
+    background: #0A0A0A;
+    color: #e5e7eb;
+}
+
+Header {
+    background: #111111;
+    color: #e5e7eb;
+    dock: top;
+    height: 3;
+    content-align: center middle;
+    border-bottom: solid #555555;
+}
+
+HeaderIcon {
+    display: none;
+}
+
+HeaderTitle {
+    text-style: bold;
+    color: #4ade80;
+}
+
+HeaderClock {
+    color: #9ca3af;
+    background: #111111;
+}
+
+#main-layout {
+    height: 100%;
+}
+
+#sidebar {
+    width: 35;
+    border-right: solid #555555;
+    background: #111111;
+    padding: 1;
+}
+
+#sidebar-title {
+    color: #6b7280;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#dept-list {
+    background: #111111;
+    border: none;
+}
+
+DepartmentItem {
+    padding: 1 2;
+    color: #9ca3af;
+}
+
+DepartmentItem:hover {
+    background: #1A1A1A;
+}
+
+DepartmentItem:focus, DepartmentItem.--highlight {
+    background: #1A1A1A;
+    color: #4ade80;
+    text-style: bold;
+}
+
+#assessment-view {
+    background: #0A0A0A;
+    padding: 2 6;
+    overflow-y: auto;
+}
+
+.empty-state {
+    color: #6b7280;
+    margin-top: 2;
+}
+
+QuestionWidget {
+    margin-bottom: 3;
+    height: auto;
+}
+
+.question-prompt {
+    color: #6b7280;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.question-text {
+    color: #e5e7eb;
+    margin-bottom: 1;
+}
+
+RadioSet {
+    background: #111111;
+    border: solid #555555;
+    padding: 1 2;
+    width: 100%;
+}
+
+RadioSet:focus-within {
+    border: solid #4ade80;
+}
+
+RadioButton {
+    color: #9ca3af;
+    background: #111111;
+}
+
+RadioButton:focus {
+    color: #e5e7eb;
+}
+
+RadioButton.-on {
+    color: #4ade80;
+    text-style: bold;
+}
+
+TextArea {
+    background: #111111;
+    border: solid #555555;
+    color: #e5e7eb;
+    height: 10;
+    margin-top: 1;
+}
+
+TextArea:focus {
+    border: solid #4ade80;
+}
+
+.helper-text {
+    color: #6b7280;
+    text-style: italic;
+    margin-top: 1;
+}
+
+Footer {
+    background: #111111;
+    color: #9ca3af;
+    border-top: solid #555555;
+}
