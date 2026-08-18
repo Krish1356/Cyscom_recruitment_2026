@@ -126,7 +126,6 @@ export default function VisualSocialMedia({ isActive }: { isActive: boolean }) {
           style={{ transformOrigin: "200px 195px" }}
         />
       </svg>
-      <img src="/departments/SM.png" alt="Social Media" className="absolute w-24 h-24 object-contain drop-shadow-[0_0_25px_rgba(103,232,249,0.5)] z-10 animate-pulse" />
     </motion.div>
   );
 }

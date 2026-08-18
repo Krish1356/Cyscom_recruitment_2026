@@ -151,7 +151,6 @@ export default function VisualWebDev({ isActive }: { isActive: boolean }) {
           pointerEvents="none"
         />
       </svg>
-      <img src="/departments/dEV.png" alt="Web Development" className="absolute w-24 h-24 object-contain drop-shadow-[0_0_25px_rgba(103,232,249,0.5)] z-10 animate-pulse" />
     </motion.div>
   );
 }

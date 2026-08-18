@@ -109,7 +109,6 @@ export default function VisualTechnical({ isActive }: { isActive: boolean }) {
           />
         ))}
       </svg>
-      <img src="/departments/Tech.png" alt="Technical" className="absolute w-24 h-24 object-contain drop-shadow-[0_0_25px_rgba(103,232,249,0.5)] z-10 animate-pulse" />
     </motion.div>
   );
 }
