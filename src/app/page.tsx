@@ -233,9 +233,9 @@ export default function Home() {
             >
               <Link 
                 href="/register" 
-                className="group w-full sm:w-auto flex items-center justify-center px-10 py-5 bg-[#10151A] text-[#F1F0EA] border border-[#67E8F9]/30 rounded-sm font-bold tracking-widest hover:border-[#67E8F9] hover:bg-[#10151A]/80 transition-all shadow-[0_0_0px_rgba(103,232,249,0)] hover:shadow-[0_0_15px_rgba(103,232,249,0.15)] uppercase"
+                className="group w-full sm:w-auto flex items-center justify-center px-10 py-5 bg-[#67E8F9] text-[#050608] border border-[#67E8F9] rounded-sm font-bold tracking-widest hover:bg-[#22D3EE] hover:border-[#22D3EE] transition-all shadow-[0_0_15px_rgba(103,232,249,0.3)] hover:shadow-[0_0_25px_rgba(103,232,249,0.5)] uppercase"
               >
-                BEGIN INFILTRATION PROTOCOL <ArrowRight className="ml-2 w-5 h-5 text-[#626A72] group-hover:text-[#67E8F9] group-hover:translate-x-1 transition-all" />
+                APPLY NOW <ArrowRight className="ml-2 w-5 h-5 text-[#050608] group-hover:translate-x-1 transition-all" />
               </Link>
               
               {session && (
