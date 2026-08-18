@@ -254,7 +254,7 @@ export default function Home() {
         <section className="py-24 bg-black/20 backdrop-blur-[2px] px-6 border-t border-white/5 relative z-10">
           <div className="container mx-auto max-w-6xl">
             <h2 className="text-base md:text-lg font-mono tracking-[0.2em] text-[#A4A8AE] mb-4">01 PROCESS</h2>
-            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA] mb-16 font-orbitron uppercase">Phases of Infiltration</h3>
+            <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-[#F1F0EA] mb-16 font-orbitron uppercase">Application Process</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20 relative">
               <div className="hidden md:block absolute top-6 left-0 right-0 h-px bg-white/5 -z-10" />
