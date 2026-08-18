@@ -186,7 +186,10 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
             {currentAssessments.map((assessment, idx) => (
               <button
                 key={assessment.id}
-                onClick={() => setActiveTab(idx)}
+                onClick={() => {
+                  setActiveTab(idx);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 className={`text-left font-mono p-3 rounded border transition-all whitespace-nowrap flex-shrink-0 ${
                   activeTab === idx 
                     ? "bg-cyan-900/50 border-cyan-400 text-cyan-100 shadow-[0_0_15px_rgba(0,255,255,0.2)]" 
@@ -288,7 +291,10 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
             <div className="pt-8 border-t border-cyan-500/30 flex justify-end">
               {activeTab < currentAssessments.length - 1 ? (
                 <button 
-                  onClick={() => setActiveTab(prev => prev + 1)}
+                  onClick={() => {
+                    setActiveTab(prev => prev + 1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
                   className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center"
                 >
                   NEXT SECTION <Send className="w-5 h-5 ml-2" />
