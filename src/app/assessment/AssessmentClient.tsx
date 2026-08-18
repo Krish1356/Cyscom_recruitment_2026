@@ -1,16 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { CyberMatrixBackground } from "@/components/CyberMatrixBackground";
-import { ShieldAlert, Clock, Terminal, Send } from "lucide-react";
-
+import { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import { AssessmentLaunchOverlay } from "@/components/ui/AssessmentLaunchOverlay";
+import { Clock, Terminal } from "lucide-react";
 import { startTimedAssessments, submitAssessment } from "../actions/assessment";
 import { useRouter } from "next/navigation";
+
+// Use the existing 3D Cyber Topology Background from the Homepage
+const CyberTopologyCanvas = dynamic(
+  () => import("@/components/canvas/CyberTopologyCanvas"),
+  { ssr: false }
+);
+
+type HistoryItem = {
+  id: string;
+  type: "system" | "question" | "answer" | "error" | "command";
+  content: string | React.ReactNode;
+};
 
 export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const router = useRouter();
   
   const [localAssessments, setLocalAssessments] = useState(assessments);
+  const [showLaunchOverlay, setShowLaunchOverlay] = useState(false);
+  
   const inProgressAssessments = localAssessments.filter(a => a.status === "IN_PROGRESS");
   const pendingAssessments = localAssessments.filter(a => a.status === "PENDING");
   
@@ -18,67 +32,342 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const currentAssessments = isTimedPhaseLocked ? pendingAssessments : inProgressAssessments;
 
   const [activeTab, setActiveTab] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentSubIndex, setCurrentSubIndex] = useState(0);
+  
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const historyEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Time management
   const initialTimeLeft = inProgressAssessments.reduce((total, a) => {
     if (!a.startedAt) return total + (a.timeRemaining || 0);
     const deadline = new Date(a.startedAt).getTime() + (a.timeRemaining || 1800) * 1000;
     const remaining = Math.max(0, Math.floor((deadline - Date.now()) / 1000));
     return total + remaining;
   }, 0);
+  
   const [timeLeft, setTimeLeft] = useState<number | null>(initialTimeLeft > 0 ? initialTimeLeft : null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (timeLeft === null) return;
     if (timeLeft <= 0 && !isSubmitting) {
-      handleSubmit();
+      handleFinalSubmit();
       return;
     }
-
     const timer = setInterval(() => {
       setTimeLeft(prev => prev !== null ? Math.max(0, prev - 1) : null);
     }, 1000);
-
     return () => clearInterval(timer);
   }, [timeLeft, isSubmitting]);
 
-  const handleSubmit = async () => {
+  // Scroll to bottom on history change
+  useEffect(() => {
+    historyEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [history]);
+
+  // Auto-focus input
+  useEffect(() => {
+    if (!isTimedPhaseLocked) {
+      inputRef.current?.focus();
+    }
+  }, [isTimedPhaseLocked, activeTab, currentQuestionIndex, currentSubIndex]);
+
+  const pushHistory = (type: HistoryItem["type"], content: string | React.ReactNode) => {
+    setHistory(prev => [...prev, { id: Math.random().toString(36).substr(2, 9), type, content }]);
+  };
+
+  // Initialization & Question Printing
+  const currentAssessment = currentAssessments[activeTab];
+  const question = currentAssessment?.questions[currentQuestionIndex];
+  
+  // Track last printed context to avoid re-printing on every render
+  const lastPrintedRef = useRef<string>("");
+
+  useEffect(() => {
+    if (!currentAssessment) return;
+    
+    const contextKey = `${currentAssessment.id}-${currentQuestionIndex}-${currentSubIndex}`;
+    if (lastPrintedRef.current === contextKey) return;
+    lastPrintedRef.current = contextKey;
+
+    if (currentQuestionIndex === 0 && currentSubIndex === 0) {
+      pushHistory("system", `--- INITIALIZING ${currentAssessment.departmentSelection.department} ASSESSMENT ---`);
+    }
+
+    if (!question) {
+      pushHistory("system", `You have reached the end of the ${currentAssessment.departmentSelection.department} section. Type '/next' to proceed to the next department, or '/finish' to submit all.`);
+      return;
+    }
+
+    // Print Question
+    if (currentSubIndex === 0) {
+      pushHistory("question", `[Q${currentQuestionIndex + 1}] ${question.questionBank.description || question.questionBank.content}`);
+    }
+
+    if (question.questionBank.content?.options) {
+      const options = question.questionBank.content.options;
+      const optsRender = (
+        <div className="ml-4 mt-2 space-y-1">
+          {options.map((opt: string, idx: number) => (
+            <div key={idx} className="text-gray-300">[{idx + 1}] {opt}</div>
+          ))}
+          <div className="text-gray-500 italic mt-2">* Type the option number to select (e.g., '1')</div>
+        </div>
+      );
+      pushHistory("system", optsRender);
+    } else if (question.questionBank.content?.subQuestions) {
+      const subQ = question.questionBank.content.subQuestions[currentSubIndex];
+      pushHistory("question", `> Sub-question: ${subQ}`);
+    } else {
+      pushHistory("system", <div className="text-gray-500 italic">* Type your response. Press Ctrl+Enter to submit.</div>);
+    }
+    
+  }, [activeTab, currentQuestionIndex, currentSubIndex, currentAssessment, question]);
+
+  const handleCommand = (cmd: string) => {
+    const parts = cmd.toLowerCase().trim().split(" ");
+    const command = parts[0];
+
+    switch (command) {
+      case "/help":
+        pushHistory("system", (
+          <div className="ml-4 space-y-1">
+            <div><strong className="text-white">/next</strong>       - Skip to the next question or department</div>
+            <div><strong className="text-white">/back</strong>       - Return to the previous question</div>
+            <div><strong className="text-white">/departments</strong>- List all assessment departments</div>
+            <div><strong className="text-white">/switch [num]</strong>- Switch to a specific department</div>
+            <div><strong className="text-white">/finish</strong>     - Submit the entire assessment</div>
+            <div><strong className="text-white">/clear</strong>      - Clear the terminal screen</div>
+          </div>
+        ));
+        break;
+      case "/clear":
+        setHistory([]);
+        // Re-print current state
+        lastPrintedRef.current = "";
+        break;
+      case "/next":
+        advanceQuestion();
+        break;
+      case "/back":
+        regressQuestion();
+        break;
+      case "/departments":
+        pushHistory("system", (
+          <div className="ml-4 space-y-1">
+            {currentAssessments.map((a, idx) => (
+              <div key={a.id}>
+                <strong className="text-white">[{idx + 1}]</strong> {a.departmentSelection.department} {a.timeRemaining ? "(Timed)" : "(General)"}
+                {idx === activeTab ? " <-- (Active)" : ""}
+              </div>
+            ))}
+          </div>
+        ));
+        break;
+      case "/switch":
+        const idx = parseInt(parts[1]) - 1;
+        if (idx >= 0 && idx < currentAssessments.length) {
+          setActiveTab(idx);
+          setCurrentQuestionIndex(0);
+          setCurrentSubIndex(0);
+        } else {
+          pushHistory("error", "Invalid department number. Type '/departments' to see the list.");
+        }
+        break;
+      case "/finish":
+        handleFinalSubmit();
+        break;
+      default:
+        pushHistory("error", `Command not found: ${command}. Type '/help' for a list of commands.`);
+    }
+  };
+
+  const advanceQuestion = () => {
+    if (!question) {
+      // At the end of a department
+      if (activeTab < currentAssessments.length - 1) {
+        setActiveTab(prev => prev + 1);
+        setCurrentQuestionIndex(0);
+        setCurrentSubIndex(0);
+      } else {
+        pushHistory("system", "All departments completed. Type '/finish' to submit your assessments.");
+      }
+      return;
+    }
+
+    if (question.questionBank.content?.subQuestions) {
+      if (currentSubIndex < question.questionBank.content.subQuestions.length - 1) {
+        setCurrentSubIndex(prev => prev + 1);
+        return;
+      }
+    }
+
+    // Move to next question
+    setCurrentQuestionIndex(prev => prev + 1);
+    setCurrentSubIndex(0);
+  };
+
+  const regressQuestion = () => {
+    if (currentSubIndex > 0) {
+      setCurrentSubIndex(prev => prev - 1);
+      return;
+    }
+    
+    if (currentQuestionIndex > 0) {
+      const prevQIdx = currentQuestionIndex - 1;
+      const prevQ = currentAssessment?.questions[prevQIdx];
+      setCurrentQuestionIndex(prevQIdx);
+      if (prevQ?.questionBank.content?.subQuestions) {
+        setCurrentSubIndex(prevQ.questionBank.content.subQuestions.length - 1);
+      } else {
+        setCurrentSubIndex(0);
+      }
+      return;
+    }
+
+    if (activeTab > 0) {
+      const prevTab = activeTab - 1;
+      setActiveTab(prevTab);
+      const targetAssessment = currentAssessments[prevTab];
+      const targetQIdx = Math.max(0, targetAssessment.questions.length - 1);
+      setCurrentQuestionIndex(targetQIdx);
+      const targetQ = targetAssessment.questions[targetQIdx];
+      if (targetQ?.questionBank.content?.subQuestions) {
+        setCurrentSubIndex(targetQ.questionBank.content.subQuestions.length - 1);
+      } else {
+        setCurrentSubIndex(0);
+      }
+      return;
+    }
+    
+    pushHistory("error", "Already at the beginning of the assessment.");
+  };
+
+  const saveAnswer = (input: string) => {
+    if (!question) return;
+
+    let finalAnswer = input;
+
+    // Handle multiple choice parsing
+    if (question.questionBank.content?.options) {
+      const num = parseInt(input.trim());
+      const opts = question.questionBank.content.options;
+      if (!isNaN(num) && num > 0 && num <= opts.length) {
+        finalAnswer = opts[num - 1];
+      } else {
+        // Find if they typed the text directly
+        const matched = opts.find((o: string) => o.toLowerCase() === input.trim().toLowerCase());
+        if (matched) finalAnswer = matched;
+        else {
+          pushHistory("error", "Invalid option. Please type the option number.");
+          return false;
+        }
+      }
+    }
+
+    // Handle Subquestions JSON storage
+    if (question.questionBank.content?.subQuestions) {
+      const subQ = question.questionBank.content.subQuestions[currentSubIndex];
+      setAnswers(prev => {
+        let currentParsed = {};
+        try { currentParsed = JSON.parse(prev[question.id] || "{}"); } catch {}
+        return {
+          ...prev,
+          [question.id]: JSON.stringify({ ...currentParsed, [subQ]: finalAnswer })
+        };
+      });
+    } else {
+      setAnswers(prev => ({ ...prev, [question.id]: finalAnswer }));
+    }
+
+    return true;
+  };
+
+  const handleInputSubmit = () => {
+    const val = inputValue.trim();
+    if (!val) return;
+    
+    setInputValue("");
+    
+    // Always print what the user typed
+    pushHistory("answer", `> ${val}`);
+
+    if (val.startsWith("/")) {
+      handleCommand(val);
+      return;
+    }
+
+    if (!question) {
+      pushHistory("error", "No active question. Type '/next' or '/finish'.");
+      return;
+    }
+
+    const saved = saveAnswer(val);
+    if (saved) {
+      advanceQuestion();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      handleInputSubmit();
+    }
+  };
+
+  const handleFinalSubmit = async () => {
+    if (isSubmitting) return;
     setIsSubmitting(true);
+    pushHistory("system", "--- INITIATING SECURE TRANSMISSION ---");
     try {
       await submitAssessment(answers);
+      pushHistory("system", "Payload transmitted successfully.");
       
       if (pendingAssessments.length > 0) {
         setLocalAssessments(prev => prev.map(a => a.status === "IN_PROGRESS" ? { ...a, status: "COMPLETED" } : a));
         setActiveTab(0);
+        setCurrentQuestionIndex(0);
+        setCurrentSubIndex(0);
+        setHistory([]);
+        lastPrintedRef.current = "";
         setIsSubmitting(false);
       } else {
-        router.push("/status");
+        setTimeout(() => router.push("/status"), 1500);
       }
     } catch (e) {
       console.error(e);
-      alert("Failed to submit assessment. Please try again.");
+      pushHistory("error", "Transmission failed. Retrying...");
       setIsSubmitting(false);
     }
   };
 
-  const handleStartTimed = async () => {
+  const executeStartTimed = async () => {
     setIsSubmitting(true);
     try {
       await startTimedAssessments();
       setLocalAssessments(prev => prev.map(a => a.status === "PENDING" ? { ...a, status: "IN_PROGRESS" } : a));
       setActiveTab(0);
+      setCurrentQuestionIndex(0);
+      setCurrentSubIndex(0);
+      setHistory([]);
+      lastPrintedRef.current = "";
       
       const newTime = pendingAssessments.reduce((acc, a) => acc + (a.timeRemaining || 0), 0);
       setTimeLeft(newTime > 0 ? newTime : null);
       setIsSubmitting(false);
+      setShowLaunchOverlay(false);
     } catch(e) {
       console.error(e);
       alert("Failed to start timed assessment.");
       setIsSubmitting(false);
+      setShowLaunchOverlay(false);
     }
   };
-
-
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -86,27 +375,25 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const currentAssessment = currentAssessments[activeTab];
-
   if (isTimedPhaseLocked) {
     return (
-      <div className="relative min-h-screen flex flex-col items-center justify-center text-gray-300 bg-[#0A0A0A] font-mono p-4">
-        <div className="z-10 bg-[#111111] p-8 border border-gray-800 rounded-sm max-w-lg text-center w-full shadow-2xl">
-          <Terminal className="w-8 h-8 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-lg text-gray-200 mb-4 font-bold uppercase tracking-widest border-b border-gray-800 pb-4">
-            STATUS: GENERAL PHASE COMPLETE
-          </h2>
-          <p className="text-gray-400 mb-8 text-sm leading-relaxed text-left">
-            &gt; You have successfully submitted the general questions.
-            <br /><br />
-            &gt; You now have a timed technical assessment for your remaining departments. The timer will begin as soon as you proceed.
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-[#000000] font-mono">
+        {showLaunchOverlay && (
+          <AssessmentLaunchOverlay onComplete={executeStartTimed} />
+        )}
+        <div className="z-10 max-w-2xl text-center space-y-6">
+          <Terminal className="w-16 h-16 text-white mx-auto mb-6" />
+          <h2 className="text-2xl font-bold tracking-widest uppercase">General Phase Complete</h2>
+          <p className="text-gray-400 leading-relaxed">
+            You have successfully submitted the general questions. You now have a timed technical assessment for your remaining departments.
+            The timer will begin as soon as you proceed.
           </p>
           <button 
-            onClick={handleStartTimed}
+            onClick={() => setShowLaunchOverlay(true)}
             disabled={isSubmitting}
-            className="w-full inline-flex items-center justify-center border border-gray-700 bg-[#1A1A1A] text-gray-300 px-8 py-4 text-xs uppercase tracking-widest hover:border-[#4ade80] hover:text-[#4ade80] transition-colors disabled:opacity-50"
+            className="inline-flex items-center justify-center border border-white bg-white text-black font-bold px-8 py-4 text-xs uppercase tracking-widest hover:bg-gray-200 transition-colors disabled:opacity-50"
           >
-            {isSubmitting ? "[ INITIALIZING... ]" : "[ BEGIN TIMED ASSESSMENT ]"}
+            {isSubmitting ? "INITIALIZING..." : "BEGIN TIMED ASSESSMENT"}
           </button>
         </div>
       </div>
@@ -114,228 +401,83 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col text-gray-300 overflow-hidden bg-[#0A0A0A] font-mono selection:bg-[#4ade80] selection:text-[#0A0A0A]">
+    <div className="relative h-screen flex flex-col bg-[#000000] text-gray-200 overflow-hidden font-mono text-sm sm:text-base">
+      
+      {/* 3D Background - Kept very subtle */}
+      <div className="fixed inset-0 z-[0] pointer-events-none opacity-40">
+        <div className="absolute inset-0 bg-[#000000]" />
+        <div className="absolute inset-0 grayscale">
+          <CyberTopologyCanvas />
+        </div>
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
       
       {/* Header */}
-      <header className="z-10 flex flex-col sm:flex-row sm:items-center justify-between p-4 border-b border-gray-800 bg-[#111111] gap-4">
+      <header className="z-10 flex flex-col sm:flex-row items-center justify-between p-4 border-b border-gray-800 bg-black/90">
         <div className="flex items-center gap-3">
-          <Terminal className="w-5 h-5 text-gray-500" />
-          <div className="flex flex-col">
-            <h1 className="text-sm font-bold tracking-widest text-gray-200">CYSCOM ASSESSMENT TERMINAL</h1>
-            <span className="text-xs text-gray-500">SESSION: ACTIVE</span>
-          </div>
+          <Terminal className="w-5 h-5 text-gray-400" />
+          <h1 className="font-bold tracking-widest text-gray-300">CYSCOM // TERMINAL</h1>
+          <span className="text-gray-600 hidden sm:inline">| {currentAssessment?.departmentSelection.department}</span>
         </div>
         
         {timeLeft !== null && (
-          <div className="flex items-center gap-3 bg-[#1A1A1A] px-4 py-2 border border-gray-800 rounded-sm">
-            <Clock className="w-4 h-4 text-gray-400" />
-            <span className={`text-sm font-bold tracking-widest ${timeLeft < 300 ? 'text-red-400' : timeLeft < 600 ? 'text-amber-400' : 'text-gray-200'}`}>
-              [ TIMER ] {formatTime(timeLeft)}
-            </span>
+          <div className="flex items-center gap-3 mt-2 sm:mt-0">
+            <Clock className="w-4 h-4 text-gray-500" />
+            <span className="font-bold text-white tracking-widest">{formatTime(timeLeft)}</span>
           </div>
         )}
       </header>
 
-      {/* Main Content */}
-      <div className="z-10 flex flex-col md:flex-row flex-1 overflow-hidden">
+      {/* Main Terminal Window */}
+      <main className="z-10 flex-1 flex flex-col overflow-hidden bg-transparent">
         
-        {/* Sidebar */}
-        <aside className="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-800 bg-[#111111] p-4 flex flex-col gap-2 flex-shrink-0">
-          <div className="text-xs text-gray-500 mb-2 uppercase tracking-widest">/departments/</div>
-          
-          <div className="flex flex-row md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-            {currentAssessments.map((assessment, idx) => (
-              <button
-                key={assessment.id}
-                onClick={() => {
-                  setActiveTab(idx);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`text-left text-xs p-3 rounded-sm border transition-all whitespace-nowrap flex-shrink-0 ${
-                  activeTab === idx 
-                    ? "bg-[#1A1A1A] border-[#4ade80] text-[#4ade80]" 
-                    : "bg-transparent border-gray-800 text-gray-400 hover:border-gray-600 hover:text-gray-200"
-                }`}
-              >
-                {activeTab === idx ? '> ' : '  '}
-                {assessment.departmentSelection.department} {assessment.timeRemaining ? "(Timed)" : "(General)"}
-              </button>
-            ))}
+        {/* Terminal History */}
+        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
+          <div className="text-gray-600 mb-6">
+            <p>Welcome to CYSCOM Secure Assessment Terminal v2.0</p>
+            <p>Type '/help' for a list of available commands.</p>
           </div>
-        </aside>
 
-        {/* Assessment Area */}
-        {/* Single Integrated Terminal Area */}
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-[#1a1b26]/5 flex flex-col items-center">
-          <div className="w-full max-w-5xl flex-1 flex flex-col border border-gray-700 bg-black rounded-lg shadow-2xl overflow-hidden relative">
-            
-            {/* Terminal Title Bar */}
-            <div className="bg-[#1a1b26] px-4 py-3 flex items-center border-b border-gray-800 shrink-0 sticky top-0 z-10 shadow-sm">
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
-              </div>
-              <div className="flex-1 text-center text-xs text-gray-500 font-mono tracking-widest uppercase truncate px-4">
-                guest@cyscom: ~/assessments/{currentAssessment?.departmentSelection.department.toLowerCase()}
-              </div>
+          {history.map((item) => (
+            <div key={item.id} className={`leading-relaxed ${
+              item.type === "question" ? "text-white font-bold mt-6" :
+              item.type === "system" ? "text-gray-400" :
+              item.type === "error" ? "text-red-400" :
+              "text-green-400" // answer or command
+            }`}>
+              {item.content}
             </div>
+          ))}
+          <div ref={historyEndRef} />
+        </div>
 
-            {/* Terminal Body */}
-            <div className="p-6 md:p-10 font-mono text-gray-300 space-y-16 flex-1 overflow-y-auto scroll-smooth">
-              {currentAssessment?.questions.length === 0 ? (
-                <div className="text-gray-500 text-sm space-y-2">
-                  <div><span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ls -la</div>
-                  <div>total 0</div>
-                  <div className="italic pt-4">&gt; No questions available for this department yet.</div>
-                </div>
-              ) : (
-                currentAssessment?.questions.map((q: any, i: number) => (
-                  <div key={q.id} className="space-y-8">
-                    {/* ASCII Divider if not the first item */}
-                    {i > 0 && (
-                      <div className="text-gray-800/80 select-none tracking-tighter overflow-hidden whitespace-nowrap">
-                        ====================================================================================================================
-                      </div>
-                    )}
-                    
-                    {/* Prompt to load question */}
-                    <div className="space-y-4">
-                      <div className="text-sm">
-                        <span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ./load_question --id {String(i + 1).padStart(2, '0')}
-                      </div>
-                      <p className="text-gray-400 whitespace-pre-wrap select-none leading-relaxed text-sm md:text-base">
-                        {q.questionBank.description || q.questionBank.content}
-                      </p>
-                    </div>
-                    
-                    {/* Answer Input Prompt */}
-                    <div className="space-y-4">
-                      <div className="text-sm">
-                        <span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ./input_answer --id {String(i + 1).padStart(2, '0')}
-                      </div>
-                      
-                      <div className="pl-0 sm:pl-4">
-                        {q.questionBank.content?.options ? (
-                          <div className="space-y-3">
-                            {q.questionBank.content.options.map((opt: string, optIdx: number) => {
-                              const optionLabel = String.fromCharCode(65 + optIdx); // A, B, C, D...
-                              const isSelected = answers[q.id] === opt;
-                              return (
-                                <label 
-                                  key={optIdx} 
-                                  className={`flex items-start gap-4 p-2 cursor-pointer transition-colors ${
-                                    isSelected 
-                                      ? 'text-[#4ade80]' 
-                                      : 'text-gray-500 hover:text-gray-300'
-                                  }`}
-                                >
-                                  <input 
-                                    type="radio" 
-                                    name={`q-${q.id}`} 
-                                    value={opt}
-                                    checked={isSelected}
-                                    onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt }))}
-                                    className="hidden"
-                                  />
-                                  <span className="font-bold shrink-0 mt-0.5 select-none text-sm md:text-base">
-                                    [{isSelected ? 'x' : ' '}] {optionLabel}.
-                                  </span>
-                                  <span className={`text-sm md:text-base ${isSelected ? 'text-[#4ade80]' : 'text-gray-400'}`}>
-                                    {opt}
-                                  </span>
-                                </label>
-                              );
-                            })}
-                          </div>
-                        ) : q.questionBank.content?.subQuestions ? (
-                          <div className="space-y-8">
-                            {q.questionBank.content.subQuestions.map((subQ: string, subIdx: number) => {
-                              const parsed = (() => {
-                                try { return JSON.parse(answers[q.id] || "{}") } catch { return {} }
-                              })();
-                              return (
-                                <div key={subIdx} className="space-y-3">
-                                  <label className="text-gray-500 text-xs font-bold uppercase tracking-widest block">
-                                    &gt; {subQ}
-                                  </label>
-                                  <div className="relative">
-                                    <div className="absolute top-3 left-0 text-[#4ade80] select-none text-sm font-bold">❯</div>
-                                    <textarea 
-                                      value={parsed[subQ] || ""}
-                                      onChange={(e) => {
-                                        const newParsed = { ...parsed, [subQ]: e.target.value };
-                                        setAnswers(prev => ({ ...prev, [q.id]: JSON.stringify(newParsed) }));
-                                      }}
-                                      className="w-full bg-transparent text-gray-300 text-sm md:text-base min-h-[100px] focus:outline-none border-none resize-y pl-5 py-3 placeholder:text-gray-800"
-                                      placeholder="Type response here..."
-                                    />
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        ) : (
-                          <div className="space-y-3">
-                            <div className="relative">
-                              <div className="absolute top-3 left-0 text-[#4ade80] select-none text-sm font-bold">❯</div>
-                              <textarea 
-                                value={answers[q.id] || ""}
-                                onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
-                                className="w-full bg-transparent text-gray-300 text-sm md:text-base min-h-[200px] focus:outline-none border-none resize-y pl-5 py-3 placeholder:text-gray-800"
-                                placeholder="Type response here..."
-                              />
-                            </div>
-                            <p className="text-xs text-gray-600 italic">
-                              Note: If this question requires a file, paste a public link above.
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              )}
-              
-              {/* Terminal Footer / Controls */}
-              <div className="pt-16 mt-8">
-                <div className="text-gray-800/80 select-none tracking-tighter overflow-hidden whitespace-nowrap mb-8">
-                  ====================================================================================================================
-                </div>
-                
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-                  <div className="text-sm">
-                    <span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ./navigate
-                  </div>
-                  
-                  <div className="flex w-full sm:w-auto">
-                    {activeTab < currentAssessments.length - 1 ? (
-                      <button 
-                        onClick={() => {
-                          setActiveTab(prev => prev + 1);
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className="w-full sm:w-auto bg-transparent border border-gray-700 hover:border-[#4ade80] hover:text-black hover:bg-[#4ade80] text-gray-300 font-bold text-sm px-8 py-3 transition-all tracking-wider flex items-center justify-center uppercase"
-                      >
-                        [ NEXT DEPT → ]
-                      </button>
-                    ) : (
-                      <button 
-                        onClick={handleSubmit}
-                        disabled={isSubmitting}
-                        className="w-full sm:w-auto bg-[#4ade80] hover:bg-[#22c55e] text-black font-bold text-sm px-8 py-3 transition-all tracking-wider flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed uppercase"
-                      >
-                        {isSubmitting ? "PROCESSING..." : "SUBMIT ALL ASSESSMENTS"}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-            </div>
+        {/* Active Prompt Area */}
+        <div className="border-t border-gray-800 bg-black p-4 flex flex-col gap-2 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+          <div className="flex items-start gap-2">
+            <span className="text-green-500 mt-1 font-bold">$&gt;</span>
+            <textarea
+              ref={inputRef}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="w-full bg-transparent border-none outline-none resize-none text-white font-mono leading-relaxed min-h-[4rem] max-h-[40vh] py-1"
+              placeholder="Type your response here..."
+              disabled={isSubmitting}
+              autoFocus
+            />
           </div>
-        </main>
-      </div>
+          <div className="flex justify-between items-center text-xs text-gray-600 select-none">
+            <span>[Ctrl+Enter to Submit] or [Type /help]</span>
+            <button 
+              onClick={handleInputSubmit}
+              className="hover:text-white transition-colors"
+            >
+              EXECUTE
+            </button>
+          </div>
+        </div>
+
+      </main>
     </div>
   );
 }

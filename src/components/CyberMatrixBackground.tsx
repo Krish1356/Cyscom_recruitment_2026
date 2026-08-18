@@ -2,6 +2,18 @@
 
 import { useEffect, useRef } from "react";
 
+interface Node {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  baseAlpha: number;
+  pulseSpeed: number;
+  pulsePhase: number;
+  color: string;
+}
+
 export function CyberMatrixBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -11,113 +23,182 @@ export function CyberMatrixBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let animId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Matrix characters (katakana + latin + numbers)
-    const chars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-    
-    const fontSize = 16;
-    let columns = width / fontSize;
-    const drops: number[] = [];
-    
-    // Initialize drops
-    for (let x = 0; x < columns; x++) {
-      drops[x] = 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+
+    const mouse = {
+      x: width / 2,
+      y: height / 2,
+      targetX: width / 2,
+      targetY: height / 2,
+      radius: 200,
+    };
+
+    // Node palette
+    const colors = ["#67E8F9", "#00D9FF", "#38BDF8", "#818CF8"];
+
+    // Generate Nodes
+    const nodeCount = Math.floor((width * height) / 10000);
+    const nodes: Node[] = [];
+
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        radius: Math.random() * 2 + 1,
+        baseAlpha: Math.random() * 0.5 + 0.3,
+        pulseSpeed: Math.random() * 0.03 + 0.01,
+        pulsePhase: Math.random() * Math.PI * 2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+      });
     }
 
-    let mouseX = width / 2;
-    let mouseY = height / 2;
+    let gridOffset = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-    
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      columns = width / fontSize;
-      drops.length = 0;
-      for (let x = 0; x < columns; x++) {
-        drops[x] = 1;
-      }
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("resize", handleResize);
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
 
     const draw = () => {
-      // Semi-transparent black to create trailing effect
-      ctx.fillStyle = "rgba(0, 5, 10, 0.05)";
+      // Smooth mouse movement
+      mouse.x += (mouse.targetX - mouse.x) * 0.08;
+      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+      // Dark Base Background
+      ctx.fillStyle = "#05070D";
       ctx.fillRect(0, 0, width, height);
 
-      // Neon blue/cyan color
-      ctx.fillStyle = "#0ff";
-      ctx.font = fontSize + "px monospace";
+      // Deep Cyan Ambient Radial Atmosphere
+      const grad = ctx.createRadialGradient(
+        mouse.x,
+        mouse.y,
+        50,
+        width / 2,
+        height / 2,
+        Math.max(width, height) * 0.8
+      );
+      grad.addColorStop(0, "rgba(8, 30, 45, 0.45)");
+      grad.addColorStop(0.5, "rgba(5, 12, 22, 0.8)");
+      grad.addColorStop(1, "rgba(3, 6, 11, 0.98)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
 
-      for (let i = 0; i < drops.length; i++) {
-        // Random character
-        const text = chars[Math.floor(Math.random() * chars.length)];
-        
-        // Calculate distance from mouse for interaction
-        const dropX = i * fontSize;
-        const dropY = drops[i] * fontSize;
-        const dx = dropX - mouseX;
-        const dy = dropY - mouseY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        // Slightly brighter if near mouse
-        if (distance < 150) {
-          ctx.fillStyle = "#fff";
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = "#0ff";
-        } else {
-          ctx.fillStyle = "rgba(0, 255, 255, 0.5)";
-          ctx.shadowBlur = 0;
-        }
-
-        ctx.fillText(text, dropX, dropY);
-
-        // Reset drop randomly to create stagger
-        if (dropY > height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        
-        // Move drop down
-        drops[i]++;
-      }
-      
-      // Draw Grid
-      ctx.shadowBlur = 0;
-      ctx.strokeStyle = "rgba(0, 255, 255, 0.03)";
+      // Perspective Grid
+      gridOffset = (gridOffset + 0.2) % 40;
+      ctx.strokeStyle = "rgba(103, 232, 249, 0.05)";
       ctx.lineWidth = 1;
-      
-      // Horizontal lines
-      ctx.beginPath();
-      for (let y = 0; y < height; y += 40) {
-        // slight curve based on mouse
-        const offset = (y - mouseY) * 0.05;
-        ctx.moveTo(0, y + offset);
-        ctx.lineTo(width, y + offset);
-      }
-      ctx.stroke();
 
-      // Vertical lines
-      ctx.beginPath();
-      for (let x = 0; x < width; x += 40) {
-        const offset = (x - mouseX) * 0.05;
-        ctx.moveTo(x + offset, 0);
-        ctx.lineTo(x + offset, height);
-      }
-      ctx.stroke();
+      const horizon = height * 0.25;
+      const gridSpacing = 60;
+      const centerX = width / 2;
 
-      requestAnimationFrame(draw);
+      for (let x = -width; x <= width * 2; x += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, height);
+        ctx.lineTo(centerX + (x - centerX) * 0.15, horizon);
+        ctx.stroke();
+      }
+
+      for (let y = height; y > horizon; y -= gridSpacing * 0.5) {
+        const lineY = y + (gridOffset % (gridSpacing * 0.5));
+        if (lineY <= height && lineY >= horizon) {
+          ctx.beginPath();
+          ctx.moveTo(0, lineY);
+          ctx.lineTo(width, lineY);
+          ctx.stroke();
+        }
+      }
+
+      // Update & Draw Nodes
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+
+        node.x += node.vx;
+        node.y += node.vy;
+
+        if (node.x < 0 || node.x > width) node.vx *= -1;
+        if (node.y < 0 || node.y > height) node.vy *= -1;
+
+        // Distance to mouse
+        const dx = node.x - mouse.x;
+        const dy = node.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < mouse.radius && dist > 0) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          node.x += (dx / dist) * force * 2;
+          node.y += (dy / dist) * force * 2;
+        }
+
+        // Draw connections between nodes
+        for (let j = i + 1; j < nodes.length; j++) {
+          const other = nodes[j];
+          const ndx = node.x - other.x;
+          const ndy = node.y - other.y;
+          const nDist = Math.sqrt(ndx * ndx + ndy * ndy);
+
+          if (nDist < 140) {
+            const alpha = (1 - nDist / 140) * 0.25;
+            ctx.strokeStyle = `rgba(103, 232, 249, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.stroke();
+          }
+        }
+
+        // Draw connection to mouse
+        if (dist < mouse.radius) {
+          const mAlpha = (1 - dist / mouse.radius) * 0.45;
+          ctx.strokeStyle = `rgba(0, 217, 255, ${mAlpha})`;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath();
+          ctx.moveTo(node.x, node.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+
+        // Draw node particle
+        node.pulsePhase += node.pulseSpeed;
+        const pulse = (Math.sin(node.pulsePhase) + 1) * 0.5;
+        const alpha = node.baseAlpha + pulse * 0.4;
+
+        ctx.fillStyle = node.color;
+        ctx.globalAlpha = alpha;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+
+      animId = requestAnimationFrame(draw);
     };
 
     draw();
 
     return () => {
+      cancelAnimationFrame(animId);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
     };
@@ -126,8 +207,7 @@ export function CyberMatrixBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-[-1] bg-[#02050e]"
-      style={{ filter: "contrast(1.2)" }}
+      className="fixed inset-0 z-0 pointer-events-none"
     />
   );
 }
