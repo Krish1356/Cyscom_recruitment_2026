@@ -142,7 +142,7 @@ export function AssessmentClient({ assessments, serverTime }: { assessments: any
       pushHistory("system", <div className="text-gray-500 italic">* Type your response. Press Ctrl+Enter to submit.</div>);
     }
     
-  }, [activeTab, currentQuestionIndex, currentSubIndex, currentAssessment, question]);
+  }, [activeTab, currentQuestionIndex, currentSubIndex, currentAssessment, question, history]);
 
   const handleCommand = (cmd: string) => {
     const parts = cmd.toLowerCase().trim().split(" ");

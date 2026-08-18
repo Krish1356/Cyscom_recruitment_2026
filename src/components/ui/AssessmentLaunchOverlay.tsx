@@ -21,6 +21,12 @@ export function AssessmentLaunchOverlay({ onComplete }: AssessmentLaunchOverlayP
   const [progress, setProgress] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
   useEffect(() => {
     let isMounted = true;
 
@@ -52,7 +58,7 @@ export function AssessmentLaunchOverlay({ onComplete }: AssessmentLaunchOverlayP
 
       await new Promise((resolve) => setTimeout(resolve, 400));
       if (isMounted) {
-        onComplete();
+        onCompleteRef.current();
       }
     };
 
@@ -62,7 +68,7 @@ export function AssessmentLaunchOverlay({ onComplete }: AssessmentLaunchOverlayP
       isMounted = false;
       clearInterval(progressInterval);
     };
-  }, [onComplete]);
+  }, []);
 
   return (
     <motion.div
