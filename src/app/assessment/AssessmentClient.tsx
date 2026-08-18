@@ -19,11 +19,15 @@ type HistoryItem = {
   content: string | React.ReactNode;
 };
 
-export function AssessmentClient({ assessments }: { assessments: any[] }) {
+export function AssessmentClient({ assessments, serverTime }: { assessments: any[], serverTime: number }) {
   const router = useRouter();
   
   const [localAssessments, setLocalAssessments] = useState(assessments);
   const [showLaunchOverlay, setShowLaunchOverlay] = useState(false);
+  
+  // Calculate local clock skew offset to synchronize perfectly with the backend
+  const [clockOffset] = useState(() => Date.now() - serverTime);
+  const getRealNow = () => Date.now() - clockOffset;
   
   const inProgressAssessments = localAssessments.filter(a => a.status === "IN_PROGRESS");
   const pendingAssessments = localAssessments.filter(a => a.status === "PENDING");
@@ -56,7 +60,7 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     if (!startedAt) return totalTimeAllocated;
     
     // Allow negative time so the useEffect can instantly trigger a submit if the clock says we're late
-    const timeElapsed = Math.floor((Date.now() - new Date(startedAt).getTime()) / 1000);
+    const timeElapsed = Math.floor((getRealNow() - new Date(startedAt).getTime()) / 1000);
     return totalTimeAllocated - timeElapsed;
   })();
   

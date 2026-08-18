@@ -40,5 +40,5 @@ export default async function AssessmentPage() {
     assessments = await generateAssessments(profile.id);
   }
 
-  return <AssessmentClient assessments={assessments} />;
+  return <AssessmentClient assessments={assessments} serverTime={Date.now()} />;
 }
