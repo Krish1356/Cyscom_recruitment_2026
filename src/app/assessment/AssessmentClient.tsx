@@ -165,129 +165,173 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
         </aside>
 
         {/* Assessment Area */}
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-[#0A0A0A]">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <div className="border-b border-gray-800 pb-4">
-              <h2 className="text-sm font-bold text-gray-200 uppercase tracking-widest">
-                $ view-assessment --dept="{currentAssessment?.departmentSelection.department}"
-              </h2>
-            </div>
+        {/* Single Integrated Terminal Area */}
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-[#1a1b26]/5 flex flex-col items-center">
+          <div className="w-full max-w-5xl flex-1 flex flex-col border border-gray-700 bg-black rounded-lg shadow-2xl overflow-hidden relative">
             
-            {currentAssessment?.questions.length === 0 ? (
-              <div className="p-8 text-center border border-gray-800 bg-[#111111] rounded-sm text-gray-500 text-sm">
-                &gt; No questions available for this department yet.
+            {/* Terminal Title Bar */}
+            <div className="bg-[#1a1b26] px-4 py-3 flex items-center border-b border-gray-800 shrink-0 sticky top-0 z-10 shadow-sm">
+              <div className="flex space-x-2">
+                <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
               </div>
-            ) : (
-              <div className="space-y-12">
-                {currentAssessment?.questions.map((q: any, i: number) => (
-                  <div key={q.id} className="space-y-4">
-                    <div className="text-xs text-gray-500 uppercase tracking-widest">
-                      $ assessment --question {String(i + 1).padStart(2, '0')}
-                    </div>
-                    
-                    <p className="text-gray-300 whitespace-pre-wrap select-none leading-relaxed text-sm md:text-base">
-                      {q.questionBank.description || q.questionBank.content}
-                    </p>
-                    
-                    {q.questionBank.content?.options ? (
-                      <div className="space-y-2 mt-4">
-                        {q.questionBank.content.options.map((opt: string, optIdx: number) => {
-                          const optionLabel = String.fromCharCode(65 + optIdx); // A, B, C, D...
-                          const isSelected = answers[q.id] === opt;
-                          return (
-                            <label 
-                              key={optIdx} 
-                              className={`flex items-start gap-4 p-4 border rounded-sm cursor-pointer transition-colors ${
-                                isSelected 
-                                  ? 'border-[#4ade80] bg-[#112211] text-[#4ade80]' 
-                                  : 'border-gray-800 bg-[#111111] hover:border-gray-600 text-gray-400'
-                              }`}
-                            >
-                              <input 
-                                type="radio" 
-                                name={`q-${q.id}`} 
-                                value={opt}
-                                checked={isSelected}
-                                onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt }))}
-                                className="hidden"
-                              />
-                              <span className="font-bold shrink-0 mt-0.5">
-                                [ {optionLabel} ]
-                              </span>
-                              <span className={`text-sm ${isSelected ? 'text-[#4ade80]' : 'text-gray-300'}`}>
-                                {opt}
-                              </span>
-                            </label>
-                          );
-                        })}
-                      </div>
-                    ) : q.questionBank.content?.subQuestions ? (
-                      <div className="space-y-6 mt-6">
-                        {q.questionBank.content.subQuestions.map((subQ: string, subIdx: number) => {
-                          const parsed = (() => {
-                            try { return JSON.parse(answers[q.id] || "{}") } catch { return {} }
-                          })();
-                          return (
-                            <div key={subIdx} className="space-y-2">
-                              <label className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-                                &gt; {subQ}
-                              </label>
-                              <textarea 
-                                value={parsed[subQ] || ""}
-                                onChange={(e) => {
-                                  const newParsed = { ...parsed, [subQ]: e.target.value };
-                                  setAnswers(prev => ({ ...prev, [q.id]: JSON.stringify(newParsed) }));
-                                }}
-                                className="w-full bg-[#111111] border border-gray-800 rounded-sm p-4 text-gray-300 text-sm min-h-[100px] focus:outline-none focus:border-[#4ade80] focus:ring-1 focus:ring-[#4ade80]/50 transition-colors placeholder:text-gray-700"
-                                placeholder="..."
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                      <div className="space-y-2 mt-6">
-                        <textarea 
-                          value={answers[q.id] || ""}
-                          onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
-                          className="w-full bg-[#111111] border border-gray-800 rounded-sm p-4 text-gray-300 text-sm min-h-[200px] focus:outline-none focus:border-[#4ade80] focus:ring-1 focus:ring-[#4ade80]/50 transition-colors placeholder:text-gray-700"
-                          placeholder="> Enter response here..."
-                        />
-                        <p className="text-xs text-gray-600 italic">
-                          &gt; Note: If this question requires a file, paste a public link (e.g. Google Drive with "Anyone with link" access) above.
-                        </p>
+              <div className="flex-1 text-center text-xs text-gray-500 font-mono tracking-widest uppercase truncate px-4">
+                guest@cyscom: ~/assessments/{currentAssessment?.departmentSelection.department.toLowerCase()}
+              </div>
+            </div>
+
+            {/* Terminal Body */}
+            <div className="p-6 md:p-10 font-mono text-gray-300 space-y-16 flex-1 overflow-y-auto scroll-smooth">
+              {currentAssessment?.questions.length === 0 ? (
+                <div className="text-gray-500 text-sm space-y-2">
+                  <div><span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ls -la</div>
+                  <div>total 0</div>
+                  <div className="italic pt-4">&gt; No questions available for this department yet.</div>
+                </div>
+              ) : (
+                currentAssessment?.questions.map((q: any, i: number) => (
+                  <div key={q.id} className="space-y-8">
+                    {/* ASCII Divider if not the first item */}
+                    {i > 0 && (
+                      <div className="text-gray-800/80 select-none tracking-tighter overflow-hidden whitespace-nowrap">
+                        ====================================================================================================================
                       </div>
                     )}
+                    
+                    {/* Prompt to load question */}
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ./load_question --id {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <p className="text-gray-400 whitespace-pre-wrap select-none leading-relaxed text-sm md:text-base">
+                        {q.questionBank.description || q.questionBank.content}
+                      </p>
+                    </div>
+                    
+                    {/* Answer Input Prompt */}
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ./input_answer --id {String(i + 1).padStart(2, '0')}
+                      </div>
+                      
+                      <div className="pl-0 sm:pl-4">
+                        {q.questionBank.content?.options ? (
+                          <div className="space-y-3">
+                            {q.questionBank.content.options.map((opt: string, optIdx: number) => {
+                              const optionLabel = String.fromCharCode(65 + optIdx); // A, B, C, D...
+                              const isSelected = answers[q.id] === opt;
+                              return (
+                                <label 
+                                  key={optIdx} 
+                                  className={`flex items-start gap-4 p-2 cursor-pointer transition-colors ${
+                                    isSelected 
+                                      ? 'text-[#4ade80]' 
+                                      : 'text-gray-500 hover:text-gray-300'
+                                  }`}
+                                >
+                                  <input 
+                                    type="radio" 
+                                    name={`q-${q.id}`} 
+                                    value={opt}
+                                    checked={isSelected}
+                                    onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt }))}
+                                    className="hidden"
+                                  />
+                                  <span className="font-bold shrink-0 mt-0.5 select-none text-sm md:text-base">
+                                    [{isSelected ? 'x' : ' '}] {optionLabel}.
+                                  </span>
+                                  <span className={`text-sm md:text-base ${isSelected ? 'text-[#4ade80]' : 'text-gray-400'}`}>
+                                    {opt}
+                                  </span>
+                                </label>
+                              );
+                            })}
+                          </div>
+                        ) : q.questionBank.content?.subQuestions ? (
+                          <div className="space-y-8">
+                            {q.questionBank.content.subQuestions.map((subQ: string, subIdx: number) => {
+                              const parsed = (() => {
+                                try { return JSON.parse(answers[q.id] || "{}") } catch { return {} }
+                              })();
+                              return (
+                                <div key={subIdx} className="space-y-3">
+                                  <label className="text-gray-500 text-xs font-bold uppercase tracking-widest block">
+                                    &gt; {subQ}
+                                  </label>
+                                  <div className="relative">
+                                    <div className="absolute top-3 left-0 text-[#4ade80] select-none text-sm font-bold">❯</div>
+                                    <textarea 
+                                      value={parsed[subQ] || ""}
+                                      onChange={(e) => {
+                                        const newParsed = { ...parsed, [subQ]: e.target.value };
+                                        setAnswers(prev => ({ ...prev, [q.id]: JSON.stringify(newParsed) }));
+                                      }}
+                                      className="w-full bg-transparent text-gray-300 text-sm md:text-base min-h-[100px] focus:outline-none border-none resize-y pl-5 py-3 placeholder:text-gray-800"
+                                      placeholder="Type response here..."
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <div className="space-y-3">
+                            <div className="relative">
+                              <div className="absolute top-3 left-0 text-[#4ade80] select-none text-sm font-bold">❯</div>
+                              <textarea 
+                                value={answers[q.id] || ""}
+                                onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
+                                className="w-full bg-transparent text-gray-300 text-sm md:text-base min-h-[200px] focus:outline-none border-none resize-y pl-5 py-3 placeholder:text-gray-800"
+                                placeholder="Type response here..."
+                              />
+                            </div>
+                            <p className="text-xs text-gray-600 italic">
+                              Note: If this question requires a file, paste a public link above.
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                ))}
+                ))
+              )}
+              
+              {/* Terminal Footer / Controls */}
+              <div className="pt-16 mt-8">
+                <div className="text-gray-800/80 select-none tracking-tighter overflow-hidden whitespace-nowrap mb-8">
+                  ====================================================================================================================
+                </div>
+                
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                  <div className="text-sm">
+                    <span className="text-[#4ade80] font-bold">guest@cyscom:~$</span> ./navigate
+                  </div>
+                  
+                  <div className="flex w-full sm:w-auto">
+                    {activeTab < currentAssessments.length - 1 ? (
+                      <button 
+                        onClick={() => {
+                          setActiveTab(prev => prev + 1);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="w-full sm:w-auto bg-transparent border border-gray-700 hover:border-[#4ade80] hover:text-black hover:bg-[#4ade80] text-gray-300 font-bold text-sm px-8 py-3 transition-all tracking-wider flex items-center justify-center uppercase"
+                      >
+                        [ NEXT DEPT → ]
+                      </button>
+                    ) : (
+                      <button 
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                        className="w-full sm:w-auto bg-[#4ade80] hover:bg-[#22c55e] text-black font-bold text-sm px-8 py-3 transition-all tracking-wider flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed uppercase"
+                      >
+                        {isSubmitting ? "PROCESSING..." : "SUBMIT ALL ASSESSMENTS"}
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
-            )}
-            
-            <div className="pt-12 mt-12 border-t border-gray-800 flex justify-between items-center">
-              <div className="text-xs text-gray-500 uppercase tracking-widest hidden sm:block">
-                STATUS: READY
-              </div>
-              <div className="flex justify-end w-full sm:w-auto">
-                {activeTab < currentAssessments.length - 1 ? (
-                  <button 
-                    onClick={() => {
-                      setActiveTab(prev => prev + 1);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="bg-transparent border border-gray-700 hover:border-[#4ade80] hover:text-[#4ade80] text-gray-300 font-bold text-sm px-6 py-3 rounded-sm transition-all tracking-wider flex items-center"
-                  >
-                    [ NEXT → ]
-                  </button>
-                ) : (
-                  <button 
-                    onClick={handleSubmit}
-                    disabled={isSubmitting}
-                    className="bg-transparent border border-gray-700 hover:border-[#4ade80] hover:text-[#4ade80] text-gray-300 font-bold text-sm px-6 py-3 rounded-sm transition-all tracking-wider flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? "[ SUBMITTING... ]" : "[ SUBMIT ALL ASSESSMENTS ]"}
-                  </button>
-                )}
-              </div>
+
             </div>
           </div>
         </main>
