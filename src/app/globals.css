@@ -211,4 +211,9 @@ html, body {
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 255, 255, 0.6);
   }
+
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto none auto 600px;
+  }
 }

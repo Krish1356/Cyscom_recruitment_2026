@@ -1,16 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { CyberMatrixBackground } from "@/components/CyberMatrixBackground";
-import { ShieldAlert, Clock, Terminal, Send } from "lucide-react";
-
+import { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import { AssessmentLaunchOverlay } from "@/components/ui/AssessmentLaunchOverlay";
+import { Clock, Terminal } from "lucide-react";
 import { startTimedAssessments, submitAssessment } from "../actions/assessment";
 import { useRouter } from "next/navigation";
+
+// Use the existing 3D Cyber Topology Background from the Homepage
+const CyberTopologyCanvas = dynamic(
+  () => import("@/components/canvas/CyberTopologyCanvas"),
+  { ssr: false }
+);
+
+type HistoryItem = {
+  id: string;
+  type: "system" | "question" | "answer" | "error" | "command";
+  content: string | React.ReactNode;
+};
 
 export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const router = useRouter();
   
   const [localAssessments, setLocalAssessments] = useState(assessments);
+  const [showLaunchOverlay, setShowLaunchOverlay] = useState(false);
+  
   const inProgressAssessments = localAssessments.filter(a => a.status === "IN_PROGRESS");
   const pendingAssessments = localAssessments.filter(a => a.status === "PENDING");
   
@@ -18,67 +32,342 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   const currentAssessments = isTimedPhaseLocked ? pendingAssessments : inProgressAssessments;
 
   const [activeTab, setActiveTab] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentSubIndex, setCurrentSubIndex] = useState(0);
+  
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const historyEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Time management
   const initialTimeLeft = inProgressAssessments.reduce((total, a) => {
     if (!a.startedAt) return total + (a.timeRemaining || 0);
     const deadline = new Date(a.startedAt).getTime() + (a.timeRemaining || 1800) * 1000;
     const remaining = Math.max(0, Math.floor((deadline - Date.now()) / 1000));
     return total + remaining;
   }, 0);
+  
   const [timeLeft, setTimeLeft] = useState<number | null>(initialTimeLeft > 0 ? initialTimeLeft : null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [answers, setAnswers] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (timeLeft === null) return;
     if (timeLeft <= 0 && !isSubmitting) {
-      handleSubmit();
+      handleFinalSubmit();
       return;
     }
-
     const timer = setInterval(() => {
       setTimeLeft(prev => prev !== null ? Math.max(0, prev - 1) : null);
     }, 1000);
-
     return () => clearInterval(timer);
   }, [timeLeft, isSubmitting]);
 
-  const handleSubmit = async () => {
+  // Scroll to bottom on history change
+  useEffect(() => {
+    historyEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [history]);
+
+  // Auto-focus input
+  useEffect(() => {
+    if (!isTimedPhaseLocked) {
+      inputRef.current?.focus();
+    }
+  }, [isTimedPhaseLocked, activeTab, currentQuestionIndex, currentSubIndex]);
+
+  const pushHistory = (type: HistoryItem["type"], content: string | React.ReactNode) => {
+    setHistory(prev => [...prev, { id: Math.random().toString(36).substr(2, 9), type, content }]);
+  };
+
+  // Initialization & Question Printing
+  const currentAssessment = currentAssessments[activeTab];
+  const question = currentAssessment?.questions[currentQuestionIndex];
+  
+  // Track last printed context to avoid re-printing on every render
+  const lastPrintedRef = useRef<string>("");
+
+  useEffect(() => {
+    if (!currentAssessment) return;
+    
+    const contextKey = `${currentAssessment.id}-${currentQuestionIndex}-${currentSubIndex}`;
+    if (lastPrintedRef.current === contextKey) return;
+    lastPrintedRef.current = contextKey;
+
+    if (currentQuestionIndex === 0 && currentSubIndex === 0) {
+      pushHistory("system", `--- INITIALIZING ${currentAssessment.departmentSelection.department} ASSESSMENT ---`);
+    }
+
+    if (!question) {
+      pushHistory("system", `You have reached the end of the ${currentAssessment.departmentSelection.department} section. Type '/next' to proceed to the next department, or '/finish' to submit all.`);
+      return;
+    }
+
+    // Print Question
+    if (currentSubIndex === 0) {
+      pushHistory("question", `[Q${currentQuestionIndex + 1}] ${question.questionBank.description || question.questionBank.content}`);
+    }
+
+    if (question.questionBank.content?.options) {
+      const options = question.questionBank.content.options;
+      const optsRender = (
+        <div className="ml-4 mt-2 space-y-1">
+          {options.map((opt: string, idx: number) => (
+            <div key={idx} className="text-gray-300">[{idx + 1}] {opt}</div>
+          ))}
+          <div className="text-gray-500 italic mt-2">* Type the option number to select (e.g., '1')</div>
+        </div>
+      );
+      pushHistory("system", optsRender);
+    } else if (question.questionBank.content?.subQuestions) {
+      const subQ = question.questionBank.content.subQuestions[currentSubIndex];
+      pushHistory("question", `> Sub-question: ${subQ}`);
+    } else {
+      pushHistory("system", <div className="text-gray-500 italic">* Type your response. Press Ctrl+Enter to submit.</div>);
+    }
+    
+  }, [activeTab, currentQuestionIndex, currentSubIndex, currentAssessment, question]);
+
+  const handleCommand = (cmd: string) => {
+    const parts = cmd.toLowerCase().trim().split(" ");
+    const command = parts[0];
+
+    switch (command) {
+      case "/help":
+        pushHistory("system", (
+          <div className="ml-4 space-y-1">
+            <div><strong className="text-white">/next</strong>       - Skip to the next question or department</div>
+            <div><strong className="text-white">/back</strong>       - Return to the previous question</div>
+            <div><strong className="text-white">/departments</strong>- List all assessment departments</div>
+            <div><strong className="text-white">/switch [num]</strong>- Switch to a specific department</div>
+            <div><strong className="text-white">/finish</strong>     - Submit the entire assessment</div>
+            <div><strong className="text-white">/clear</strong>      - Clear the terminal screen</div>
+          </div>
+        ));
+        break;
+      case "/clear":
+        setHistory([]);
+        // Re-print current state
+        lastPrintedRef.current = "";
+        break;
+      case "/next":
+        advanceQuestion();
+        break;
+      case "/back":
+        regressQuestion();
+        break;
+      case "/departments":
+        pushHistory("system", (
+          <div className="ml-4 space-y-1">
+            {currentAssessments.map((a, idx) => (
+              <div key={a.id}>
+                <strong className="text-white">[{idx + 1}]</strong> {a.departmentSelection.department} {a.timeRemaining ? "(Timed)" : "(General)"}
+                {idx === activeTab ? " <-- (Active)" : ""}
+              </div>
+            ))}
+          </div>
+        ));
+        break;
+      case "/switch":
+        const idx = parseInt(parts[1]) - 1;
+        if (idx >= 0 && idx < currentAssessments.length) {
+          setActiveTab(idx);
+          setCurrentQuestionIndex(0);
+          setCurrentSubIndex(0);
+        } else {
+          pushHistory("error", "Invalid department number. Type '/departments' to see the list.");
+        }
+        break;
+      case "/finish":
+        handleFinalSubmit();
+        break;
+      default:
+        pushHistory("error", `Command not found: ${command}. Type '/help' for a list of commands.`);
+    }
+  };
+
+  const advanceQuestion = () => {
+    if (!question) {
+      // At the end of a department
+      if (activeTab < currentAssessments.length - 1) {
+        setActiveTab(prev => prev + 1);
+        setCurrentQuestionIndex(0);
+        setCurrentSubIndex(0);
+      } else {
+        pushHistory("system", "All departments completed. Type '/finish' to submit your assessments.");
+      }
+      return;
+    }
+
+    if (question.questionBank.content?.subQuestions) {
+      if (currentSubIndex < question.questionBank.content.subQuestions.length - 1) {
+        setCurrentSubIndex(prev => prev + 1);
+        return;
+      }
+    }
+
+    // Move to next question
+    setCurrentQuestionIndex(prev => prev + 1);
+    setCurrentSubIndex(0);
+  };
+
+  const regressQuestion = () => {
+    if (currentSubIndex > 0) {
+      setCurrentSubIndex(prev => prev - 1);
+      return;
+    }
+    
+    if (currentQuestionIndex > 0) {
+      const prevQIdx = currentQuestionIndex - 1;
+      const prevQ = currentAssessment?.questions[prevQIdx];
+      setCurrentQuestionIndex(prevQIdx);
+      if (prevQ?.questionBank.content?.subQuestions) {
+        setCurrentSubIndex(prevQ.questionBank.content.subQuestions.length - 1);
+      } else {
+        setCurrentSubIndex(0);
+      }
+      return;
+    }
+
+    if (activeTab > 0) {
+      const prevTab = activeTab - 1;
+      setActiveTab(prevTab);
+      const targetAssessment = currentAssessments[prevTab];
+      const targetQIdx = Math.max(0, targetAssessment.questions.length - 1);
+      setCurrentQuestionIndex(targetQIdx);
+      const targetQ = targetAssessment.questions[targetQIdx];
+      if (targetQ?.questionBank.content?.subQuestions) {
+        setCurrentSubIndex(targetQ.questionBank.content.subQuestions.length - 1);
+      } else {
+        setCurrentSubIndex(0);
+      }
+      return;
+    }
+    
+    pushHistory("error", "Already at the beginning of the assessment.");
+  };
+
+  const saveAnswer = (input: string) => {
+    if (!question) return;
+
+    let finalAnswer = input;
+
+    // Handle multiple choice parsing
+    if (question.questionBank.content?.options) {
+      const num = parseInt(input.trim());
+      const opts = question.questionBank.content.options;
+      if (!isNaN(num) && num > 0 && num <= opts.length) {
+        finalAnswer = opts[num - 1];
+      } else {
+        // Find if they typed the text directly
+        const matched = opts.find((o: string) => o.toLowerCase() === input.trim().toLowerCase());
+        if (matched) finalAnswer = matched;
+        else {
+          pushHistory("error", "Invalid option. Please type the option number.");
+          return false;
+        }
+      }
+    }
+
+    // Handle Subquestions JSON storage
+    if (question.questionBank.content?.subQuestions) {
+      const subQ = question.questionBank.content.subQuestions[currentSubIndex];
+      setAnswers(prev => {
+        let currentParsed = {};
+        try { currentParsed = JSON.parse(prev[question.id] || "{}"); } catch {}
+        return {
+          ...prev,
+          [question.id]: JSON.stringify({ ...currentParsed, [subQ]: finalAnswer })
+        };
+      });
+    } else {
+      setAnswers(prev => ({ ...prev, [question.id]: finalAnswer }));
+    }
+
+    return true;
+  };
+
+  const handleInputSubmit = () => {
+    const val = inputValue.trim();
+    if (!val) return;
+    
+    setInputValue("");
+    
+    // Always print what the user typed
+    pushHistory("answer", `> ${val}`);
+
+    if (val.startsWith("/")) {
+      handleCommand(val);
+      return;
+    }
+
+    if (!question) {
+      pushHistory("error", "No active question. Type '/next' or '/finish'.");
+      return;
+    }
+
+    const saved = saveAnswer(val);
+    if (saved) {
+      advanceQuestion();
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault();
+      handleInputSubmit();
+    }
+  };
+
+  const handleFinalSubmit = async () => {
+    if (isSubmitting) return;
     setIsSubmitting(true);
+    pushHistory("system", "--- INITIATING SECURE TRANSMISSION ---");
     try {
       await submitAssessment(answers);
+      pushHistory("system", "Payload transmitted successfully.");
       
       if (pendingAssessments.length > 0) {
         setLocalAssessments(prev => prev.map(a => a.status === "IN_PROGRESS" ? { ...a, status: "COMPLETED" } : a));
         setActiveTab(0);
+        setCurrentQuestionIndex(0);
+        setCurrentSubIndex(0);
+        setHistory([]);
+        lastPrintedRef.current = "";
         setIsSubmitting(false);
       } else {
-        router.push("/status");
+        setTimeout(() => router.push("/status"), 1500);
       }
     } catch (e) {
       console.error(e);
-      alert("Failed to submit assessment. Please try again.");
+      pushHistory("error", "Transmission failed. Retrying...");
       setIsSubmitting(false);
     }
   };
 
-  const handleStartTimed = async () => {
+  const executeStartTimed = async () => {
     setIsSubmitting(true);
     try {
       await startTimedAssessments();
       setLocalAssessments(prev => prev.map(a => a.status === "PENDING" ? { ...a, status: "IN_PROGRESS" } : a));
       setActiveTab(0);
+      setCurrentQuestionIndex(0);
+      setCurrentSubIndex(0);
+      setHistory([]);
+      lastPrintedRef.current = "";
       
       const newTime = pendingAssessments.reduce((acc, a) => acc + (a.timeRemaining || 0), 0);
       setTimeLeft(newTime > 0 ? newTime : null);
       setIsSubmitting(false);
+      setShowLaunchOverlay(false);
     } catch(e) {
       console.error(e);
       alert("Failed to start timed assessment.");
       setIsSubmitting(false);
+      setShowLaunchOverlay(false);
     }
   };
-
-
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -86,23 +375,23 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const currentAssessment = currentAssessments[activeTab];
-
   if (isTimedPhaseLocked) {
     return (
-      <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-black/90">
-        <CyberMatrixBackground />
-        <div className="z-10 bg-black/60 p-10 border border-cyan-500/50 rounded max-w-lg text-center backdrop-blur-sm shadow-[0_0_30px_rgba(0,255,255,0.1)] cyber-bracket">
-          <Terminal className="w-12 h-12 text-cyan-400 mx-auto mb-6" />
-          <h2 className="text-2xl font-mono text-cyan-300 mb-4 font-bold tracking-widest uppercase">General Phase Complete</h2>
-          <p className="text-cyan-100/70 mb-8 font-mono">
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-white bg-[#000000] font-mono">
+        {showLaunchOverlay && (
+          <AssessmentLaunchOverlay onComplete={executeStartTimed} />
+        )}
+        <div className="z-10 max-w-2xl text-center space-y-6">
+          <Terminal className="w-16 h-16 text-white mx-auto mb-6" />
+          <h2 className="text-2xl font-bold tracking-widest uppercase">General Phase Complete</h2>
+          <p className="text-gray-400 leading-relaxed">
             You have successfully submitted the general questions. You now have a timed technical assessment for your remaining departments.
             The timer will begin as soon as you proceed.
           </p>
           <button 
-            onClick={handleStartTimed}
+            onClick={() => setShowLaunchOverlay(true)}
             disabled={isSubmitting}
-            className="inline-flex items-center justify-center border border-yellow-500 bg-yellow-950/20 text-yellow-400 px-8 py-4 text-xs uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition-colors disabled:opacity-50"
+            className="inline-flex items-center justify-center border border-white bg-white text-black font-bold px-8 py-4 text-xs uppercase tracking-widest hover:bg-gray-200 transition-colors disabled:opacity-50"
           >
             {isSubmitting ? "INITIALIZING..." : "BEGIN TIMED ASSESSMENT"}
           </button>
@@ -112,157 +401,83 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col text-white overflow-hidden bg-black/90">
-      <CyberMatrixBackground />
+    <div className="relative h-screen flex flex-col bg-[#000000] text-gray-200 overflow-hidden font-mono text-sm sm:text-base">
+      
+      {/* 3D Background - Kept very subtle */}
+      <div className="fixed inset-0 z-[0] pointer-events-none opacity-40">
+        <div className="absolute inset-0 bg-[#000000]" />
+        <div className="absolute inset-0 grayscale">
+          <CyberTopologyCanvas />
+        </div>
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
       
       {/* Header */}
-      <header className="z-10 flex items-center justify-between p-4 border-b border-cyan-500/30 bg-black/80 backdrop-blur-md">
-        <div className="flex items-center gap-2">
-          <Terminal className="w-6 h-6 text-cyan-400" />
-          <h1 className="font-mono text-xl font-bold tracking-widest text-cyan-400">CYSCOM // TERMINAL</h1>
+      <header className="z-10 flex flex-col sm:flex-row items-center justify-between p-4 border-b border-gray-800 bg-black/90">
+        <div className="flex items-center gap-3">
+          <Terminal className="w-5 h-5 text-gray-400" />
+          <h1 className="font-bold tracking-widest text-gray-300">CYSCOM // TERMINAL</h1>
+          <span className="text-gray-600 hidden sm:inline">| {currentAssessment?.departmentSelection.department}</span>
         </div>
         
         {timeLeft !== null && (
-          <div className="flex items-center gap-4 bg-cyan-950/50 px-4 py-2 rounded border border-cyan-500/50">
-            <Clock className="w-5 h-5 text-cyan-300" />
-            <span className="font-mono text-xl font-bold text-cyan-100">{formatTime(timeLeft)}</span>
+          <div className="flex items-center gap-3 mt-2 sm:mt-0">
+            <Clock className="w-4 h-4 text-gray-500" />
+            <span className="font-bold text-white tracking-widest">{formatTime(timeLeft)}</span>
           </div>
         )}
       </header>
 
-      {/* Main Content */}
-      <div className="z-10 flex flex-col md:flex-row flex-1 overflow-hidden">
+      {/* Main Terminal Window */}
+      <main className="z-10 flex-1 flex flex-col overflow-hidden bg-transparent">
         
-        {/* Sidebar */}
-        <aside className="w-full md:w-64 border-b md:border-b-0 md:border-r border-cyan-500/30 bg-black/60 backdrop-blur-md p-4 flex flex-col gap-4 flex-shrink-0">
-          <div className="text-xs font-mono text-cyan-500 mb-0 md:mb-2 uppercase tracking-widest hidden md:block">Departments</div>
-          
-          <div className="flex flex-row md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-            {currentAssessments.map((assessment, idx) => (
-              <button
-                key={assessment.id}
-                onClick={() => {
-                  setActiveTab(idx);
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className={`text-left font-mono p-3 rounded border transition-all whitespace-nowrap flex-shrink-0 ${
-                  activeTab === idx 
-                    ? "bg-cyan-900/50 border-cyan-400 text-cyan-100 shadow-[0_0_15px_rgba(0,255,255,0.2)]" 
-                    : "bg-black/40 border-cyan-900/50 text-cyan-100/60 hover:border-cyan-500/50 hover:text-cyan-300"
-                }`}
-              >
-                {assessment.departmentSelection.department} {assessment.timeRemaining ? "(Timed)" : "(General)"}
-              </button>
-            ))}
+        {/* Terminal History */}
+        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
+          <div className="text-gray-600 mb-6">
+            <p>Welcome to CYSCOM Secure Assessment Terminal v2.0</p>
+            <p>Type '/help' for a list of available commands.</p>
           </div>
 
-        </aside>
-
-        {/* Assessment Area */}
-        <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-black/40 backdrop-blur-sm">
-          <div className="max-w-4xl mx-auto space-y-8">
-            <h2 className="text-2xl font-mono font-bold text-cyan-300 border-b border-cyan-500/30 pb-4">
-              {currentAssessment?.departmentSelection.department} Assessment
-            </h2>
-            
-            {currentAssessment?.questions.length === 0 ? (
-              <div className="p-8 text-center border border-cyan-500/20 bg-cyan-950/20 rounded text-cyan-100/60 font-mono">
-                No questions available for this department yet.
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {currentAssessment?.questions.map((q: any, i: number) => (
-                  <div key={q.id} className="p-6 border border-cyan-500/30 bg-black/60 rounded">
-                    <h3 className="font-mono text-cyan-400 font-bold mb-4">Question {i + 1}</h3>
-                    <p className="text-cyan-50 mb-6 whitespace-pre-wrap select-none">{q.questionBank.description || q.questionBank.content}</p>
-                    {q.questionBank.content?.options ? (
-                      <div className="space-y-3">
-                        {q.questionBank.content.options.map((opt: string, optIdx: number) => (
-                          <label key={optIdx} className={`flex items-center gap-3 p-3 border rounded cursor-pointer transition-colors ${answers[q.id] === opt ? 'border-cyan-400 bg-cyan-900/30' : 'border-cyan-900/50 bg-black/40 hover:border-cyan-700'}`}>
-                            <input 
-                              type="radio" 
-                              name={`q-${q.id}`} 
-                              value={opt}
-                              checked={answers[q.id] === opt}
-                              onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt }))}
-                              className="hidden"
-                            />
-                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${answers[q.id] === opt ? 'border-cyan-400' : 'border-cyan-700'}`}>
-                              {answers[q.id] === opt && <div className="w-2 h-2 rounded-full bg-cyan-400" />}
-                            </div>
-                            <span className="font-mono text-sm text-cyan-100">{opt}</span>
-                          </label>
-                        ))}
-                      </div>
-                    ) : q.questionBank.content?.subQuestions ? (
-                      <div className="space-y-4">
-                        {q.questionBank.content.subQuestions.map((subQ: string, subIdx: number) => {
-                          const parsed = (() => {
-                            try { return JSON.parse(answers[q.id] || "{}") } catch { return {} }
-                          })();
-                          return (
-                            <div key={subIdx} className="space-y-2">
-                              <label className="text-cyan-300 font-mono text-sm font-bold">{subQ}</label>
-                              <textarea 
-                                value={parsed[subQ] || ""}
-                                onChange={(e) => {
-                                  const newParsed = { ...parsed, [subQ]: e.target.value };
-                                  setAnswers(prev => ({ ...prev, [q.id]: JSON.stringify(newParsed) }));
-                                }}
-                                className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[100px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
-                                placeholder={`Enter your response for ${subQ}...`}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                      <div className="space-y-2">
-                        <textarea 
-                          value={answers[q.id] || ""}
-                          onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
-                          className="w-full bg-cyan-950/30 border border-cyan-500/50 rounded p-4 font-mono text-cyan-100 min-h-[250px] focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
-                          placeholder="Enter your response here..."
-                        />
-                        <p className="text-xs text-cyan-500/60 font-mono italic">
-                          * If this question asks for an upload or file, please paste your public Google Drive (or similar) link in the box above. Ensure access is set to "Anyone with the link".
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            <div className="pt-8 border-t border-cyan-500/30 flex justify-end">
-              {activeTab < currentAssessments.length - 1 ? (
-                <button 
-                  onClick={() => {
-                    setActiveTab(prev => prev + 1);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center"
-                >
-                  NEXT SECTION <Send className="w-5 h-5 ml-2" />
-                </button>
-              ) : (
-                <button 
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-lg px-8 py-4 rounded shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all font-mono tracking-wider flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? "SUBMITTING..." : (
-                    <>
-                      <Send className="w-5 h-5 mr-2" />
-                      SUBMIT ALL ASSESSMENTS
-                    </>
-                  )}
-                </button>
-              )}
+          {history.map((item) => (
+            <div key={item.id} className={`leading-relaxed ${
+              item.type === "question" ? "text-white font-bold mt-6" :
+              item.type === "system" ? "text-gray-400" :
+              item.type === "error" ? "text-red-400" :
+              "text-green-400" // answer or command
+            }`}>
+              {item.content}
             </div>
+          ))}
+          <div ref={historyEndRef} />
+        </div>
+
+        {/* Active Prompt Area */}
+        <div className="border-t border-gray-800 bg-black p-4 flex flex-col gap-2 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+          <div className="flex items-start gap-2">
+            <span className="text-green-500 mt-1 font-bold">$&gt;</span>
+            <textarea
+              ref={inputRef}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="w-full bg-transparent border-none outline-none resize-none text-white font-mono leading-relaxed min-h-[4rem] max-h-[40vh] py-1"
+              placeholder="Type your response here..."
+              disabled={isSubmitting}
+              autoFocus
+            />
           </div>
-        </main>
-      </div>
+          <div className="flex justify-between items-center text-xs text-gray-600 select-none">
+            <span>[Ctrl+Enter to Submit] or [Type /help]</span>
+            <button 
+              onClick={handleInputSubmit}
+              className="hover:text-white transition-colors"
+            >
+              EXECUTE
+            </button>
+          </div>
+        </div>
+
+      </main>
     </div>
   );
 }
