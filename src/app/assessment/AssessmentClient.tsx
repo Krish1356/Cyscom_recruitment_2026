@@ -336,7 +336,16 @@ export function AssessmentClient({ assessments }: { assessments: any[] }) {
     setIsSubmitting(true);
     pushHistory("system", "--- INITIATING SECURE TRANSMISSION ---");
     try {
-      await submitAssessment(answers);
+      const result = await submitAssessment(answers);
+      
+      if (result && !result.success) {
+        if (result.error === "deadline") {
+          pushHistory("error", "Transmission failed: Deadline passed. Assessment locked.");
+          return;
+        }
+        throw new Error(result.error || "Unknown transmission error");
+      }
+
       pushHistory("system", "Payload transmitted successfully.");
       
       if (pendingAssessments.length > 0) {

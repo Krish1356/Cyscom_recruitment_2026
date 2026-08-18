@@ -42,7 +42,7 @@ export async function submitAssessment(answers: Record<string, string>) {
     const deadline = earliestStart + (totalTimeAllocated * 1000) + 15000; // 15s grace period
 
     if (Date.now() > deadline) {
-      throw new Error("Assessment deadline has passed");
+      return { success: false, error: "deadline" };
     }
   }
 
