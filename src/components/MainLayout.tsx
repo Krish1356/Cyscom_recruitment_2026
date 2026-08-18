@@ -11,13 +11,21 @@ export function MainLayout({ children, session }: { children: ReactNode, session
       {/* Navbar */}
       <nav className="fixed top-0 w-full z-50 bg-[rgba(5,6,8,0.7)] backdrop-blur-md border-b border-white/5">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
+          <Link 
+            href="/" 
+            onClick={(e) => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+            className="flex items-center gap-3"
+          >
             <Image src="/logo.png" alt="CYSCOM Logo" width={40} height={40} className="w-10 h-10 object-contain" />
             <span className="text-[#F1F0EA] text-2xl font-orbitron tracking-wider font-bold">CYSCOM</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/#home" className="text-sm font-bold tracking-widest text-[#F1F0EA] hover:text-[#67E8F9] transition-colors relative group">
+            <Link 
+              href="/" 
+              onClick={(e) => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+              className="text-sm font-bold tracking-widest text-[#F1F0EA] hover:text-[#67E8F9] transition-colors relative group"
+            >
               HOME
               <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#67E8F9] opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
