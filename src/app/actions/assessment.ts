@@ -9,17 +9,17 @@ const submitAssessmentSchema = z.record(z.string(), z.string().max(5000));
 export async function submitAssessment(answers: Record<string, string>) {
   const parsedAnswers = submitAssessmentSchema.safeParse(answers);
   if (!parsedAnswers.success) {
-    throw new Error("Invalid answers payload");
+    return { success: false, error: "Invalid answers payload. Did you exceed the 5000 character limit?" };
   }
 
   const session = await auth();
-  if (!session?.user?.id) throw new Error("Unauthorized");
+  if (!session?.user?.id) return { success: false, error: "Unauthorized" };
 
   const profile = await prisma.applicantProfile.findUnique({
     where: { userId: session.user.id }
   });
 
-  if (!profile) throw new Error("Profile not found");
+  if (!profile) return { success: false, error: "Profile not found" };
 
   // Validate the first question belongs to an assessment owned by this applicant
   // For robustness, find all assessments currently in progress for this profile
@@ -32,7 +32,7 @@ export async function submitAssessment(answers: Record<string, string>) {
   });
 
   if (activeAssessments.length === 0) {
-    throw new Error("No active assessments to submit");
+    return { success: false, error: "No active assessments to submit. You may have already submitted." };
   }
 
   // Validate Timer

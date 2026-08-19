@@ -347,7 +347,9 @@ export function AssessmentClient({ assessments, serverTime }: { assessments: any
           pushHistory("error", "Transmission failed: Deadline passed. Assessment locked.");
           return;
         }
-        throw new Error(result.error || "Unknown transmission error");
+        pushHistory("error", `Transmission failed: ${result.error || "Unknown transmission error"}`);
+        setIsSubmitting(false);
+        return;
       }
 
       pushHistory("system", "Payload transmitted successfully.");
@@ -368,7 +370,8 @@ export function AssessmentClient({ assessments, serverTime }: { assessments: any
       if (e?.message?.includes("deadline") || String(e).includes("deadline")) {
         pushHistory("error", "Transmission failed: Deadline passed. Please contact an admin.");
       } else {
-        pushHistory("error", "Transmission failed. Next attempt in 10 seconds...");
+        const errorMsg = e?.message || String(e);
+        pushHistory("error", `Transmission failed: ${errorMsg}. Next attempt in 10 seconds...`);
         setTimeout(() => setIsSubmitting(false), 10000);
       }
     }
