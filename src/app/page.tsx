@@ -342,14 +342,14 @@ export default function Home() {
                   status="ACTIVE"
                   title="Assessments"
                   desc="Complete the technical assessments and department-specific challenges."
-                  date="August 16 - August 30, 2026"
+                  date="August 16 - August 31, 2026"
                   active
                 />
                 <EventCard
                   status="PENDING"
                   title="Portal Closes"
                   desc="The deadline to submit all challenges and finalize your application."
-                  date="August 30, 2026 • 23:59"
+                  date="August 31, 2026 • 18:00"
                 />
               </div>
             </div>
@@ -634,7 +634,7 @@ function CountdownTimer() {
 
   useEffect(() => {
     setMounted(true);
-    const targetDate = new Date("August 30, 2026 23:59:00 GMT+0530").getTime();
+    const targetDate = new Date("August 31, 2026 18:00:00 GMT+0530").getTime();
 
     const updateTimer = () => {
       const now = new Date().getTime();
