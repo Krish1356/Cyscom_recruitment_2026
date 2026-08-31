@@ -16,7 +16,11 @@ export default async function RecruitmentPage() {
   const applicants = await prisma.applicantProfile.findMany({
     include: {
       user: true,
-      departments: true,
+      departments: {
+        include: {
+          assessments: true
+        }
+      },
       stageHistory: {
         orderBy: { timestamp: "desc" },
         take: 1,

@@ -19,6 +19,7 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [pref1Filter, setPref1Filter] = useState("ALL");
   const [pref2Filter, setPref2Filter] = useState("ALL");
+  const [assessmentFilter, setAssessmentFilter] = useState("ALL");
   const [quickViewId, setQuickViewId] = useState<string | null>(null);
 
   const filtered = applicants.filter(app => {
@@ -31,7 +32,16 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
     const matchesPref1 = pref1Filter === "ALL" || pref1 === pref1Filter;
     const matchesPref2 = pref2Filter === "ALL" || pref2 === pref2Filter;
 
-    return matchesSearch && matchesPref1 && matchesPref2;
+    const hasCompletedAssessment = app.departments.some((d: any) => 
+      d.assessments && d.assessments.some((a: any) => a.status === "COMPLETED")
+    );
+    const isCompleted = hasCompletedAssessment || app.overallStatus !== "APPLIED";
+
+    const matchesAssessment = assessmentFilter === "ALL" || 
+      (assessmentFilter === "COMPLETED" && isCompleted) ||
+      (assessmentFilter === "PENDING" && !isCompleted);
+
+    return matchesSearch && matchesPref1 && matchesPref2 && matchesAssessment;
   });
 
   const handleExportCSV = () => {
@@ -133,6 +143,16 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
             <option value="EVENT_MANAGEMENT">Event Mgmt</option>
             <option value="DESIGN">Design</option>
             <option value="OUTREACH">Outreach</option>
+          </select>
+
+          <select
+            value={assessmentFilter}
+            onChange={(e) => setAssessmentFilter(e.target.value)}
+            className="bg-[#0B1014] border border-white/10 rounded-md text-sm text-[#A4A8AE] py-2 px-3 focus:outline-none focus:border-[#67E8F9]/50"
+          >
+            <option value="ALL">Assessments: All</option>
+            <option value="COMPLETED">Completed</option>
+            <option value="PENDING">Pending</option>
           </select>
         </div>
         
