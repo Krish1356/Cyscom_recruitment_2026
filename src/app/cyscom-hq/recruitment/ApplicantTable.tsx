@@ -19,7 +19,7 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [pref1Filter, setPref1Filter] = useState("ALL");
   const [pref2Filter, setPref2Filter] = useState("ALL");
-  const [assessmentFilter, setAssessmentFilter] = useState("ALL");
+  const [statusFilter, setStatusFilter] = useState("ALL");
   const [quickViewId, setQuickViewId] = useState<string | null>(null);
 
   const filtered = applicants.filter(app => {
@@ -32,16 +32,9 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
     const matchesPref1 = pref1Filter === "ALL" || pref1 === pref1Filter;
     const matchesPref2 = pref2Filter === "ALL" || pref2 === pref2Filter;
 
-    const hasCompletedAssessment = app.departments.some((d: any) => 
-      d.assessments && d.assessments.some((a: any) => a.status === "COMPLETED")
-    );
-    const isCompleted = hasCompletedAssessment || app.overallStatus !== "APPLIED";
+    const matchesStatus = statusFilter === "ALL" || app.overallStatus === statusFilter;
 
-    const matchesAssessment = assessmentFilter === "ALL" || 
-      (assessmentFilter === "COMPLETED" && isCompleted) ||
-      (assessmentFilter === "PENDING" && !isCompleted);
-
-    return matchesSearch && matchesPref1 && matchesPref2 && matchesAssessment;
+    return matchesSearch && matchesPref1 && matchesPref2 && matchesStatus;
   });
 
   const handleExportCSV = () => {
@@ -146,13 +139,19 @@ export function ApplicantTable({ applicants }: { applicants: any[] }) {
           </select>
 
           <select
-            value={assessmentFilter}
-            onChange={(e) => setAssessmentFilter(e.target.value)}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
             className="bg-[#0B1014] border border-white/10 rounded-md text-sm text-[#A4A8AE] py-2 px-3 focus:outline-none focus:border-[#67E8F9]/50"
           >
-            <option value="ALL">Assessments: All</option>
-            <option value="COMPLETED">Completed</option>
-            <option value="PENDING">Pending</option>
+            <option value="ALL">Status: All</option>
+            <option value="APPLIED">Applied</option>
+            <option value="ASSESSMENT_COMPLETED">Assessment Completed</option>
+            <option value="UNDER_REVIEW">Under Review</option>
+            <option value="SHORTLISTED">Shortlisted</option>
+            <option value="INTERVIEW_SCHEDULED">Interview Scheduled</option>
+            <option value="INTERVIEW_COMPLETED">Interview Completed</option>
+            <option value="SELECTED">Selected</option>
+            <option value="REJECTED">Rejected</option>
           </select>
         </div>
         
