@@ -1,0 +1,4821 @@
+[
+  {
+    "id": "cmsx117fk000304jo80bxxpqk",
+    "departmentSelectionId": "cmsx10xow000104jo8eyg99fx",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T09:26:11.377Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx117s4000404joyt3q9llt",
+        "assessmentId": "cmsx117fk000304jo80bxxpqk",
+        "questionBankId": "cmswzbcfx000mc6sg1p07z3os",
+        "questionBank": {
+          "id": "cmswzbcfx000mc6sg1p07z3os",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How would you approach a company you've never contacted before?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx117yd000504jockpyt8p6",
+        "assessmentId": "cmsx117fk000304jo80bxxpqk",
+        "questionBankId": "cmswzbcko000nc6sg2fdo2frh",
+        "questionBank": {
+          "id": "cmswzbcko000nc6sg2fdo2frh",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "One huge sponsor or five smaller sponsors? Explain the reason.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1184m000604jocxgg22pm",
+        "assessmentId": "cmsx117fk000304jo80bxxpqk",
+        "questionBankId": "cmswzbcpq000pc6sgbt8vbyu3",
+        "questionBank": {
+          "id": "cmswzbcpq000pc6sgbt8vbyu3",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If you could get one person/company to say “YES” to us instantly, who would it be and why?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx118av000704joizw2mnph",
+        "assessmentId": "cmsx117fk000304jo80bxxpqk",
+        "questionBankId": "cmswzbc62000jc6sgr371ufgx",
+        "questionBank": {
+          "id": "cmswzbc62000jc6sgr371ufgx",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "You’ve sent 20 messages and gotten exactly 0 replies. What’s your next move?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx118h5000804joggohskf2",
+        "assessmentId": "cmsx117fk000304jo80bxxpqk",
+        "questionBankId": "cmswzbcav000kc6sgar6tid9i",
+        "questionBank": {
+          "id": "cmswzbcav000kc6sgar6tid9i",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "CYSCOM is conducting a Web Exploitation Workshop. Write one promotional line for each:\nA. A hardcore CTF player\nB. A first-year student who knows nothing about cybersecurity\nC. Someone who thinks cybersecurity isn't for them\n\nYou cannot use the same pitch twice.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx118nd000904jo9sek3g1o",
+        "assessmentId": "cmsx117fk000304jo80bxxpqk",
+        "questionBankId": "cmswzbces000lc6sg62n4rdbx",
+        "questionBank": {
+          "id": "cmswzbces000lc6sg62n4rdbx",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "You have to get another VIT club to collaborate with CYSCOM for an event. They already have:\n- bigger Instagram following\n- more members\n- better-known events\nYou have no budget and they aren't particularly interested in cybersecurity. How would you convince them to collaborate?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx118zv000a04joh5is0n5b",
+    "departmentSelectionId": "cmsx10xow000204joqiyikum0",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T09:26:11.377Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx119ce000b04jogicmub2d",
+        "assessmentId": "cmsx118zv000a04joh5is0n5b",
+        "questionBankId": "cmswzbav70003c6sgf8prx1mn",
+        "questionBank": {
+          "id": "cmswzbav70003c6sgf8prx1mn",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Any previous work ? if so then attach it",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx119im000c04jory6rptpy",
+        "assessmentId": "cmsx118zv000a04joh5is0n5b",
+        "questionBankId": "cmswzbb1q0005c6sgsy8vndzy",
+        "questionBank": {
+          "id": "cmswzbb1q0005c6sgsy8vndzy",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Which social media platforms are you most active on?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx119ov000d04jozx08f8mw",
+        "assessmentId": "cmsx118zv000a04joh5is0n5b",
+        "questionBankId": "cmswzbase0002c6sg47jjgkl8",
+        "questionBank": {
+          "id": "cmswzbase0002c6sg47jjgkl8",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Take a look at cyscom's instagram page and tell us 2 things that we can improve to make our page better?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx119v3000e04jo9howx4xr",
+        "assessmentId": "cmsx118zv000a04joh5is0n5b",
+        "questionBankId": "cmswzbaq00001c6sgoi859a7l",
+        "questionBank": {
+          "id": "cmswzbaq00001c6sgoi859a7l",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What experience do you have with social media management and video editing?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx11a1c000f04jomnc3pz28",
+        "assessmentId": "cmsx118zv000a04joh5is0n5b",
+        "questionBankId": "cmswzbami0000c6sgnc21ikz0",
+        "questionBank": {
+          "id": "cmswzbami0000c6sgnc21ikz0",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What software or app do you edit on?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx11a7k000g04jociyh832a",
+        "assessmentId": "cmsx118zv000a04joh5is0n5b",
+        "questionBankId": "cmswzbb6l0006c6sg9odko9o5",
+        "questionBank": {
+          "id": "cmswzbb6l0006c6sg9odko9o5",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you stay updated with the latest social media trends?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx1wywx000404ien3cbu8vq",
+    "departmentSelectionId": "cmsx1wodp000204iebptuix4a",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T09:52:51.757Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx1wz9g000504iepklwwpwh",
+        "assessmentId": "cmsx1wywx000404ien3cbu8vq",
+        "questionBankId": "cmswzbc62000jc6sgr371ufgx",
+        "questionBank": {
+          "id": "cmswzbc62000jc6sgr371ufgx",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "You’ve sent 20 messages and gotten exactly 0 replies. What’s your next move?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1wzfn000604iecsg50u0p",
+        "assessmentId": "cmsx1wywx000404ien3cbu8vq",
+        "questionBankId": "cmswzbcav000kc6sgar6tid9i",
+        "questionBank": {
+          "id": "cmswzbcav000kc6sgar6tid9i",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "CYSCOM is conducting a Web Exploitation Workshop. Write one promotional line for each:\nA. A hardcore CTF player\nB. A first-year student who knows nothing about cybersecurity\nC. Someone who thinks cybersecurity isn't for them\n\nYou cannot use the same pitch twice.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1wzlv000704iewg29wu9y",
+        "assessmentId": "cmsx1wywx000404ien3cbu8vq",
+        "questionBankId": "cmswzbcol000oc6sg47npre3u",
+        "questionBank": {
+          "id": "cmswzbcol000oc6sg47npre3u",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "A company replies:\n\"Why should we sponsor a college cybersecurity club when we can spend that money on a much bigger tech event?\"\nWhat would you reply?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1wzs3000804ien6cqvg5w",
+        "assessmentId": "cmsx1wywx000404ien3cbu8vq",
+        "questionBankId": "cmswzbcpq000pc6sgbt8vbyu3",
+        "questionBank": {
+          "id": "cmswzbcpq000pc6sgbt8vbyu3",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If you could get one person/company to say “YES” to us instantly, who would it be and why?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1wzyc000904iev3fb259b",
+        "assessmentId": "cmsx1wywx000404ien3cbu8vq",
+        "questionBankId": "cmswzbcko000nc6sg2fdo2frh",
+        "questionBank": {
+          "id": "cmswzbcko000nc6sg2fdo2frh",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "One huge sponsor or five smaller sponsors? Explain the reason.",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx1x0ar000a04ie99d7o0hk",
+    "departmentSelectionId": "cmsx1wodp000304ie0sde7kmp",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T09:52:51.757Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx1x0n6000b04iegm6xhy0i",
+        "assessmentId": "cmsx1x0ar000a04ie99d7o0hk",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x0te000c04iebj6n6f3y",
+        "assessmentId": "cmsx1x0ar000a04ie99d7o0hk",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x0zm000d04iehdbekgwr",
+        "assessmentId": "cmsx1x0ar000a04ie99d7o0hk",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x15u000e04ie6j5dvq81",
+        "assessmentId": "cmsx1x0ar000a04ie99d7o0hk",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x1c2000f04iea7lxmdme",
+        "assessmentId": "cmsx1x0ar000a04ie99d7o0hk",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x1ib000g04iekn8tly34",
+        "assessmentId": "cmsx1x0ar000a04ie99d7o0hk",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx1x1ur000h04ieh1odlmdi",
+    "departmentSelectionId": "cmsx1wodp000304ie0sde7kmp",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-17T09:55:08.487Z",
+    "completedAt": "2026-08-17T09:55:38.876Z",
+    "timeRemaining": 30,
+    "questions": [
+      {
+        "id": "cmsx1x277000i04ieuxd2kgta",
+        "assessmentId": "cmsx1x1ur000h04ieh1odlmdi",
+        "questionBankId": "cmswzbd320011c6sgipuvlimr",
+        "questionBank": {
+          "id": "cmswzbd320011c6sgipuvlimr",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You find a bug that exposes another user's data. What's your first action?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Report it responsibly to the team.",
+            "options": [
+              "Share it with friends.",
+              "Report it responsibly to the team.",
+              "Ignore it.",
+              "Post it on social media."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x2df000j04iexd2pxfy8",
+        "assessmentId": "cmsx1x1ur000h04ieh1odlmdi",
+        "questionBankId": "cmswzbczp000yc6sg8floy1oh",
+        "questionBank": {
+          "id": "cmswzbczp000yc6sg8floy1oh",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You accidentally commit an API key to GitHub. What should you do FIRST?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Change (rotate) the API key immediately.",
+            "options": [
+              "Delete the repository.",
+              "Change (rotate) the API key immediately.",
+              "Rename the file.",
+              "Ignore it if the repository is private."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x2jn000k04ierfxbhu2p",
+        "assessmentId": "cmsx1x1ur000h04ieh1odlmdi",
+        "questionBankId": "cmswzbcwd000vc6sg9jqstmfv",
+        "questionBank": {
+          "id": "cmswzbcwd000vc6sg9jqstmfv",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which protocol should be used to securely transmit login credentials?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "HTTPS",
+            "options": [
+              "HTTP",
+              "HTTPS",
+              "FTP",
+              "SMTP"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x2pu000l04ieh1eo0c2n",
+        "assessmentId": "cmsx1x1ur000h04ieh1odlmdi",
+        "questionBankId": "cmswzbd1y0010c6sgqceydu7h",
+        "questionBank": {
+          "id": "cmswzbd1y0010c6sgqceydu7h",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Your website works perfectly, but a dependency has a known critical security vulnerability. What should you prioritize?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Update or patch the dependency after testing.",
+            "options": [
+              "Ignore it until users complain.",
+              "Update or patch the dependency after testing.",
+              "Redesign the UI first.",
+              "Hide the warning."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx1x2w2000m04ie6p4l3nea",
+        "assessmentId": "cmsx1x1ur000h04ieh1odlmdi",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx6edkd000004l9cw3oyz6o",
+    "departmentSelectionId": "cmswxpjug000104l8pe79p8le",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T11:55:46.701Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx6edwk000104l9pam438pg",
+        "assessmentId": "cmsx6edkd000004l9cw3oyz6o",
+        "questionBankId": "cmsx1mjui0001pwsgnaxrcvyz",
+        "questionBank": {
+          "id": "cmsx1mjui0001pwsgnaxrcvyz",
+          "department": "TECHNICAL",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6ee30000204l99835n78z",
+        "assessmentId": "cmsx6edkd000004l9cw3oyz6o",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6ee8z000304l9lpnwjh6x",
+        "assessmentId": "cmsx6edkd000004l9cw3oyz6o",
+        "questionBankId": "cmswzbd8v0016c6sgaehobmpr",
+        "questionBank": {
+          "id": "cmswzbd8v0016c6sgaehobmpr",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If Google didn't exist for a day, how would you solve technical problems?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eeex000404l9y66fk7i7",
+        "assessmentId": "cmsx6edkd000004l9cw3oyz6o",
+        "questionBankId": "cmswzbda10017c6sgdgp1fb8e",
+        "questionBank": {
+          "id": "cmswzbda10017c6sgdgp1fb8e",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What motivates you more: winning competitions or learning new things?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eekv000504l9i2deyq51",
+        "assessmentId": "cmsx6edkd000004l9cw3oyz6o",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eeqt000604l9ocdisajz",
+        "assessmentId": "cmsx6edkd000004l9cw3oyz6o",
+        "questionBankId": "cmswzbd6k0014c6sgig9rtkyz",
+        "questionBank": {
+          "id": "cmswzbd6k0014c6sgig9rtkyz",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you approach learning something completely new?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx6eged000d04l9an2znnpt",
+    "departmentSelectionId": "cmswxpjug000204l8nopor1gs",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T11:55:46.701Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx6egq9000e04l9un5jkvov",
+        "assessmentId": "cmsx6eged000d04l9an2znnpt",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6egw8000f04l957evlq5y",
+        "assessmentId": "cmsx6eged000d04l9an2znnpt",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eh26000g04l9ox8vp22p",
+        "assessmentId": "cmsx6eged000d04l9an2znnpt",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eh84000h04l9se7oysn2",
+        "assessmentId": "cmsx6eged000d04l9an2znnpt",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6ehe1000i04l9e76mx56p",
+        "assessmentId": "cmsx6eged000d04l9an2znnpt",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6ehjz000j04l9fus1bfxw",
+        "assessmentId": "cmsx6eged000d04l9an2znnpt",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx6ef2s000704l9xg4k31dy",
+    "departmentSelectionId": "cmswxpjug000104l8pe79p8le",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-17T11:55:51.265Z",
+    "completedAt": "2026-08-17T11:57:16.151Z",
+    "timeRemaining": 60,
+    "questions": []
+  },
+  {
+    "id": "cmsx6ehvt000k04l9k0rczkul",
+    "departmentSelectionId": "cmswxpjug000204l8nopor1gs",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-17T11:55:51.265Z",
+    "completedAt": "2026-08-17T11:57:16.151Z",
+    "timeRemaining": 20,
+    "questions": [
+      {
+        "id": "cmsx6eidj000l04l9ydhsxhue",
+        "assessmentId": "cmsx6ehvt000k04l9k0rczkul",
+        "questionBankId": "cmswzbd320011c6sgipuvlimr",
+        "questionBank": {
+          "id": "cmswzbd320011c6sgipuvlimr",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You find a bug that exposes another user's data. What's your first action?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Report it responsibly to the team.",
+            "options": [
+              "Share it with friends.",
+              "Report it responsibly to the team.",
+              "Ignore it.",
+              "Post it on social media."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eijh000m04l9tavjhvvk",
+        "assessmentId": "cmsx6ehvt000k04l9k0rczkul",
+        "questionBankId": "cmswzbcwd000vc6sg9jqstmfv",
+        "questionBank": {
+          "id": "cmswzbcwd000vc6sg9jqstmfv",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which protocol should be used to securely transmit login credentials?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "HTTPS",
+            "options": [
+              "HTTP",
+              "HTTPS",
+              "FTP",
+              "SMTP"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eipe000n04l9dexhsevg",
+        "assessmentId": "cmsx6ehvt000k04l9k0rczkul",
+        "questionBankId": "cmswzbd1y0010c6sgqceydu7h",
+        "questionBank": {
+          "id": "cmswzbd1y0010c6sgqceydu7h",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Your website works perfectly, but a dependency has a known critical security vulnerability. What should you prioritize?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Update or patch the dependency after testing.",
+            "options": [
+              "Ignore it until users complain.",
+              "Update or patch the dependency after testing.",
+              "Redesign the UI first.",
+              "Hide the warning."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6eivc000o04l98u9rbvjt",
+        "assessmentId": "cmsx6ehvt000k04l9k0rczkul",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx6ej1b000p04l99sozay4f",
+        "assessmentId": "cmsx6ehvt000k04l9k0rczkul",
+        "questionBankId": "cmswzbcyl000xc6sg75jaso4s",
+        "questionBank": {
+          "id": "cmswzbcyl000xc6sg75jaso4s",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which response leaks the least information?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Invalid username or password.",
+            "options": [
+              "Password is incorrect.",
+              "Username doesn't exist.",
+              "Invalid username or password.",
+              "Try another username."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyjnnic000304jit4kcwbq5",
+    "departmentSelectionId": "cmsyjnap3000104jiew6amo0b",
+    "status": "IN_PROGRESS",
+    "startedAt": null,
+    "completedAt": null,
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyjnnun000404jivtqg0hat",
+        "assessmentId": "cmsyjnnic000304jit4kcwbq5",
+        "questionBankId": "cmswzbbv4000ec6sgasc18ssu",
+        "questionBank": {
+          "id": "cmswzbbv4000ec6sgasc18ssu",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Do you have any past experience in designing?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjno0r000504ji76sqgwlq",
+        "assessmentId": "cmsyjnnic000304jit4kcwbq5",
+        "questionBankId": "cmswzbbw8000fc6sguvcf5s9x",
+        "questionBank": {
+          "id": "cmswzbbw8000fc6sguvcf5s9x",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If CYSCOM had a mascot, what would it be and why?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjno6r000604ji8mbtbd67",
+        "assessmentId": "cmsyjnnic000304jit4kcwbq5",
+        "questionBankId": "cmswzbc4y000ic6sgsn6636s3",
+        "questionBank": {
+          "id": "cmswzbc4y000ic6sgsn6636s3",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Can you can upload design or portfolio or something like that? attach link",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjnocr000704jiez9dcz3z",
+        "assessmentId": "cmsyjnnic000304jit4kcwbq5",
+        "questionBankId": "cmswzbc15000hc6sgk4h2jviy",
+        "questionBank": {
+          "id": "cmswzbc15000hc6sgk4h2jviy",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever gotten feedback you disagreed with? How did you handle that?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjnoir000804ji3172qiep",
+        "assessmentId": "cmsyjnnic000304jit4kcwbq5",
+        "questionBankId": "cmswzbbrb000dc6sgghi7n4zf",
+        "questionBank": {
+          "id": "cmswzbbrb000dc6sgghi7n4zf",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What Software application do you use for designing?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyjnoup000904jirl0eemp2",
+    "departmentSelectionId": "cmsyjnap3000204jiola2wfkr",
+    "status": "IN_PROGRESS",
+    "startedAt": null,
+    "completedAt": null,
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyjnp6o000a04jib2dyn3g5",
+        "assessmentId": "cmsyjnoup000904jirl0eemp2",
+        "questionBankId": "cmswzbb1q0005c6sgsy8vndzy",
+        "questionBank": {
+          "id": "cmswzbb1q0005c6sgsy8vndzy",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Which social media platforms are you most active on?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjnpco000b04jiesao20a3",
+        "assessmentId": "cmsyjnoup000904jirl0eemp2",
+        "questionBankId": "cmswzbaq00001c6sgoi859a7l",
+        "questionBank": {
+          "id": "cmswzbaq00001c6sgoi859a7l",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What experience do you have with social media management and video editing?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjnpin000c04jirvtbav5o",
+        "assessmentId": "cmsyjnoup000904jirl0eemp2",
+        "questionBankId": "cmswzbb6l0006c6sg9odko9o5",
+        "questionBank": {
+          "id": "cmswzbb6l0006c6sg9odko9o5",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you stay updated with the latest social media trends?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjnpon000d04ji6304kh7p",
+        "assessmentId": "cmsyjnoup000904jirl0eemp2",
+        "questionBankId": "cmswzbami0000c6sgnc21ikz0",
+        "questionBank": {
+          "id": "cmswzbami0000c6sgnc21ikz0",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What software or app do you edit on?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjnpun000e04ji6py2eu06",
+        "assessmentId": "cmsyjnoup000904jirl0eemp2",
+        "questionBankId": "cmswzbaym0004c6sg0us1gddr",
+        "questionBank": {
+          "id": "cmswzbaym0004c6sg0us1gddr",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How good are you in making short form content scripts for marketing or promoting an event?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyjz0u4000004lb9osuob9x",
+    "departmentSelectionId": "cmsyjyor1000104ldl6ygl9jp",
+    "status": "IN_PROGRESS",
+    "startedAt": null,
+    "completedAt": null,
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyjz16o000104lb54lvyoyn",
+        "assessmentId": "cmsyjz0u4000004lb9osuob9x",
+        "questionBankId": "cmsx1mjui0001pwsgnaxrcvyz",
+        "questionBank": {
+          "id": "cmsx1mjui0001pwsgnaxrcvyz",
+          "department": "TECHNICAL",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz1cw000204lbwkphrb54",
+        "assessmentId": "cmsyjz0u4000004lb9osuob9x",
+        "questionBankId": "cmswzbd8v0016c6sgaehobmpr",
+        "questionBank": {
+          "id": "cmswzbd8v0016c6sgaehobmpr",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If Google didn't exist for a day, how would you solve technical problems?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz1j4000304lbi35cpq9v",
+        "assessmentId": "cmsyjz0u4000004lb9osuob9x",
+        "questionBankId": "cmswzbd7p0015c6sg6b989gcs",
+        "questionBank": {
+          "id": "cmswzbd7p0015c6sg6b989gcs",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz1pc000404lb7y5nl8k2",
+        "assessmentId": "cmsyjz0u4000004lb9osuob9x",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz1vk000504lbm7u4wnk2",
+        "assessmentId": "cmsyjz0u4000004lb9osuob9x",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz21s000604lbhpf6turh",
+        "assessmentId": "cmsyjz0u4000004lb9osuob9x",
+        "questionBankId": "cmswzbd6k0014c6sgig9rtkyz",
+        "questionBank": {
+          "id": "cmswzbd6k0014c6sgig9rtkyz",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you approach learning something completely new?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyjz2e8000704lbxjg64r2u",
+    "departmentSelectionId": "cmsyjyor1000104ldl6ygl9jp",
+    "status": "PENDING",
+    "startedAt": null,
+    "completedAt": null,
+    "timeRemaining": 60,
+    "questions": [
+      {
+        "id": "cmsyjz2qo000804lb5edvf9cy",
+        "assessmentId": "cmsyjz2e8000704lbxjg64r2u",
+        "questionBankId": "cmsxahwsb0004sosg0crtemds",
+        "questionBank": {
+          "id": "cmsxahwsb0004sosg0crtemds",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Check whether the statement itself is a clue or misdirection.",
+            "options": [
+              "Ignore password.txt completely.",
+              "Check whether the statement itself is a clue or misdirection.",
+              "Delete password.txt.",
+              "Search online for the password."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz2ww000904lbfcrx4kcj",
+        "assessmentId": "cmsyjz2e8000704lbxjg64r2u",
+        "questionBankId": "cmsxahwr80003sosgz1fv6gok",
+        "questionBank": {
+          "id": "cmsxahwr80003sosgz1fv6gok",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Page source",
+            "options": [
+              "HTTP headers",
+              "Page source",
+              "Cookies",
+              "Network requests"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz334000a04lbn7du3g90",
+        "assessmentId": "cmsyjz2e8000704lbxjg64r2u",
+        "questionBankId": "cmsxahwq30002sosglwi8nwc0",
+        "questionBank": {
+          "id": "cmsxahwq30002sosglwi8nwc0",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge behaves differently than expected. Your first assumption is:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "I'm missing some information",
+            "options": [
+              "The challenge is broken",
+              "I'm missing some information",
+              "The organizers made a mistake",
+              "My laptop is faulty"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz39b000b04lb7ygsnq0h",
+        "assessmentId": "cmsyjz2e8000704lbxjg64r2u",
+        "questionBankId": "cmsxahwnq0000sosgmk27ya07",
+        "questionBank": {
+          "id": "cmsxahwnq0000sosgmk27ya07",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Understanding the challenge statement",
+            "options": [
+              "Trying random tools immediately",
+              "Understanding the challenge statement",
+              "Searching for write-ups before attempting",
+              "Writing your own script from scratch"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz3fj000c04lb0wxy6dxs",
+        "assessmentId": "cmsyjz2e8000704lbxjg64r2u",
+        "questionBankId": "cmsxahwoy0001sosg9spx5rdq",
+        "questionBank": {
+          "id": "cmsxahwoy0001sosg9spx5rdq",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge gives almost no information. Your first instinct is to:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Gather as much information as possible",
+            "options": [
+              "Gather as much information as possible",
+              "Guess the answer",
+              "Search the exact title online",
+              "Skip immediately"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyjz3rx000d04lbyvbaukyn",
+    "departmentSelectionId": "cmsyjyor1000204ldsj04ra9d",
+    "status": "IN_PROGRESS",
+    "startedAt": null,
+    "completedAt": null,
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyjz44d000e04lbemi0dbi6",
+        "assessmentId": "cmsyjz3rx000d04lbyvbaukyn",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz4al000f04lbpmn2jwaf",
+        "assessmentId": "cmsyjz3rx000d04lbyvbaukyn",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz4gu000g04lbgiil6ql0",
+        "assessmentId": "cmsyjz3rx000d04lbyvbaukyn",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz4n2000h04lbp115uz0m",
+        "assessmentId": "cmsyjz3rx000d04lbyvbaukyn",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz4ta000i04lb4093z2dx",
+        "assessmentId": "cmsyjz3rx000d04lbyvbaukyn",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz4zi000j04lbh0piidp0",
+        "assessmentId": "cmsyjz3rx000d04lbyvbaukyn",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyjz5bx000k04lbcozgg9q6",
+    "departmentSelectionId": "cmsyjyor1000204ldsj04ra9d",
+    "status": "PENDING",
+    "startedAt": null,
+    "completedAt": null,
+    "timeRemaining": 20,
+    "questions": [
+      {
+        "id": "cmsyjz5uh000l04lb30h4mrab",
+        "assessmentId": "cmsyjz5bx000k04lbcozgg9q6",
+        "questionBankId": "cmswzbcwd000vc6sg9jqstmfv",
+        "questionBank": {
+          "id": "cmswzbcwd000vc6sg9jqstmfv",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which protocol should be used to securely transmit login credentials?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "HTTPS",
+            "options": [
+              "HTTP",
+              "HTTPS",
+              "FTP",
+              "SMTP"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz60p000m04lbeyjbue33",
+        "assessmentId": "cmsyjz5bx000k04lbcozgg9q6",
+        "questionBankId": "cmswzbd320011c6sgipuvlimr",
+        "questionBank": {
+          "id": "cmswzbd320011c6sgipuvlimr",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You find a bug that exposes another user's data. What's your first action?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Report it responsibly to the team.",
+            "options": [
+              "Share it with friends.",
+              "Report it responsibly to the team.",
+              "Ignore it.",
+              "Post it on social media."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz66x000n04lbqsg1qi1u",
+        "assessmentId": "cmsyjz5bx000k04lbcozgg9q6",
+        "questionBankId": "cmswzbd1y0010c6sgqceydu7h",
+        "questionBank": {
+          "id": "cmswzbd1y0010c6sgqceydu7h",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Your website works perfectly, but a dependency has a known critical security vulnerability. What should you prioritize?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Update or patch the dependency after testing.",
+            "options": [
+              "Ignore it until users complain.",
+              "Update or patch the dependency after testing.",
+              "Redesign the UI first.",
+              "Hide the warning."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz6d5000o04lbgiswif64",
+        "assessmentId": "cmsyjz5bx000k04lbcozgg9q6",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyjz6jc000p04lbjzgfyau4",
+        "assessmentId": "cmsyjz5bx000k04lbcozgg9q6",
+        "questionBankId": "cmswzbcyl000xc6sg75jaso4s",
+        "questionBank": {
+          "id": "cmswzbcyl000xc6sg75jaso4s",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which response leaks the least information?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Invalid username or password.",
+            "options": [
+              "Password is incorrect.",
+              "Username doesn't exist.",
+              "Invalid username or password.",
+              "Try another username."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyizv9c000304jlp88r3i6b",
+    "departmentSelectionId": "cmsyizk1i000104jlaun31ugb",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T11:37:06.175Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyizvlg000404jlv1lse05o",
+        "assessmentId": "cmsyizv9c000304jlp88r3i6b",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizvrh000504jlo2cxxveg",
+        "assessmentId": "cmsyizv9c000304jlp88r3i6b",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizvxi000604jl2462wrn1",
+        "assessmentId": "cmsyizv9c000304jlp88r3i6b",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizw3j000704jlxfyh4i4v",
+        "assessmentId": "cmsyizv9c000304jlp88r3i6b",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizw9k000804jl65qss4lz",
+        "assessmentId": "cmsyizv9c000304jlp88r3i6b",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizwfn000904jlfusxlx3z",
+        "assessmentId": "cmsyizv9c000304jlp88r3i6b",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyizy3y000g04jlccethwyf",
+    "departmentSelectionId": "cmsyizk1i000204jlp5xyde4y",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T11:37:06.175Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyizyfz000h04jl99fk3vd2",
+        "assessmentId": "cmsyizy3y000g04jlccethwyf",
+        "questionBankId": "cmswzbami0000c6sgnc21ikz0",
+        "questionBank": {
+          "id": "cmswzbami0000c6sgnc21ikz0",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What software or app do you edit on?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizym0000i04jlxsa6g7wz",
+        "assessmentId": "cmsyizy3y000g04jlccethwyf",
+        "questionBankId": "cmswzbav70003c6sgf8prx1mn",
+        "questionBank": {
+          "id": "cmswzbav70003c6sgf8prx1mn",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Any previous work ? if so then attach it",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizys1000j04jlm0yg5pe6",
+        "assessmentId": "cmsyizy3y000g04jlccethwyf",
+        "questionBankId": "cmswzbaq00001c6sgoi859a7l",
+        "questionBank": {
+          "id": "cmswzbaq00001c6sgoi859a7l",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What experience do you have with social media management and video editing?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizyy2000k04jl1032nfz4",
+        "assessmentId": "cmsyizy3y000g04jlccethwyf",
+        "questionBankId": "cmswzbase0002c6sg47jjgkl8",
+        "questionBank": {
+          "id": "cmswzbase0002c6sg47jjgkl8",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Take a look at cyscom's instagram page and tell us 2 things that we can improve to make our page better?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizz43000l04jluctwmoe2",
+        "assessmentId": "cmsyizy3y000g04jlccethwyf",
+        "questionBankId": "cmswzbaym0004c6sg0us1gddr",
+        "questionBank": {
+          "id": "cmswzbaym0004c6sg0us1gddr",
+          "department": "SOCIAL_MEDIA",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How good are you in making short form content scripts for marketing or promoting an event?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyizwrp000a04jlhxyxzdp6",
+    "departmentSelectionId": "cmsyizk1i000104jlaun31ugb",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-18T11:37:11.746Z",
+    "completedAt": "2026-08-18T11:37:33.814Z",
+    "timeRemaining": 20,
+    "questions": [
+      {
+        "id": "cmsyizx3q000b04jlp0w8l7ab",
+        "assessmentId": "cmsyizwrp000a04jlhxyxzdp6",
+        "questionBankId": "cmswzbcwd000vc6sg9jqstmfv",
+        "questionBank": {
+          "id": "cmswzbcwd000vc6sg9jqstmfv",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which protocol should be used to securely transmit login credentials?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "HTTPS",
+            "options": [
+              "HTTP",
+              "HTTPS",
+              "FTP",
+              "SMTP"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizx9v000c04jlsv8xv5ck",
+        "assessmentId": "cmsyizwrp000a04jlhxyxzdp6",
+        "questionBankId": "cmswzbd1y0010c6sgqceydu7h",
+        "questionBank": {
+          "id": "cmswzbd1y0010c6sgqceydu7h",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Your website works perfectly, but a dependency has a known critical security vulnerability. What should you prioritize?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Update or patch the dependency after testing.",
+            "options": [
+              "Ignore it until users complain.",
+              "Update or patch the dependency after testing.",
+              "Redesign the UI first.",
+              "Hide the warning."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizxfv000d04jl09561yz3",
+        "assessmentId": "cmsyizwrp000a04jlhxyxzdp6",
+        "questionBankId": "cmswzbczp000yc6sg8floy1oh",
+        "questionBank": {
+          "id": "cmswzbczp000yc6sg8floy1oh",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You accidentally commit an API key to GitHub. What should you do FIRST?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Change (rotate) the API key immediately.",
+            "options": [
+              "Delete the repository.",
+              "Change (rotate) the API key immediately.",
+              "Rename the file.",
+              "Ignore it if the repository is private."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizxlw000e04jl78mrcf67",
+        "assessmentId": "cmsyizwrp000a04jlhxyxzdp6",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyizxrx000f04jll26fff5l",
+        "assessmentId": "cmsyizwrp000a04jlhxyxzdp6",
+        "questionBankId": "cmswzbcyl000xc6sg75jaso4s",
+        "questionBank": {
+          "id": "cmswzbcyl000xc6sg75jaso4s",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which response leaks the least information?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Invalid username or password.",
+            "options": [
+              "Password is incorrect.",
+              "Username doesn't exist.",
+              "Invalid username or password.",
+              "Try another username."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsxg5mfc000304ljrmt622ts",
+    "departmentSelectionId": "cmsxg590a000104ljzuwcur0f",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T16:34:40.872Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsxg5mrq000404ljh8rs5xbh",
+        "assessmentId": "cmsxg5mfc000304ljrmt622ts",
+        "questionBankId": "cmsx1mjui0001pwsgnaxrcvyz",
+        "questionBank": {
+          "id": "cmsx1mjui0001pwsgnaxrcvyz",
+          "department": "TECHNICAL",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5mxs000504lj1lj8dj30",
+        "assessmentId": "cmsxg5mfc000304ljrmt622ts",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5n3r000604ljkisc73oi",
+        "assessmentId": "cmsxg5mfc000304ljrmt622ts",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5n9q000704lj1d4d8u0g",
+        "assessmentId": "cmsxg5mfc000304ljrmt622ts",
+        "questionBankId": "cmswzbd6k0014c6sgig9rtkyz",
+        "questionBank": {
+          "id": "cmswzbd6k0014c6sgig9rtkyz",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you approach learning something completely new?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5nfo000804ljtqjqi7bz",
+        "assessmentId": "cmsxg5mfc000304ljrmt622ts",
+        "questionBankId": "cmswzbd7p0015c6sg6b989gcs",
+        "questionBank": {
+          "id": "cmswzbd7p0015c6sg6b989gcs",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5nln000904ljqae15e6s",
+        "assessmentId": "cmsxg5mfc000304ljrmt622ts",
+        "questionBankId": "cmswzbda10017c6sgdgp1fb8e",
+        "questionBank": {
+          "id": "cmswzbda10017c6sgdgp1fb8e",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What motivates you more: winning competitions or learning new things?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsxg5p97000g04ljzxwb49jg",
+    "departmentSelectionId": "cmsxg590a000204lj02sif6ox",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T16:34:40.872Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsxg5pl4000h04ljwl16ksgd",
+        "assessmentId": "cmsxg5p97000g04ljzxwb49jg",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5pr2000i04ljwth41gny",
+        "assessmentId": "cmsxg5p97000g04ljzxwb49jg",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5px1000j04ljghpgitqe",
+        "assessmentId": "cmsxg5p97000g04ljzxwb49jg",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5q2z000k04ljvv1l3f82",
+        "assessmentId": "cmsxg5p97000g04ljzxwb49jg",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5q94000l04ljbqgieqvr",
+        "assessmentId": "cmsxg5p97000g04ljzxwb49jg",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5qf4000m04ljkt1ozmgt",
+        "assessmentId": "cmsxg5p97000g04ljzxwb49jg",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsxg5nxk000a04ljg49jin1n",
+    "departmentSelectionId": "cmsxg590a000104ljzuwcur0f",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-17T16:35:19.782Z",
+    "completedAt": "2026-08-17T16:36:49.240Z",
+    "timeRemaining": 60,
+    "questions": [
+      {
+        "id": "cmsxg5o9h000b04lj80xrffdx",
+        "assessmentId": "cmsxg5nxk000a04ljg49jin1n",
+        "questionBankId": "cmsxahwsb0004sosg0crtemds",
+        "questionBank": {
+          "id": "cmsxahwsb0004sosg0crtemds",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Check whether the statement itself is a clue or misdirection.",
+            "options": [
+              "Ignore password.txt completely.",
+              "Check whether the statement itself is a clue or misdirection.",
+              "Delete password.txt.",
+              "Search online for the password."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5ofg000c04ljghnybd07",
+        "assessmentId": "cmsxg5nxk000a04ljg49jin1n",
+        "questionBankId": "cmsxahwr80003sosgz1fv6gok",
+        "questionBank": {
+          "id": "cmsxahwr80003sosgz1fv6gok",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Page source",
+            "options": [
+              "HTTP headers",
+              "Page source",
+              "Cookies",
+              "Network requests"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5ole000d04ljpjdxpco2",
+        "assessmentId": "cmsxg5nxk000a04ljg49jin1n",
+        "questionBankId": "cmsxahwq30002sosglwi8nwc0",
+        "questionBank": {
+          "id": "cmsxahwq30002sosglwi8nwc0",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge behaves differently than expected. Your first assumption is:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "I'm missing some information",
+            "options": [
+              "The challenge is broken",
+              "I'm missing some information",
+              "The organizers made a mistake",
+              "My laptop is faulty"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5ord000e04lj8t39kd8v",
+        "assessmentId": "cmsxg5nxk000a04ljg49jin1n",
+        "questionBankId": "cmsxahwoy0001sosg9spx5rdq",
+        "questionBank": {
+          "id": "cmsxahwoy0001sosg9spx5rdq",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge gives almost no information. Your first instinct is to:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Gather as much information as possible",
+            "options": [
+              "Gather as much information as possible",
+              "Guess the answer",
+              "Search the exact title online",
+              "Skip immediately"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5oxb000f04lj4kqyvb7p",
+        "assessmentId": "cmsxg5nxk000a04ljg49jin1n",
+        "questionBankId": "cmsxahwnq0000sosgmk27ya07",
+        "questionBank": {
+          "id": "cmsxahwnq0000sosgmk27ya07",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Understanding the challenge statement",
+            "options": [
+              "Trying random tools immediately",
+              "Understanding the challenge statement",
+              "Searching for write-ups before attempting",
+              "Writing your own script from scratch"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsxg5qr1000n04lja17bt3be",
+    "departmentSelectionId": "cmsxg590a000204lj02sif6ox",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-17T16:35:19.782Z",
+    "completedAt": "2026-08-17T16:36:49.240Z",
+    "timeRemaining": 20,
+    "questions": [
+      {
+        "id": "cmsxg5r93000o04ljnmy68575",
+        "assessmentId": "cmsxg5qr1000n04lja17bt3be",
+        "questionBankId": "cmswzbd1y0010c6sgqceydu7h",
+        "questionBank": {
+          "id": "cmswzbd1y0010c6sgqceydu7h",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Your website works perfectly, but a dependency has a known critical security vulnerability. What should you prioritize?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Update or patch the dependency after testing.",
+            "options": [
+              "Ignore it until users complain.",
+              "Update or patch the dependency after testing.",
+              "Redesign the UI first.",
+              "Hide the warning."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5rf2000p04ljddia72jj",
+        "assessmentId": "cmsxg5qr1000n04lja17bt3be",
+        "questionBankId": "cmswzbd0u000zc6sgl9tcywgx",
+        "questionBank": {
+          "id": "cmswzbd0u000zc6sgl9tcywgx",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "A login page allows unlimited password attempts. What vulnerability does this create?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Brute-force attack",
+            "options": [
+              "XSS",
+              "Brute-force attack",
+              "Clickjacking",
+              "DNS Spoofing"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5rl0000q04ljmptbo4xc",
+        "assessmentId": "cmsxg5qr1000n04lja17bt3be",
+        "questionBankId": "cmswzbcwd000vc6sg9jqstmfv",
+        "questionBank": {
+          "id": "cmswzbcwd000vc6sg9jqstmfv",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which protocol should be used to securely transmit login credentials?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "HTTPS",
+            "options": [
+              "HTTP",
+              "HTTPS",
+              "FTP",
+              "SMTP"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5rqy000r04ljuokatjov",
+        "assessmentId": "cmsxg5qr1000n04lja17bt3be",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsxg5rww000s04ljbqim52pp",
+        "assessmentId": "cmsxg5qr1000n04lja17bt3be",
+        "questionBankId": "cmswzbczp000yc6sg8floy1oh",
+        "questionBank": {
+          "id": "cmswzbczp000yc6sg8floy1oh",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You accidentally commit an API key to GitHub. What should you do FIRST?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Change (rotate) the API key immediately.",
+            "options": [
+              "Delete the repository.",
+              "Change (rotate) the API key immediately.",
+              "Rename the file.",
+              "Ignore it if the repository is private."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsygb7nl000304kyfxxqbzi7",
+    "departmentSelectionId": "cmsygazeo000104ky1xvman1u",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T09:20:56.489Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsygb80x000404kyy007m1cw",
+        "assessmentId": "cmsygb7nl000304kyfxxqbzi7",
+        "questionBankId": "cmsx1mjui0001pwsgnaxrcvyz",
+        "questionBank": {
+          "id": "cmsx1mjui0001pwsgnaxrcvyz",
+          "department": "TECHNICAL",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygb87a000504ky6n6x4wth",
+        "assessmentId": "cmsygb7nl000304kyfxxqbzi7",
+        "questionBankId": "cmswzbd6k0014c6sgig9rtkyz",
+        "questionBank": {
+          "id": "cmswzbd6k0014c6sgig9rtkyz",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you approach learning something completely new?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygb8dl000604kydjsml2aj",
+        "assessmentId": "cmsygb7nl000304kyfxxqbzi7",
+        "questionBankId": "cmswzbda10017c6sgdgp1fb8e",
+        "questionBank": {
+          "id": "cmswzbda10017c6sgdgp1fb8e",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What motivates you more: winning competitions or learning new things?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygb8jt000704kyiho3k78x",
+        "assessmentId": "cmsygb7nl000304kyfxxqbzi7",
+        "questionBankId": "cmswzbd7p0015c6sg6b989gcs",
+        "questionBank": {
+          "id": "cmswzbd7p0015c6sg6b989gcs",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygb8q1000804kyr7eud8yy",
+        "assessmentId": "cmsygb7nl000304kyfxxqbzi7",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygb8wa000904kycxmb79gt",
+        "assessmentId": "cmsygb7nl000304kyfxxqbzi7",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsygbamq000g04kynmi1y3z4",
+    "departmentSelectionId": "cmsygazeo000204kyst6dt7ff",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T09:20:56.489Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsygbaz6000h04kywxblc1ob",
+        "assessmentId": "cmsygbamq000g04kynmi1y3z4",
+        "questionBankId": "cmswzbbrb000dc6sgghi7n4zf",
+        "questionBank": {
+          "id": "cmswzbbrb000dc6sgghi7n4zf",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What Software application do you use for designing?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygbb5e000i04kyc1n3l3v8",
+        "assessmentId": "cmsygbamq000g04kynmi1y3z4",
+        "questionBankId": "cmswzbc01000gc6sgoaj2rt82",
+        "questionBank": {
+          "id": "cmswzbc01000gc6sgoaj2rt82",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If we assign you a task and you are not able to complete it before due time then what will you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygbbbm000j04kyvsj4giz6",
+        "assessmentId": "cmsygbamq000g04kynmi1y3z4",
+        "questionBankId": "cmswzbbv4000ec6sgasc18ssu",
+        "questionBank": {
+          "id": "cmswzbbv4000ec6sgasc18ssu",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Do you have any past experience in designing?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygbbhu000k04ky7tsec7oi",
+        "assessmentId": "cmsygbamq000g04kynmi1y3z4",
+        "questionBankId": "cmswzbc15000hc6sgk4h2jviy",
+        "questionBank": {
+          "id": "cmswzbc15000hc6sgk4h2jviy",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever gotten feedback you disagreed with? How did you handle that?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygbbo3000l04kyljjzf99q",
+        "assessmentId": "cmsygbamq000g04kynmi1y3z4",
+        "questionBankId": "cmswzbbw8000fc6sguvcf5s9x",
+        "questionBank": {
+          "id": "cmswzbbw8000fc6sguvcf5s9x",
+          "department": "DESIGN",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If CYSCOM had a mascot, what would it be and why?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsygb98r000a04kypccdxg1v",
+    "departmentSelectionId": "cmsygazeo000104ky1xvman1u",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-18T09:21:10.296Z",
+    "completedAt": "2026-08-18T09:21:49.071Z",
+    "timeRemaining": 60,
+    "questions": [
+      {
+        "id": "cmsygb9le000b04kyqqk77ht4",
+        "assessmentId": "cmsygb98r000a04kypccdxg1v",
+        "questionBankId": "cmsxahwnq0000sosgmk27ya07",
+        "questionBank": {
+          "id": "cmsxahwnq0000sosgmk27ya07",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Understanding the challenge statement",
+            "options": [
+              "Trying random tools immediately",
+              "Understanding the challenge statement",
+              "Searching for write-ups before attempting",
+              "Writing your own script from scratch"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygb9rm000c04ky77mhmaab",
+        "assessmentId": "cmsygb98r000a04kypccdxg1v",
+        "questionBankId": "cmsxahwoy0001sosg9spx5rdq",
+        "questionBank": {
+          "id": "cmsxahwoy0001sosg9spx5rdq",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge gives almost no information. Your first instinct is to:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Gather as much information as possible",
+            "options": [
+              "Gather as much information as possible",
+              "Guess the answer",
+              "Search the exact title online",
+              "Skip immediately"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygb9xu000d04kyipq8n415",
+        "assessmentId": "cmsygb98r000a04kypccdxg1v",
+        "questionBankId": "cmsxahwq30002sosglwi8nwc0",
+        "questionBank": {
+          "id": "cmsxahwq30002sosglwi8nwc0",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge behaves differently than expected. Your first assumption is:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "I'm missing some information",
+            "options": [
+              "The challenge is broken",
+              "I'm missing some information",
+              "The organizers made a mistake",
+              "My laptop is faulty"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygba43000e04kyihsqlxxu",
+        "assessmentId": "cmsygb98r000a04kypccdxg1v",
+        "questionBankId": "cmsxahwsb0004sosg0crtemds",
+        "questionBank": {
+          "id": "cmsxahwsb0004sosg0crtemds",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Check whether the statement itself is a clue or misdirection.",
+            "options": [
+              "Ignore password.txt completely.",
+              "Check whether the statement itself is a clue or misdirection.",
+              "Delete password.txt.",
+              "Search online for the password."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygbaab000f04kyf8z34pgn",
+        "assessmentId": "cmsygb98r000a04kypccdxg1v",
+        "questionBankId": "cmsxahwr80003sosgz1fv6gok",
+        "questionBank": {
+          "id": "cmsxahwr80003sosgz1fv6gok",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Page source",
+            "options": [
+              "HTTP headers",
+              "Page source",
+              "Cookies",
+              "Network requests"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsygq3dj000304l7htjp60um",
+    "departmentSelectionId": "cmsygpupw000104l77degh5ag",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T09:33:35.827Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsygq3pu000404l7e64k17f2",
+        "assessmentId": "cmsygq3dj000304l7htjp60um",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq3vz000504l7yidthbxl",
+        "assessmentId": "cmsygq3dj000304l7htjp60um",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq423000604l7e4s1f3s1",
+        "assessmentId": "cmsygq3dj000304l7htjp60um",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq488000704l79yvzrhyi",
+        "assessmentId": "cmsygq3dj000304l7htjp60um",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq4ee000804l7ipid475m",
+        "assessmentId": "cmsygq3dj000304l7htjp60um",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq4kj000904l7twuiiyol",
+        "assessmentId": "cmsygq3dj000304l7htjp60um",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsygq69t000g04l78gbnjyw0",
+    "departmentSelectionId": "cmsygpupw000204l7zdv4ifck",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T09:33:35.827Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsygq6m2000h04l7gc9378gv",
+        "assessmentId": "cmsygq69t000g04l78gbnjyw0",
+        "questionBankId": "cmswzbc62000jc6sgr371ufgx",
+        "questionBank": {
+          "id": "cmswzbc62000jc6sgr371ufgx",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "You’ve sent 20 messages and gotten exactly 0 replies. What’s your next move?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq6s6000i04l70pirch7c",
+        "assessmentId": "cmsygq69t000g04l78gbnjyw0",
+        "questionBankId": "cmswzbcav000kc6sgar6tid9i",
+        "questionBank": {
+          "id": "cmswzbcav000kc6sgar6tid9i",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "CYSCOM is conducting a Web Exploitation Workshop. Write one promotional line for each:\nA. A hardcore CTF player\nB. A first-year student who knows nothing about cybersecurity\nC. Someone who thinks cybersecurity isn't for them\n\nYou cannot use the same pitch twice.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq6ye000j04l76tbtg8yl",
+        "assessmentId": "cmsygq69t000g04l78gbnjyw0",
+        "questionBankId": "cmswzbces000lc6sg62n4rdbx",
+        "questionBank": {
+          "id": "cmswzbces000lc6sg62n4rdbx",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "You have to get another VIT club to collaborate with CYSCOM for an event. They already have:\n- bigger Instagram following\n- more members\n- better-known events\nYou have no budget and they aren't particularly interested in cybersecurity. How would you convince them to collaborate?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq74j000k04l7jg7cnj3p",
+        "assessmentId": "cmsygq69t000g04l78gbnjyw0",
+        "questionBankId": "cmswzbcol000oc6sg47npre3u",
+        "questionBank": {
+          "id": "cmswzbcol000oc6sg47npre3u",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "A company replies:\n\"Why should we sponsor a college cybersecurity club when we can spend that money on a much bigger tech event?\"\nWhat would you reply?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq7an000l04l7o8fi8y10",
+        "assessmentId": "cmsygq69t000g04l78gbnjyw0",
+        "questionBankId": "cmswzbcpq000pc6sgbt8vbyu3",
+        "questionBank": {
+          "id": "cmswzbcpq000pc6sgbt8vbyu3",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If you could get one person/company to say “YES” to us instantly, who would it be and why?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsygq4ws000a04l7qtooaybn",
+    "departmentSelectionId": "cmsygpupw000104l77degh5ag",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-18T09:33:44.394Z",
+    "completedAt": "2026-08-18T09:34:00.800Z",
+    "timeRemaining": 20,
+    "questions": [
+      {
+        "id": "cmsygq593000b04l74u9fwcu9",
+        "assessmentId": "cmsygq4ws000a04l7qtooaybn",
+        "questionBankId": "cmswzbcwd000vc6sg9jqstmfv",
+        "questionBank": {
+          "id": "cmswzbcwd000vc6sg9jqstmfv",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which protocol should be used to securely transmit login credentials?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "HTTPS",
+            "options": [
+              "HTTP",
+              "HTTPS",
+              "FTP",
+              "SMTP"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq5f8000c04l7hx91ob3r",
+        "assessmentId": "cmsygq4ws000a04l7qtooaybn",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq5lc000d04l7niexuevr",
+        "assessmentId": "cmsygq4ws000a04l7qtooaybn",
+        "questionBankId": "cmswzbcyl000xc6sg75jaso4s",
+        "questionBank": {
+          "id": "cmswzbcyl000xc6sg75jaso4s",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which response leaks the least information?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Invalid username or password.",
+            "options": [
+              "Password is incorrect.",
+              "Username doesn't exist.",
+              "Invalid username or password.",
+              "Try another username."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq5rh000e04l7lk4gzul8",
+        "assessmentId": "cmsygq4ws000a04l7qtooaybn",
+        "questionBankId": "cmswzbczp000yc6sg8floy1oh",
+        "questionBank": {
+          "id": "cmswzbczp000yc6sg8floy1oh",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You accidentally commit an API key to GitHub. What should you do FIRST?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Change (rotate) the API key immediately.",
+            "options": [
+              "Delete the repository.",
+              "Change (rotate) the API key immediately.",
+              "Rename the file.",
+              "Ignore it if the repository is private."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsygq5xl000f04l7nqgukmsa",
+        "assessmentId": "cmsygq4ws000a04l7qtooaybn",
+        "questionBankId": "cmswzbd0u000zc6sgl9tcywgx",
+        "questionBank": {
+          "id": "cmswzbd0u000zc6sgl9tcywgx",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "A login page allows unlimited password attempts. What vulnerability does this create?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Brute-force attack",
+            "options": [
+              "XSS",
+              "Brute-force attack",
+              "Clickjacking",
+              "DNS Spoofing"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyyg45v000a04jut2pnmyq1",
+    "departmentSelectionId": "cmsyyft6n000104jugc2bgx40",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-18T17:48:04.410Z",
+    "completedAt": "2026-08-18T17:50:12.674Z",
+    "timeRemaining": 120,
+    "questions": [
+      {
+        "id": "cmsyyg4ig000b04jukvg2hile",
+        "assessmentId": "cmsyyg45v000a04jut2pnmyq1",
+        "questionBankId": "cmsxahwoy0001sosg9spx5rdq",
+        "questionBank": {
+          "id": "cmsxahwoy0001sosg9spx5rdq",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge gives almost no information. Your first instinct is to:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Gather as much information as possible",
+            "options": [
+              "Gather as much information as possible",
+              "Guess the answer",
+              "Search the exact title online",
+              "Skip immediately"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg4or000c04jum0ox0syc",
+        "assessmentId": "cmsyyg45v000a04jut2pnmyq1",
+        "questionBankId": "cmsxahwnq0000sosgmk27ya07",
+        "questionBank": {
+          "id": "cmsxahwnq0000sosgmk27ya07",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Understanding the challenge statement",
+            "options": [
+              "Trying random tools immediately",
+              "Understanding the challenge statement",
+              "Searching for write-ups before attempting",
+              "Writing your own script from scratch"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg4v1000d04ju4p0q0o7j",
+        "assessmentId": "cmsyyg45v000a04jut2pnmyq1",
+        "questionBankId": "cmsxahwsb0004sosg0crtemds",
+        "questionBank": {
+          "id": "cmsxahwsb0004sosg0crtemds",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Check whether the statement itself is a clue or misdirection.",
+            "options": [
+              "Ignore password.txt completely.",
+              "Check whether the statement itself is a clue or misdirection.",
+              "Delete password.txt.",
+              "Search online for the password."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg51b000e04jumw5mk39u",
+        "assessmentId": "cmsyyg45v000a04jut2pnmyq1",
+        "questionBankId": "cmsxahwr80003sosgz1fv6gok",
+        "questionBank": {
+          "id": "cmsxahwr80003sosgz1fv6gok",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Page source",
+            "options": [
+              "HTTP headers",
+              "Page source",
+              "Cookies",
+              "Network requests"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg57m000f04juzyn5lai8",
+        "assessmentId": "cmsyyg45v000a04jut2pnmyq1",
+        "questionBankId": "cmsxahwq30002sosglwi8nwc0",
+        "questionBank": {
+          "id": "cmsxahwq30002sosglwi8nwc0",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge behaves differently than expected. Your first assumption is:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "I'm missing some information",
+            "options": [
+              "The challenge is broken",
+              "I'm missing some information",
+              "The organizers made a mistake",
+              "My laptop is faulty"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyx50lh000a04jjkxgywtvs",
+    "departmentSelectionId": "cmsyx4pvk000104jjj999v0iy",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-18T17:11:30.795Z",
+    "completedAt": "2026-08-18T17:13:03.372Z",
+    "timeRemaining": 60,
+    "questions": [
+      {
+        "id": "cmsyx50y6000b04jjczwqr19n",
+        "assessmentId": "cmsyx50lh000a04jjkxgywtvs",
+        "questionBankId": "cmsxahwsb0004sosg0crtemds",
+        "questionBank": {
+          "id": "cmsxahwsb0004sosg0crtemds",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Check whether the statement itself is a clue or misdirection.",
+            "options": [
+              "Ignore password.txt completely.",
+              "Check whether the statement itself is a clue or misdirection.",
+              "Delete password.txt.",
+              "Search online for the password."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx514k000c04jj81j3ss9i",
+        "assessmentId": "cmsyx50lh000a04jjkxgywtvs",
+        "questionBankId": "cmsxahwoy0001sosg9spx5rdq",
+        "questionBank": {
+          "id": "cmsxahwoy0001sosg9spx5rdq",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge gives almost no information. Your first instinct is to:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Gather as much information as possible",
+            "options": [
+              "Gather as much information as possible",
+              "Guess the answer",
+              "Search the exact title online",
+              "Skip immediately"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx51aw000d04jjhorigziw",
+        "assessmentId": "cmsyx50lh000a04jjkxgywtvs",
+        "questionBankId": "cmsxahwr80003sosgz1fv6gok",
+        "questionBank": {
+          "id": "cmsxahwr80003sosgz1fv6gok",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Page source",
+            "options": [
+              "HTTP headers",
+              "Page source",
+              "Cookies",
+              "Network requests"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx51ha000e04jjf35kk0af",
+        "assessmentId": "cmsyx50lh000a04jjkxgywtvs",
+        "questionBankId": "cmsxahwnq0000sosgmk27ya07",
+        "questionBank": {
+          "id": "cmsxahwnq0000sosgmk27ya07",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Understanding the challenge statement",
+            "options": [
+              "Trying random tools immediately",
+              "Understanding the challenge statement",
+              "Searching for write-ups before attempting",
+              "Writing your own script from scratch"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx51nm000f04jjsvla3f2a",
+        "assessmentId": "cmsyx50lh000a04jjkxgywtvs",
+        "questionBankId": "cmsxahwq30002sosglwi8nwc0",
+        "questionBank": {
+          "id": "cmsxahwq30002sosglwi8nwc0",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge behaves differently than expected. Your first assumption is:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "I'm missing some information",
+            "options": [
+              "The challenge is broken",
+              "I'm missing some information",
+              "The organizers made a mistake",
+              "My laptop is faulty"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyvmxgs000304ihzy43ldcp",
+    "departmentSelectionId": "cmsyvmmwn000104ihosd607wh",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T16:30:27.178Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyvmxtp000404ih9t83ebq6",
+        "assessmentId": "cmsyvmxgs000304ihzy43ldcp",
+        "questionBankId": "cmsx1mjui0001pwsgnaxrcvyz",
+        "questionBank": {
+          "id": "cmsx1mjui0001pwsgnaxrcvyz",
+          "department": "TECHNICAL",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmy02000504ihx1t2uj8q",
+        "assessmentId": "cmsyvmxgs000304ihzy43ldcp",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmy6c000604ih30csbe6j",
+        "assessmentId": "cmsyvmxgs000304ihzy43ldcp",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmycl000704ih3edhw79l",
+        "assessmentId": "cmsyvmxgs000304ihzy43ldcp",
+        "questionBankId": "cmswzbd6k0014c6sgig9rtkyz",
+        "questionBank": {
+          "id": "cmswzbd6k0014c6sgig9rtkyz",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you approach learning something completely new?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmyiv000804ih1f2jq7zq",
+        "assessmentId": "cmsyvmxgs000304ihzy43ldcp",
+        "questionBankId": "cmswzbda10017c6sgdgp1fb8e",
+        "questionBank": {
+          "id": "cmswzbda10017c6sgdgp1fb8e",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What motivates you more: winning competitions or learning new things?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmyp3000904ihzgam68lh",
+        "assessmentId": "cmsyvmxgs000304ihzy43ldcp",
+        "questionBankId": "cmswzbd8v0016c6sgaehobmpr",
+        "questionBank": {
+          "id": "cmswzbd8v0016c6sgaehobmpr",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If Google didn't exist for a day, how would you solve technical problems?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyx53lj000n04jj5nvrcuk3",
+    "departmentSelectionId": "cmsyx4pvk000204jj144k4j2n",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-18T17:11:30.795Z",
+    "completedAt": "2026-08-18T17:13:03.372Z",
+    "timeRemaining": 20,
+    "questions": [
+      {
+        "id": "cmsyx544i000o04jjw5r9ns8j",
+        "assessmentId": "cmsyx53lj000n04jj5nvrcuk3",
+        "questionBankId": "cmswzbd0u000zc6sgl9tcywgx",
+        "questionBank": {
+          "id": "cmswzbd0u000zc6sgl9tcywgx",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "A login page allows unlimited password attempts. What vulnerability does this create?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Brute-force attack",
+            "options": [
+              "XSS",
+              "Brute-force attack",
+              "Clickjacking",
+              "DNS Spoofing"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx54ax000p04jjymrzsxqk",
+        "assessmentId": "cmsyx53lj000n04jj5nvrcuk3",
+        "questionBankId": "cmswzbcwd000vc6sg9jqstmfv",
+        "questionBank": {
+          "id": "cmswzbcwd000vc6sg9jqstmfv",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which protocol should be used to securely transmit login credentials?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "HTTPS",
+            "options": [
+              "HTTP",
+              "HTTPS",
+              "FTP",
+              "SMTP"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx54hb000q04jjvw55bwcz",
+        "assessmentId": "cmsyx53lj000n04jj5nvrcuk3",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx54no000r04jjpt9gbn0g",
+        "assessmentId": "cmsyx53lj000n04jj5nvrcuk3",
+        "questionBankId": "cmswzbd320011c6sgipuvlimr",
+        "questionBank": {
+          "id": "cmswzbd320011c6sgipuvlimr",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You find a bug that exposes another user's data. What's your first action?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Report it responsibly to the team.",
+            "options": [
+              "Share it with friends.",
+              "Report it responsibly to the team.",
+              "Ignore it.",
+              "Post it on social media."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx54u1000s04jjn9hgmu4f",
+        "assessmentId": "cmsyx53lj000n04jj5nvrcuk3",
+        "questionBankId": "cmswzbczp000yc6sg8floy1oh",
+        "questionBank": {
+          "id": "cmswzbczp000yc6sg8floy1oh",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You accidentally commit an API key to GitHub. What should you do FIRST?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Change (rotate) the API key immediately.",
+            "options": [
+              "Delete the repository.",
+              "Change (rotate) the API key immediately.",
+              "Rename the file.",
+              "Ignore it if the repository is private."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyvn0fh000g04ihi9mqo3nq",
+    "departmentSelectionId": "cmsyvmmwn000204ihs1ryjrpj",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T16:30:27.178Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyvn0ry000h04ih086i9czb",
+        "assessmentId": "cmsyvn0fh000g04ihi9mqo3nq",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn0y6000i04ihetg4qdfs",
+        "assessmentId": "cmsyvn0fh000g04ihi9mqo3nq",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn14e000j04ihlxl18lkx",
+        "assessmentId": "cmsyvn0fh000g04ihi9mqo3nq",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn1an000k04ihhr4dw222",
+        "assessmentId": "cmsyvn0fh000g04ihi9mqo3nq",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn1gw000l04ihifcdqful",
+        "assessmentId": "cmsyvn0fh000g04ihi9mqo3nq",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn1n4000m04ihu5kmil9s",
+        "assessmentId": "cmsyvn0fh000g04ihi9mqo3nq",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyvmz1l000a04ih4i8uvubl",
+    "departmentSelectionId": "cmsyvmmwn000104ihosd607wh",
+    "status": "IN_PROGRESS",
+    "startedAt": "2026-08-18T16:30:36.830Z",
+    "completedAt": null,
+    "timeRemaining": 60,
+    "questions": [
+      {
+        "id": "cmsyvmze2000b04ih2wvapg6b",
+        "assessmentId": "cmsyvmz1l000a04ih4i8uvubl",
+        "questionBankId": "cmsxahwq30002sosglwi8nwc0",
+        "questionBank": {
+          "id": "cmsxahwq30002sosglwi8nwc0",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge behaves differently than expected. Your first assumption is:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "I'm missing some information",
+            "options": [
+              "The challenge is broken",
+              "I'm missing some information",
+              "The organizers made a mistake",
+              "My laptop is faulty"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmzkb000c04iheys7dspz",
+        "assessmentId": "cmsyvmz1l000a04ih4i8uvubl",
+        "questionBankId": "cmsxahwoy0001sosg9spx5rdq",
+        "questionBank": {
+          "id": "cmsxahwoy0001sosg9spx5rdq",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "A challenge gives almost no information. Your first instinct is to:",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Gather as much information as possible",
+            "options": [
+              "Gather as much information as possible",
+              "Guess the answer",
+              "Search the exact title online",
+              "Skip immediately"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmzqj000d04ih7sz53hi6",
+        "assessmentId": "cmsyvmz1l000a04ih4i8uvubl",
+        "questionBankId": "cmsxahwr80003sosgz1fv6gok",
+        "questionBank": {
+          "id": "cmsxahwr80003sosgz1fv6gok",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a webpage that simply says: 'Access Denied'. What do you investigate first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Page source",
+            "options": [
+              "HTTP headers",
+              "Page source",
+              "Cookies",
+              "Network requests"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvmzws000e04ihtsltzkw7",
+        "assessmentId": "cmsyvmz1l000a04ih4i8uvubl",
+        "questionBankId": "cmsxahwnq0000sosgmk27ya07",
+        "questionBank": {
+          "id": "cmsxahwnq0000sosgmk27ya07",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You've been given a CTF challenge and have 30 minutes. What do you prioritize first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Understanding the challenge statement",
+            "options": [
+              "Trying random tools immediately",
+              "Understanding the challenge statement",
+              "Searching for write-ups before attempting",
+              "Writing your own script from scratch"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn031000f04ihfx45f8p4",
+        "assessmentId": "cmsyvmz1l000a04ih4i8uvubl",
+        "questionBankId": "cmsxahwsb0004sosg0crtemds",
+        "questionBank": {
+          "id": "cmsxahwsb0004sosg0crtemds",
+          "department": "TECHNICAL",
+          "title": "MCQ Question",
+          "description": "You're given a CTF challenge with only the following: challenge.zip, password.txt, README.md. The password.txt file contains: 'The password is not in this file.' What would you do first?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Check whether the statement itself is a clue or misdirection.",
+            "options": [
+              "Ignore password.txt completely.",
+              "Check whether the statement itself is a clue or misdirection.",
+              "Delete password.txt.",
+              "Search online for the password."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyvn1zk000n04ihxl5s42hy",
+    "departmentSelectionId": "cmsyvmmwn000204ihs1ryjrpj",
+    "status": "IN_PROGRESS",
+    "startedAt": "2026-08-18T16:30:36.830Z",
+    "completedAt": null,
+    "timeRemaining": 20,
+    "questions": [
+      {
+        "id": "cmsyvn2i7000o04ihp3hzyr0v",
+        "assessmentId": "cmsyvn1zk000n04ihxl5s42hy",
+        "questionBankId": "cmswzbd320011c6sgipuvlimr",
+        "questionBank": {
+          "id": "cmswzbd320011c6sgipuvlimr",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You find a bug that exposes another user's data. What's your first action?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Report it responsibly to the team.",
+            "options": [
+              "Share it with friends.",
+              "Report it responsibly to the team.",
+              "Ignore it.",
+              "Post it on social media."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn2of000p04ih0im1ik7n",
+        "assessmentId": "cmsyvn1zk000n04ihxl5s42hy",
+        "questionBankId": "cmswzbcyl000xc6sg75jaso4s",
+        "questionBank": {
+          "id": "cmswzbcyl000xc6sg75jaso4s",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which response leaks the least information?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Invalid username or password.",
+            "options": [
+              "Password is incorrect.",
+              "Username doesn't exist.",
+              "Invalid username or password.",
+              "Try another username."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn2uo000q04ihhdf20anq",
+        "assessmentId": "cmsyvn1zk000n04ihxl5s42hy",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn30x000r04ihrbpufklw",
+        "assessmentId": "cmsyvn1zk000n04ihxl5s42hy",
+        "questionBankId": "cmswzbd0u000zc6sgl9tcywgx",
+        "questionBank": {
+          "id": "cmswzbd0u000zc6sgl9tcywgx",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "A login page allows unlimited password attempts. What vulnerability does this create?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Brute-force attack",
+            "options": [
+              "XSS",
+              "Brute-force attack",
+              "Clickjacking",
+              "DNS Spoofing"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyvn375000s04ihr3wgdkca",
+        "assessmentId": "cmsyvn1zk000n04ihxl5s42hy",
+        "questionBankId": "cmswzbczp000yc6sg8floy1oh",
+        "questionBank": {
+          "id": "cmswzbczp000yc6sg8floy1oh",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You accidentally commit an API key to GitHub. What should you do FIRST?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Change (rotate) the API key immediately.",
+            "options": [
+              "Delete the repository.",
+              "Change (rotate) the API key immediately.",
+              "Rename the file.",
+              "Ignore it if the repository is private."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx0r5x9000004jpt2vgdff9",
+    "departmentSelectionId": "cmsx0drou000104lau9x9pm5c",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T09:17:37.912Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx0r6b6000104jps2e4tsrs",
+        "assessmentId": "cmsx0r5x9000004jpt2vgdff9",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r6ix000204jptbt964g9",
+        "assessmentId": "cmsx0r5x9000004jpt2vgdff9",
+        "questionBankId": "cmswzbd7p0015c6sg6b989gcs",
+        "questionBank": {
+          "id": "cmswzbd7p0015c6sg6b989gcs",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r6p6000304jp562f7ech",
+        "assessmentId": "cmsx0r5x9000004jpt2vgdff9",
+        "questionBankId": "cmswzbd6k0014c6sgig9rtkyz",
+        "questionBank": {
+          "id": "cmswzbd6k0014c6sgig9rtkyz",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you approach learning something completely new?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r6vf000404jpynv5p8ch",
+        "assessmentId": "cmsx0r5x9000004jpt2vgdff9",
+        "questionBankId": "cmswzbd8v0016c6sgaehobmpr",
+        "questionBank": {
+          "id": "cmswzbd8v0016c6sgaehobmpr",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If Google didn't exist for a day, how would you solve technical problems?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r71p000504jpwoo2ljrn",
+        "assessmentId": "cmsx0r5x9000004jpt2vgdff9",
+        "questionBankId": "cmswzbda10017c6sgdgp1fb8e",
+        "questionBank": {
+          "id": "cmswzbda10017c6sgdgp1fb8e",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What motivates you more: winning competitions or learning new things?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r77x000604jp7uyyqs0y",
+        "assessmentId": "cmsx0r5x9000004jpt2vgdff9",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx0r8yg000d04jpuwaiifqx",
+    "departmentSelectionId": "cmsx0drou000204la7jndms9j",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-17T09:17:37.912Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsx0r9az000e04jph7wn5vh6",
+        "assessmentId": "cmsx0r8yg000d04jpuwaiifqx",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r9hf000f04jp9cjt7nn4",
+        "assessmentId": "cmsx0r8yg000d04jpuwaiifqx",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r9no000g04jpahabjod6",
+        "assessmentId": "cmsx0r8yg000d04jpuwaiifqx",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0r9ty000h04jpcaey4vl7",
+        "assessmentId": "cmsx0r8yg000d04jpuwaiifqx",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0ra07000i04jpukggthpk",
+        "assessmentId": "cmsx0r8yg000d04jpuwaiifqx",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsx0r7kg000704jpjf1f976n",
+    "departmentSelectionId": "cmsx0drou000104lau9x9pm5c",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-17T09:18:28.056Z",
+    "completedAt": "2026-08-17T09:19:21.907Z",
+    "timeRemaining": 90,
+    "questions": []
+  },
+  {
+    "id": "cmsx0raco000j04jpilqgys5p",
+    "departmentSelectionId": "cmsx0drou000204la7jndms9j",
+    "status": "COMPLETED",
+    "startedAt": "2026-08-17T09:18:28.056Z",
+    "completedAt": "2026-08-17T09:19:21.907Z",
+    "timeRemaining": 30,
+    "questions": [
+      {
+        "id": "cmsx0ravc000k04jp60zcmm9a",
+        "assessmentId": "cmsx0raco000j04jpilqgys5p",
+        "questionBankId": "cmswzbd1y0010c6sgqceydu7h",
+        "questionBank": {
+          "id": "cmswzbd1y0010c6sgqceydu7h",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Your website works perfectly, but a dependency has a known critical security vulnerability. What should you prioritize?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Update or patch the dependency after testing.",
+            "options": [
+              "Ignore it until users complain.",
+              "Update or patch the dependency after testing.",
+              "Redesign the UI first.",
+              "Hide the warning."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0rb1k000l04jphb3d3xxi",
+        "assessmentId": "cmsx0raco000j04jpilqgys5p",
+        "questionBankId": "cmswzbczp000yc6sg8floy1oh",
+        "questionBank": {
+          "id": "cmswzbczp000yc6sg8floy1oh",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You accidentally commit an API key to GitHub. What should you do FIRST?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Change (rotate) the API key immediately.",
+            "options": [
+              "Delete the repository.",
+              "Change (rotate) the API key immediately.",
+              "Rename the file.",
+              "Ignore it if the repository is private."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0rb7t000m04jpkjafmg0r",
+        "assessmentId": "cmsx0raco000j04jpilqgys5p",
+        "questionBankId": "cmswzbcxi000wc6sg2zp054i0",
+        "questionBank": {
+          "id": "cmswzbcxi000wc6sg2zp054i0",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which is the safest place to store a user's password?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Hashed",
+            "options": [
+              "Plain text",
+              "Encrypted",
+              "Hashed",
+              "Base64 encoded"
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0rbe3000n04jpxnmvd7cm",
+        "assessmentId": "cmsx0raco000j04jpilqgys5p",
+        "questionBankId": "cmswzbcyl000xc6sg75jaso4s",
+        "questionBank": {
+          "id": "cmswzbcyl000xc6sg75jaso4s",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "Which response leaks the least information?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Invalid username or password.",
+            "options": [
+              "Password is incorrect.",
+              "Username doesn't exist.",
+              "Invalid username or password.",
+              "Try another username."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsx0rblj000o04jprqc9vorc",
+        "assessmentId": "cmsx0raco000j04jpilqgys5p",
+        "questionBankId": "cmswzbd320011c6sgipuvlimr",
+        "questionBank": {
+          "id": "cmswzbd320011c6sgipuvlimr",
+          "department": "WEB_DEVELOPMENT",
+          "title": "MCQ Question",
+          "description": "You find a bug that exposes another user's data. What's your first action?",
+          "type": "TIMED",
+          "difficulty": 1,
+          "points": 10,
+          "content": {
+            "answer": "Report it responsibly to the team.",
+            "options": [
+              "Share it with friends.",
+              "Report it responsibly to the team.",
+              "Ignore it.",
+              "Post it on social media."
+            ]
+          },
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyx4z04000304jj9aledlxw",
+    "departmentSelectionId": "cmsyx4pvk000104jjj999v0iy",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T17:11:23.637Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyx4zcw000404jjo067xbq5",
+        "assessmentId": "cmsyx4z04000304jj9aledlxw",
+        "questionBankId": "cmsx1mjui0001pwsgnaxrcvyz",
+        "questionBank": {
+          "id": "cmsx1mjui0001pwsgnaxrcvyz",
+          "department": "TECHNICAL",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx4zja000504jjbk5803fp",
+        "assessmentId": "cmsyx4z04000304jj9aledlxw",
+        "questionBankId": "cmswzbd8v0016c6sgaehobmpr",
+        "questionBank": {
+          "id": "cmswzbd8v0016c6sgaehobmpr",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If Google didn't exist for a day, how would you solve technical problems?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx4zpo000604jjltfokeqx",
+        "assessmentId": "cmsyx4z04000304jj9aledlxw",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx4zw1000704jjesk4sapl",
+        "assessmentId": "cmsyx4z04000304jj9aledlxw",
+        "questionBankId": "cmswzbda10017c6sgdgp1fb8e",
+        "questionBank": {
+          "id": "cmswzbda10017c6sgdgp1fb8e",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What motivates you more: winning competitions or learning new things?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx502e000804jje4txkn9c",
+        "assessmentId": "cmsyx4z04000304jj9aledlxw",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx508r000904jjakzxqpyv",
+        "assessmentId": "cmsyx4z04000304jj9aledlxw",
+        "questionBankId": "cmswzbd7p0015c6sg6b989gcs",
+        "questionBank": {
+          "id": "cmswzbd7p0015c6sg6b989gcs",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyx520b000g04jj3kgscj89",
+    "departmentSelectionId": "cmsyx4pvk000204jj144k4j2n",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T17:11:23.637Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyx52d1000h04jjupbii2mb",
+        "assessmentId": "cmsyx520b000g04jj3kgscj89",
+        "questionBankId": "cmsx1mizk0000pwsg6qyfy93i",
+        "questionBank": {
+          "id": "cmsx1mizk0000pwsg6qyfy93i",
+          "department": "WEB_DEVELOPMENT",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx52jd000i04jjzxm4c0iw",
+        "assessmentId": "cmsyx520b000g04jj3kgscj89",
+        "questionBankId": "cmswzbcv8000uc6sgtbr1tvgj",
+        "questionBank": {
+          "id": "cmswzbcv8000uc6sgtbr1tvgj",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine a feature isn't working right before deployment. What would you do?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx52pq000j04jjug0m9fog",
+        "assessmentId": "cmsyx520b000g04jj3kgscj89",
+        "questionBankId": "cmswzbcu4000tc6sgyegwf1vn",
+        "questionBank": {
+          "id": "cmswzbcu4000tc6sgyegwf1vn",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What's the biggest challenge you've faced while developing something?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx52w4000k04jjjdc59wwz",
+        "assessmentId": "cmsyx520b000g04jj3kgscj89",
+        "questionBankId": "cmswzbct1000sc6sg0vvzpac4",
+        "questionBank": {
+          "id": "cmswzbct1000sc6sg0vvzpac4",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you built any websites or personal projects? Tell us about your favorite one.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx532h000l04jjkwfs01pl",
+        "assessmentId": "cmsyx520b000g04jj3kgscj89",
+        "questionBankId": "cmswzbcrx000rc6sghxo8qmiq",
+        "questionBank": {
+          "id": "cmswzbcrx000rc6sghxo8qmiq",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "What are tech stacks you know about? Have you worked on any projects in the past?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyx538u000m04jjnjzp86sz",
+        "assessmentId": "cmsyx520b000g04jj3kgscj89",
+        "questionBankId": "cmswzbcqu000qc6sgnbwmfwr5",
+        "questionBank": {
+          "id": "cmswzbcqu000qc6sgnbwmfwr5",
+          "department": "WEB_DEVELOPMENT",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you wanna join CYSCOM, especially the Dev Dept?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyyg2l4000304juz2stefi2",
+    "departmentSelectionId": "cmsyyft6n000104jugc2bgx40",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T17:47:56.787Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyyg2xr000404ju40xsnphv",
+        "assessmentId": "cmsyyg2l4000304juz2stefi2",
+        "questionBankId": "cmsx1mjui0001pwsgnaxrcvyz",
+        "questionBank": {
+          "id": "cmsx1mjui0001pwsgnaxrcvyz",
+          "department": "TECHNICAL",
+          "title": "Profile Links",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Please provide the links to your GitHub and LinkedIn profiles.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg342000504ju1xtsknke",
+        "assessmentId": "cmsyyg2l4000304juz2stefi2",
+        "questionBankId": "cmswzbd490012c6sgd11yb9z3",
+        "questionBank": {
+          "id": "cmswzbd490012c6sgd11yb9z3",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Why do you want to join the Technical Department?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg3ad000604jumr84rqse",
+        "assessmentId": "cmsyyg2l4000304juz2stefi2",
+        "questionBankId": "cmswzbd7p0015c6sg6b989gcs",
+        "questionBank": {
+          "id": "cmswzbd7p0015c6sg6b989gcs",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Imagine If a website behaves unexpectedly, what kinds of things would you investigate first?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg3go000704ju9g3yuoj2",
+        "assessmentId": "cmsyyg2l4000304juz2stefi2",
+        "questionBankId": "cmswzbd5d0013c6sggbq6q0cm",
+        "questionBank": {
+          "id": "cmswzbd5d0013c6sggbq6q0cm",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "Have you ever participated in a CTF? If yes, tell us about your experience. If not, what do you know about CTFs?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg3mz000804jui8c1jveh",
+        "assessmentId": "cmsyyg2l4000304juz2stefi2",
+        "questionBankId": "cmswzbd6k0014c6sgig9rtkyz",
+        "questionBank": {
+          "id": "cmswzbd6k0014c6sgig9rtkyz",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How do you approach learning something completely new?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg3t9000904juygsdp9qg",
+        "assessmentId": "cmsyyg2l4000304juz2stefi2",
+        "questionBankId": "cmswzbd8v0016c6sgaehobmpr",
+        "questionBank": {
+          "id": "cmswzbd8v0016c6sgaehobmpr",
+          "department": "TECHNICAL",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "If Google didn't exist for a day, how would you solve technical problems?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "cmsyyg5k5000g04jucwbjo5ak",
+    "departmentSelectionId": "cmsyyft6n000204juvt98o27g",
+    "status": "COMPLETED",
+    "startedAt": null,
+    "completedAt": "2026-08-18T17:47:56.787Z",
+    "timeRemaining": null,
+    "questions": [
+      {
+        "id": "cmsyyg5wq000h04juptcapodn",
+        "assessmentId": "cmsyyg5k5000g04jucwbjo5ak",
+        "questionBankId": "cmswzbcav000kc6sgar6tid9i",
+        "questionBank": {
+          "id": "cmswzbcav000kc6sgar6tid9i",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "CYSCOM is conducting a Web Exploitation Workshop. Write one promotional line for each:\nA. A hardcore CTF player\nB. A first-year student who knows nothing about cybersecurity\nC. Someone who thinks cybersecurity isn't for them\n\nYou cannot use the same pitch twice.",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg631000i04juwla43t2o",
+        "assessmentId": "cmsyyg5k5000g04jucwbjo5ak",
+        "questionBankId": "cmswzbcfx000mc6sg1p07z3os",
+        "questionBank": {
+          "id": "cmswzbcfx000mc6sg1p07z3os",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "How would you approach a company you've never contacted before?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg69c000j04jungra1evh",
+        "assessmentId": "cmsyyg5k5000g04jucwbjo5ak",
+        "questionBankId": "cmswzbc62000jc6sgr371ufgx",
+        "questionBank": {
+          "id": "cmswzbc62000jc6sgr371ufgx",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "You’ve sent 20 messages and gotten exactly 0 replies. What’s your next move?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg6fm000k04juc0k7z91m",
+        "assessmentId": "cmsyyg5k5000g04jucwbjo5ak",
+        "questionBankId": "cmswzbcol000oc6sg47npre3u",
+        "questionBank": {
+          "id": "cmswzbcol000oc6sg47npre3u",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "A company replies:\n\"Why should we sponsor a college cybersecurity club when we can spend that money on a much bigger tech event?\"\nWhat would you reply?",
+          "hints": [],
+          "flag": null
+        }
+      },
+      {
+        "id": "cmsyyg6lx000l04ju166oujem",
+        "assessmentId": "cmsyyg5k5000g04jucwbjo5ak",
+        "questionBankId": "cmswzbces000lc6sg62n4rdbx",
+        "questionBank": {
+          "id": "cmswzbces000lc6sg62n4rdbx",
+          "department": "OUTREACH",
+          "title": "General Question",
+          "description": null,
+          "type": "GENERAL",
+          "difficulty": 1,
+          "points": 10,
+          "content": "You have to get another VIT club to collaborate with CYSCOM for an event. They already have:\n- bigger Instagram following\n- more members\n- better-known events\nYou have no budget and they aren't particularly interested in cybersecurity. How would you convince them to collaborate?",
+          "hints": [],
+          "flag": null
+        }
+      }
+    ]
+  }
+]

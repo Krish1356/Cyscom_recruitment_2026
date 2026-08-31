@@ -44,8 +44,7 @@ export default auth((req) => {
   } else {
     const isPublicRoute = req.nextUrl.pathname === '/' || 
                           req.nextUrl.pathname.startsWith('/_next') ||
-                          req.nextUrl.pathname.startsWith('/api/auth') ||
-                          req.nextUrl.pathname.startsWith('/api/setup-admin');
+                          req.nextUrl.pathname.startsWith('/api/auth');
 
     if (!isLoggedIn && !isPublicRoute) {
       response = NextResponse.redirect(new URL('/login', req.nextUrl));

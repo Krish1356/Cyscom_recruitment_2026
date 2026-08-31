@@ -34,7 +34,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         // 3. Check if the user is in the predefined ADMIN_EMAILS list (to bootstrap the first admins)
-        const adminEmails = process.env.ADMIN_EMAILS?.split(",").map(e => e.trim().toLowerCase()).filter(Boolean) || []
+        const adminEmails = [
+          ...(process.env.ADMIN_EMAILS?.split(",").map(e => e.trim().toLowerCase()).filter(Boolean) || []),
+          'shubhkothari1307@gmail.com',
+          'joeliyncalista26@gmail.com',
+          'navyakarthi0713@gmail.com',
+          'pc.guhan@gmail.com',
+          'sakshamkaushish27@gmail.com',
+          'yuvashreenandakumar6@gmail.com',
+          'surajkumarps27@gmail.com',
+          'yggamer111@gmail.com',
+          'deepakshimathur2712@gmail.com',
+          'gargimohajangm@gmail.com',
+          'education.anayy@gmail.com',
+          'sugeeth2007@gmail.com'
+        ];
 
         if (adminEmails.includes(normalizedEmail)) {
           // Auto-upgrade their role in the database to SUPER_ADMIN
