@@ -47,7 +47,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           'deepakshimathur2712@gmail.com',
           'gargimohajangm@gmail.com',
           'education.anayy@gmail.com',
-          'sugeeth2007@gmail.com'
+          'sugeeth2007@gmail.com',
+          'randomchizkeliye@gmail.com'
         ];
 
         if (adminEmails.includes(normalizedEmail)) {
