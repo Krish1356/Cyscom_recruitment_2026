@@ -14,12 +14,16 @@ const CyberTopologyCanvas = dynamic(
   { ssr: false }
 );
 
+import { INTERVIEW_SESSIONS } from "@/lib/interview-sessions";
+
 interface StatusClientProps {
   status: string;
   session: any;
+  hasInterviewSlot?: boolean;
+  selectedSlotId?: string;
 }
 
-export function StatusClient({ status, session }: StatusClientProps) {
+export function StatusClient({ status, session, hasInterviewSlot, selectedSlotId }: StatusClientProps) {
   const router = useRouter();
   const [isLaunching, setIsLaunching] = useState(false);
 
@@ -45,10 +49,13 @@ export function StatusClient({ status, session }: StatusClientProps) {
       case "SHORTLISTED":
         return {
           title: "SHORTLISTED FOR INTERVIEW",
-          desc: "You have been cleared for Stage 3. Check your registered email for interview scheduling details.",
+          desc: hasInterviewSlot 
+            ? "Your interview session has been successfully registered." 
+            : "You have been cleared for Stage 3. Select your interview session below.",
           color: "text-[#67E8F9]",
           borderColor: "border-white/10",
           icon: ShieldAlert,
+          showInterviewSection: true,
           showWhatsapp: true,
         };
       case "SELECTED":
@@ -107,7 +114,7 @@ export function StatusClient({ status, session }: StatusClientProps) {
       </div>
 
       <MainLayout session={session}>
-        <div className="pt-32 pb-24 px-6 min-h-screen flex items-center justify-center relative z-10">
+        <div className="pt-32 pb-24 px-6 min-h-screen flex flex-col items-center justify-start relative z-10">
           <div
             className="w-full max-w-xl bg-[#090D12]/90 backdrop-blur-xl border border-white/10 rounded-lg p-8 md:p-12 shadow-2xl text-center relative overflow-hidden transition-all duration-300"
           >
@@ -132,6 +139,35 @@ export function StatusClient({ status, session }: StatusClientProps) {
             <p className="text-[#A4A8AE] text-sm md:text-base font-mono leading-relaxed mb-8 max-w-md mx-auto">
               {info.desc}
             </p>
+
+            {info.showInterviewSection && (
+              <div className="mt-6 pt-6 border-t border-white/10 text-center">
+                <p className="text-xs font-mono text-[#A4A8AE] mb-4 uppercase tracking-wider">
+                  INTERVIEW SLOT SELECTION
+                </p>
+                {hasInterviewSlot ? (
+                  <div className="bg-[#10151A] border border-emerald-500/30 p-4 rounded-sm">
+                    <div className="text-emerald-400 font-bold mb-1 uppercase text-sm tracking-wider flex items-center justify-center gap-2">
+                      <CheckCircle2 className="w-4 h-4" />
+                      Interview Slot Confirmed
+                    </div>
+                    <div className="text-[#F1F0EA] font-mono text-sm">
+                      {selectedSlotId && INTERVIEW_SESSIONS[selectedSlotId as keyof typeof INTERVIEW_SESSIONS]?.label}
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => router.push("/interview-slot")}
+                    className="w-full group inline-flex items-center justify-center px-8 py-4 bg-[#67E8F9] text-[#050608] font-bold rounded-sm tracking-wider hover:bg-[#22D3EE] transition-colors font-mono text-sm uppercase shadow-md"
+                  >
+                    <span className="flex items-center gap-2">
+                      Select Interview Slot
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </button>
+                )}
+              </div>
+            )}
 
             {info.showWhatsapp && (
               <div className="mt-6 pt-6 border-t border-white/10">

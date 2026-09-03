@@ -15,7 +15,10 @@ import {
   ChevronRight,
   LogOut,
   User as UserIcon,
-  Kanban
+  Kanban,
+  Menu,
+  X,
+  LayoutGrid
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

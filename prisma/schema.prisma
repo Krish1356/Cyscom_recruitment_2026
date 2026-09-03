@@ -142,17 +142,17 @@ model ApplicantProfile {
 
   overallStatus PipelineStageName @default(APPLIED)
 
-  departments       DepartmentSelection[]
-  assessmentSession AssessmentSession?
-  stageHistory      StageHistory[]
-  interviews        Interview[]
-  reviewerNotes     ReviewerNote[]
-  integrityScore    IntegrityScore?
+  departments            DepartmentSelection[]
+  assessmentSession      AssessmentSession?
+  stageHistory           StageHistory[]
+  interviews             Interview[]
+  reviewerNotes          ReviewerNote[]
+  integrityScore         IntegrityScore?
+  interviewSlotSelection InterviewSlotSelection?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 
 model DepartmentSelection {
   id          String           @id @default(cuid())
@@ -377,4 +377,14 @@ model WhatsAppSettings {
   id         String   @id @default(cuid())
   inviteLink String
   updatedAt  DateTime @updatedAt
+}
+
+model InterviewSlotSelection {
+  id          String   @id @default(cuid())
+  applicantId String   @unique
+  sessionId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  applicant ApplicantProfile @relation(fields: [applicantId], references: [id], onDelete: Cascade)
 }

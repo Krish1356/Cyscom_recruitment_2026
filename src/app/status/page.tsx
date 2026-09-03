@@ -12,11 +12,12 @@ export default async function StatusPage() {
 
   const profile = await prisma.applicantProfile.findUnique({
     where: { userId: session.user.id },
+    include: { interviewSlotSelection: true }
   });
 
   if (!profile) {
     redirect("/register");
   }
 
-  return <StatusClient status={profile.overallStatus} session={session} />;
+  return <StatusClient status={profile.overallStatus} session={session} hasInterviewSlot={!!profile.interviewSlotSelection} selectedSlotId={profile.interviewSlotSelection?.sessionId} />;
 }

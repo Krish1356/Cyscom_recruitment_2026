@@ -47,6 +47,10 @@ export function MainLayout({ children, session }: { children: ReactNode, session
                   STATUS
                   <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#67E8F9] opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
+                <Link href="/interview-slot" className="text-sm font-bold tracking-widest text-[#626A72] hover:text-[#67E8F9] transition-colors relative group uppercase hidden lg:block">
+                  INTERVIEW SLOT
+                  <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#67E8F9] opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
                 <button onClick={() => signOut({ callbackUrl: "/" })} className="text-sm text-[#626A72] hover:text-[#F1F0EA] transition-colors border-b border-transparent hover:border-[#F1F0EA] uppercase tracking-widest ml-4">
                   Logout
                 </button>
